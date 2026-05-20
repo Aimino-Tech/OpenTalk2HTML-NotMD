@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Fast HTML MCP - pre-commit hook
+# Runs fast e2e tests (no mock APIs, mock data only, real user flows)
+# Block commit if tests fail.
+#
+# Install: git config core.hooksPath .githooks
+
+echo "🧪 Running fast e2e tests..."
+
+# Ensure dependencies are installed (no-op if up to date)
+echo "📦 Ensuring dependencies..."
+npm install --silent
+
+# Ensure project is built
+if [ ! -f "dist/index.js" ]; then
+  echo "🔨 Building project..."
+  npm run build
+fi
+
+# Run tests
+npm test
+exit_code=$?
+
+if [ $exit_code -ne 0 ]; then
+  echo "❌ e2e tests failed. Commit blocked."
+  exit 1
+fi
+
+echo "✅ All e2e tests passed."
+exit 0

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Changelog'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff;
+    --border: #e5e7eb; --text-primary: #111827; --text-secondary: #6b7280;
+    --accent: #2563eb; --accent-light: #eff6ff;
+    --green: #16a34a; --green-bg: #dcfce7; --red: #dc2626; --red-bg: #fee2e2;
+    --amber: #d97706; --amber-bg: #fef3c7;
+    --font-body: system-ui, -apple-system, sans-serif; --font-mono: 'SF Mono', 'Fira Code', monospace;
+    --radius: 8px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #111827; --bg-secondary: #1f2937; --bg-card: #1f2937;
+    --border: #374151; --text-primary: #f9fafb; --text-secondary: #9ca3af;
+    --accent: #3b82f6; --accent-light: #1e3a5f;
+    --green: #22c55e; --green-bg: #14532d; --red: #ef4444; --red-bg: #450a0a;
+    --amber: #f59e0b; --amber-bg: #451a03;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 800}}px; margin: 0 auto; padding: 48px 24px;
+    line-height: 1.6;
+  }
+  .cl-header { margin-bottom: 40px; }
+  .cl-header h1 { font-size: 28px; font-weight: 700; margin: 0 0 8px; }
+  .cl-header p { color: var(--text-secondary); margin: 0; }
+  .version { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .version:last-child { border-bottom: none; }
+  .version-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .version-header .tag { font-size: 18px; font-weight: 700; font-family: var(--font-mono); color: var(--accent); }
+  .version-header .date { font-size: 13px; color: var(--text-secondary); }
+  .version-header .badge { padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+  .version-header .badge.latest { background: var(--accent-light); color: var(--accent); }
+  .version-header .badge.breaking { background: var(--red-bg); color: var(--red); }
+  .change-group { margin-bottom: 16px; }
+  .change-group h3 { font-size: 14px; font-weight: 600; margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .change-group h3.features { color: var(--green); }
+  .change-group h3.fixes { color: var(--amber); }
+  .change-group h3.breaking { color: var(--red); }
+  .change-group ul { margin: 0; padding: 0 0 0 20px; }
+  .change-group li { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; line-height: 1.6; }
+  .change-group li strong { color: var(--text-primary); }
+  .rss-sub { margin-top: 40px; padding: 16px 20px; background: var(--bg-secondary); border-radius: var(--radius); display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
+  .rss-sub a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  @media (max-width: 600px) { body { padding: 24px 16px; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

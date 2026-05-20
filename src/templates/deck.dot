@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Deck'}}</title>
+<style>
+  :root {
+    --bg-primary: #0a0a0f; --bg-card: #1a1a2e;
+    --border: #2a2a4a; --text-primary: #e8e8f0; --text-secondary: #9898c0;
+    --accent: #a78bfa; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #f5f3ff; --bg-card: #ffffff;
+    --border: #d0d0e0; --text-primary: #1a1a2e; --text-secondary: #6b6b8a;
+    --accent: #7c3aed;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    padding: 0; margin: 0;
+  }
+  .slide {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    padding: 60px; border-bottom: 1px solid var(--border);
+  }
+  {{=it.custom_css || ''}}
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

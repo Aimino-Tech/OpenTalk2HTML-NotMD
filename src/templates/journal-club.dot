@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Journal Club'}}</title>
+<style>
+  :root {
+    --bg-primary: #1a1a2e; --bg-secondary: #222244; --bg-card: #2a2a4e;
+    --border: #3a3a5e; --text-primary: #e8e8f0; --text-secondary: #a8a8d0;
+    --accent: #a78bfa; --accent-dim: #2e1a5e; --accent-green: #4ade80; --accent-amber: #fbbf24; --accent-red: #f87171;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif; --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --radius: 10px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #faf5ff; --bg-secondary: #ffffff; --bg-card: #ffffff;
+    --border: #d8d0e8; --text-primary: #1a0a2e; --text-secondary: #5a4a7a;
+    --accent: #7c3aed; --accent-dim: #ede9fe;
+  }
+  body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); max-width: {{=it.line_width || 850}}px; margin: 0 auto; padding: 40px 24px; line-height: 1.6; }
+  .article-header { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 2px solid var(--accent); }
+  .article-header h1 { font-size: 24px; font-weight: 700; margin: 0 0 8px; }
+  .article-header .journal { font-size: 14px; color: var(--accent); font-weight: 600; }
+  .article-header .meta { font-size: 13px; color: var(--text-secondary); display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+  .study-badge { display: inline-block; padding: 3px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+  .study-badge.rct { background: var(--accent-dim); color: var(--accent); }
+  .study-badge.cohort { background: rgba(251,191,36,.15); color: var(--accent-amber); }
+  .study-badge.review { background: rgba(74,222,128,.15); color: var(--accent-green); }
+  .study-badge.case-report { background: rgba(248,113,113,.15); color: var(--accent-red); }
+  .pico-box { background: var(--bg-card); border: 1px solid var(--accent); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 24px; }
+  .pico-box h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin: 0 0 12px; }
+  .pico-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; font-size: 14px; }
+  .pico-grid dt { color: var(--accent); font-weight: 700; font-size: 12px; text-transform: uppercase; }
+  .pico-grid dd { margin: 2px 0 8px; color: var(--text-secondary); }
+  .appraisal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .appraisal-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+  .appraisal-card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-secondary); margin: 0 0 8px; }
+  .appraisal-card .score { font-size: 22px; font-weight: 800; font-family: var(--font-mono); }
+  .appraisal-card .score.high { color: var(--accent-green); }
+  .appraisal-card .score.moderate { color: var(--accent-amber); }
+  .appraisal-card .score.low { color: var(--accent-red); }
+  .appraisal-card p { font-size: 13px; color: var(--text-secondary); margin: 4px 0 0; }
+  .evidence-meter { height: 8px; border-radius: 4px; background: var(--bg-secondary); margin: 4px 0 12px; overflow: hidden; }
+  .evidence-meter .fill { height: 100%; border-radius: 4px; transition: width .3s; }
+  .evidence-meter .fill.strong { background: var(--accent-green); }
+  .evidence-meter .fill.moderate { background: var(--accent-amber); }
+  .evidence-meter .fill.weak { background: var(--accent-red); }
+  .takeaway-list { list-style: none; padding: 0; }
+  .takeaway-list li { padding: 10px 14px 10px 32px; border-left: 3px solid var(--accent); margin-bottom: 8px; font-size: 14px; background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0; position: relative; }
+  .takeaway-list li::before { content: "✦"; position: absolute; left: 10px; color: var(--accent); }
+  .qa-block { margin-bottom: 20px; }
+  .qa-block .q { font-weight: 700; color: var(--accent); padding: 10px 14px; background: var(--bg-card); border-radius: var(--radius) var(--radius) 0 0; border-left: 3px solid var(--accent); }
+  .qa-block .a { padding: 10px 14px; border-left: 3px solid var(--border); border-radius: 0 0 var(--radius) var(--radius); color: var(--text-secondary); font-size: 14px; margin-bottom: 8px; }
+  .discussion-point { padding: 12px 16px; border-left: 3px solid var(--accent); margin-bottom: 8px; background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0; font-size: 14px; }
+  @media print { body { padding: 0; } }
+  @media (max-width: 640px) { .pico-grid { grid-template-columns: 1fr; } .appraisal-grid { grid-template-columns: 1fr; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

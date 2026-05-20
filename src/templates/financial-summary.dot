@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Financial Summary'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-card: #ffffff;
+    --border: #e2e8f0; --text-primary: #0f172a; --text-secondary: #64748b;
+    --accent: #2563eb; --accent-green: #16a34a; --accent-red: #dc2626;
+    --accent-amber: #d97706; --accent-light: #eff6ff;
+    --font-body: system-ui, -apple-system, sans-serif; --font-mono: 'SF Mono', 'Fira Code', monospace;
+    --radius: 10px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-card: #1e293b;
+    --border: #334155; --text-primary: #f1f5f9; --text-secondary: #94a3b8;
+    --accent: #60a5fa; --accent-green: #22c55e; --accent-red: #ef4444;
+    --accent-amber: #f59e0b; --accent-light: #1e3a5f;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 900}}px; margin: 0 auto; padding: 40px 24px;
+    line-height: 1.5;
+  }
+  .fs-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px; }
+  .fs-header h1 { font-size: 26px; font-weight: 700; margin: 0; }
+  .fs-header .period { font-size: 14px; color: var(--text-secondary); }
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .kpi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+  .kpi-card .kpi-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); font-weight: 600; }
+  .kpi-card .kpi-value { font-size: 26px; font-weight: 800; margin: 4px 0; font-family: var(--font-mono); letter-spacing: -1px; }
+  .kpi-card .kpi-change { font-size: 13px; }
+  .kpi-card .kpi-change.up { color: var(--accent-green); }
+  .kpi-card .kpi-change.down { color: var(--accent-red); }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 14px; }
+  table th { padding: 10px 14px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); background: var(--bg-secondary); }
+  table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  table td.amount { text-align: right; font-family: var(--font-mono); font-weight: 600; }
+  table td.amount.positive { color: var(--accent-green); }
+  table td.amount.negative { color: var(--accent-red); }
+  table .total-row { font-weight: 700; border-top: 2px solid var(--text-primary); }
+  table .total-row td { padding: 12px 14px; }
+  table .section-header td { font-weight: 700; color: var(--accent); padding: 16px 14px 8px; border-bottom: none; }
+  .chart-placeholder { height: 200px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; }
+  .growth-bar { display: flex; align-items: flex-end; gap: 8px; height: 160px; padding: 16px 0; }
+  .growth-bar .bar { flex: 1; border-radius: 4px 4px 0 0; min-width: 20px; position: relative; }
+  .growth-bar .bar .val { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); font-size: 11px; font-family: var(--font-mono); color: var(--text-secondary); margin-bottom: 4px; }
+  .growth-bar .bar .label { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-secondary); margin-top: 4px; white-space: nowrap; }
+  .growth-bar .bar.revenue { background: var(--accent); }
+  .growth-bar .bar.expense { background: var(--accent-red); }
+  .growth-bar .bar.profit { background: var(--accent-green); }
+  @media print { body { padding: 0; } }
+  @media (max-width: 600px) { .kpi-grid { grid-template-columns: 1fr 1fr; } .fs-header { flex-direction: column; align-items: flex-start; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

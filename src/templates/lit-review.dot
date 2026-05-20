@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Literature Review'}}</title>
+<style>
+  :root {
+    --bg-primary: #0f0f1a; --bg-secondary: #181825; --bg-card: #1e1e30;
+    --border: #2e2e4a; --text-primary: #e8e8f0; --text-secondary: #9898b8;
+    --accent: #60a5fa; --accent-green: #34d399; --accent-red: #f87171;
+    --accent-amber: #fbbf24; --accent-purple: #a78bfa;
+    --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --radius: 10px; --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #f0f4ff; --bg-secondary: #ffffff; --bg-card: #ffffff;
+    --border: #c8d0e0; --text-primary: #1a1a2e; --text-secondary: #5a6a7a;
+    --accent: #2563eb; --accent-green: #059669; --accent-red: #dc2626;
+    --accent-amber: #d97706; --accent-purple: #7c3aed;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 860}}px; margin: 0 auto; padding: 40px 24px;
+    line-height: 1.8; font-size: 15px;
+  }
+  h1, h2, h3, h4 { color: var(--accent); margin-top: 1.5em; margin-bottom: 0.5em; }
+  h1 { font-size: 26px; font-weight: 800; }
+  h2 { font-size: 20px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { font-size: 16px; font-weight: 600; }
+  .abstract-box { padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); border-left: 4px solid var(--accent); margin-bottom: 24px; font-style: italic; }
+  .abstract-box h3 { margin-top: 0; font-style: normal; }
+  .prisma-container { padding: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; min-height: 180px; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .prisma-container .phase { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+  .prisma-container .phase .count { font-size: 28px; font-weight: 800; font-family: var(--font-mono); }
+  .prisma-container .phase .label { font-size: 12px; color: var(--text-secondary); }
+  .prisma-arrow { color: var(--text-secondary); font-size: 18px; margin: 0 16px; }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  table th { padding: 10px 14px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); background: var(--bg-secondary); }
+  table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  table tr:nth-child(even) td { background: var(--bg-secondary); }
+  .quality-dots { display: flex; gap: 4px; }
+  .quality-dots .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .quality-dots .dot.high { background: var(--accent-green); }
+  .quality-dots .dot.med { background: var(--accent-amber); }
+  .quality-dots .dot.low { background: var(--accent-red); }
+  .traffic-light { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+  .traffic-light.green { background: var(--accent-green); }
+  .traffic-light.amber { background: var(--accent-amber); }
+  .traffic-light.red { background: var(--accent-red); }
+  .citation-list { list-style: none; padding: 0; margin: 12px 0; }
+  .citation-list li { padding: 10px 14px; border-left: 3px solid transparent; margin-bottom: 4px; border-radius: 0 6px 6px 0; transition: all 0.2s; font-size: 14px; }
+  .citation-list li:hover { border-left-color: var(--accent); background: var(--bg-card); }
+  .citation-list .cite-id { font-family: var(--font-mono); font-size: 12px; color: var(--accent); font-weight: 700; }
+  .db-badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px; margin: 2px; }
+  .db-badge.pubmed { background: rgba(96,165,250,0.15); color: #60a5fa; }
+  .db-badge.scopus { background: rgba(52,211,153,0.15); color: #34d399; }
+  .db-badge.ieee { background: rgba(167,139,250,0.15); color: #a78bfa; }
+  .db-badge.arxiv { background: rgba(248,113,113,0.15); color: #f87171; }
+  .synthesis-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin: 16px 0; }
+  .theme-card { padding: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); border-top: 3px solid var(--accent); }
+  .theme-card h4 { margin: 0 0 6px; font-size: 15px; }
+  .theme-card p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+  .theme-card .studies { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 8px; }
+  @media print { body { padding: 0; font-size: 12px; } .synthesis-grid { break-inside: avoid; } table { break-inside: avoid; } .quality-dots { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

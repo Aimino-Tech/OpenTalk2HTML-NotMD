@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Industry Overview'}}</title>
+<style>
+  :root {
+    --bg-primary: #0f0f1a; --bg-secondary: #18182a; --bg-card: #1e1e38;
+    --border: #2e2e52; --text-primary: #e8e8f0; --text-secondary: #9898be;
+    --accent: #fb7185; --accent-dim: #3a1a28; --accent-green: #4ade80; --accent-amber: #fbbf24; --accent-blue: #60a5fa;
+    --font-body: 'Inter', system-ui, -apple-system, sans-serif; --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --radius: 10px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #fff8f8; --bg-secondary: #ffffff; --bg-card: #ffffff;
+    --border: #e0d0d0; --text-primary: #1a0a0a; --text-secondary: #6a4a4a;
+    --accent: #e11d48; --accent-dim: #ffe4e6;
+  }
+  body { font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary); max-width: {{=it.line_width || 920}}px; margin: 0 auto; padding: 40px 24px; line-height: 1.5; }
+  .market-sizing { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 28px; }
+  .market-sizing h2 { font-size: 15px; font-weight: 700; margin: 0 0 14px; color: var(--accent); }
+  .market-bar { display: flex; align-items: flex-end; gap: 8px; height: 120px; margin-bottom: 8px; }
+  .market-bar .seg { flex: 1; border-radius: 6px 6px 0 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 8px 4px 4px; position: relative; min-height: 20px; }
+  .market-bar .seg .val { font-size: 11px; font-weight: 700; font-family: var(--font-mono); color: #fff; }
+  .market-bar .seg .lbl { font-size: 10px; color: rgba(255,255,255,.7); margin-top: 2px; }
+  .market-bar .seg.tam { background: var(--accent); }
+  .market-bar .seg.sam { background: var(--accent-blue); }
+  .market-bar .seg.som { background: var(--accent-green); }
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .comp-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+  .comp-card h3 { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
+  .comp-card .comp-ticker { font-family: var(--font-mono); font-size: 12px; color: var(--accent); font-weight: 600; }
+  .comp-card .comp-metric { display: flex; justify-content: space-between; padding: 4px 0; font-size: 13px; border-bottom: 1px solid var(--border); }
+  .comp-card .comp-metric:last-child { border-bottom: none; }
+  .comp-card .comp-metric span:first-child { color: var(--text-secondary); }
+  .comp-card .comp-metric span:last-child { font-weight: 600; }
+  .share-chart { display: flex; align-items: center; gap: 2px; height: 30px; margin: 12px 0; border-radius: 4px; overflow: hidden; }
+  .share-chart .slice { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #fff; min-width: 12px; }
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .swot-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+  .swot-card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 8px; }
+  .swot-card ul { list-style: none; padding: 0; margin: 0; }
+  .swot-card li { padding: 4px 0; font-size: 13px; color: var(--text-secondary); position: relative; padding-left: 14px; }
+  .swot-card li::before { content: "•"; position: absolute; left: 0; font-weight: 700; }
+  .swot-card.strengths { border-left: 4px solid var(--accent-green); }
+  .swot-card.strengths h3 { color: var(--accent-green); }
+  .swot-card.weaknesses { border-left: 4px solid var(--accent-red); }
+  .swot-card.weaknesses h3, .swot-card.weaknesses li::before { color: var(--accent-red); }
+  .swot-card.opportunities { border-left: 4px solid var(--accent-blue); }
+  .swot-card.opportunities h3, .swot-card.opportunities li::before { color: var(--accent-blue); }
+  .swot-card.threats { border-left: 4px solid var(--accent-amber); }
+  .swot-card.threats h3, .swot-card.threats li::before { color: var(--accent-amber); }
+  .growth-chart { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 24px; }
+  .growth-chart h3 { font-size: 15px; font-weight: 700; margin: 0 0 12px; }
+  .g-bar { display: flex; align-items: flex-end; gap: 6px; height: 140px; }
+  .g-bar .bar { flex: 1; border-radius: 4px 4px 0 0; position: relative; min-width: 18px; background: var(--accent); opacity: .7; }
+  .g-bar .bar .lbl { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); font-size: 10px; color: var(--text-secondary); margin-top: 4px; white-space: nowrap; }
+  .g-bar .bar .val { position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); font-size: 10px; font-family: var(--font-mono); color: var(--text-secondary); margin-bottom: 2px; }
+  .g-bar .bar.highlight { opacity: 1; background: var(--accent); }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px; }
+  table th { padding: 10px 14px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); background: var(--bg-secondary); }
+  table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .forbes-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; gap: 12px; }
+  .forbes-card .force-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; min-width: 100px; }
+  .forbes-card .force-bar { flex: 1; height: 8px; border-radius: 4px; background: var(--bg-secondary); margin: auto 8px; overflow: hidden; }
+  .forbes-card .force-bar .fill { height: 100%; border-radius: 4px; }
+  .forbes-card .force-level { font-size: 12px; font-weight: 600; min-width: 50px; text-align: right; }
+  @media print { body { padding: 0; } }
+  @media (max-width: 640px) { .swot-grid { grid-template-columns: 1fr; } .comp-grid { grid-template-columns: 1fr; } .market-bar { height: 80px; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

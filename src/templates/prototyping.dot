@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Prototype'}}</title>
+<style>
+  :root {
+    --bg-primary: #0a0a0f; --bg-card: #1a1a2e; --bg-elevated: #222240;
+    --border: #2a2a4a; --text-primary: #e8e8f0; --text-secondary: #9898b8;
+    --accent: #f59e0b; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #fffbeb; --bg-card: #ffffff; --bg-elevated: #fef3c7;
+    --border: #f0e0a0; --text-primary: #1a1a2e; --text-secondary: #8a7a4a;
+    --accent: #d97706;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    padding: 0; margin: 0;
+  }
+  {{=it.custom_css || ''}}
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Error'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff;
+    --border: #e5e7eb; --text-primary: #111827; --text-secondary: #6b7280;
+    --accent: #6366f1; --accent-light: #eef2ff;
+    --red: #dc2626; --red-bg: #fee2e2;
+    --font-body: system-ui, -apple-system, sans-serif;
+    --radius: 12px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #111827; --bg-secondary: #1f2937; --bg-card: #1f2937;
+    --border: #374151; --text-primary: #f9fafb; --text-secondary: #9ca3af;
+    --accent: #818cf8; --accent-light: #2e1065;
+    --red: #ef4444; --red-bg: #450a0a;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    line-height: 1.6; margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  }
+  .error-container { text-align: center; padding: 48px 24px; max-width: 500px; }
+  .error-code { font-size: 120px; font-weight: 800; line-height: 1; letter-spacing: -8px; margin-bottom: 8px; background: linear-gradient(135deg, var(--accent), var(--red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .error-icon { font-size: 64px; margin-bottom: 16px; display: block; }
+  .error-container h1 { font-size: 24px; font-weight: 700; margin: 0 0 12px; }
+  .error-container p { font-size: 15px; color: var(--text-secondary); margin: 0 0 24px; max-width: 360px; margin-left: auto; margin-right: auto; }
+  .search-box { display: flex; max-width: 360px; margin: 0 auto 24px; }
+  .search-box input { flex: 1; padding: 10px 16px; border: 2px solid var(--border); border-right: none; border-radius: var(--radius) 0 0 var(--radius); font-size: 14px; outline: none; background: var(--bg-card); color: var(--text-primary); }
+  .search-box input:focus { border-color: var(--accent); }
+  .search-box button { padding: 10px 20px; border: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0; background: var(--accent); color: #fff; font-weight: 600; font-size: 14px; cursor: pointer; }
+  .nav-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .nav-links a { color: var(--accent); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 16px; border-radius: var(--radius); transition: background 0.2s; }
+  .nav-links a:hover { background: var(--accent-light); }
+  .nav-links a.home { background: var(--accent); color: #fff; }
+  .brand { position: fixed; top: 24px; left: 24px; font-size: 18px; font-weight: 700; color: var(--accent); }
+  @media (max-width: 600px) { .error-code { font-size: 80px; } .error-container { padding: 32px 16px; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+<div class="brand">{{=it.title || 'Error'}}</div>
+<div class="error-container">
+{{=it.content}}
+</div>
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Optional reverse proxy with automatic HTTPS (Let's Encrypt)
+your-domain.com {
+    reverse_proxy fast-html-mcp:3000
+    header {
+        Access-Control-Allow-Origin *
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type"
+    }
+}

@@ -1,0 +1,23 @@
+import "./tabs.js";
+import "./accordion.js";
+import "./data-table.js";
+import "./card-deck.js";
+import "./hero.js";
+import "./callout.js";
+import "./code-block.js";
+import "./header.js";
+import "./footer.js";
+import "./sidebar.js";
+import "./stats-grid.js";
+import "./timeline.js";
+import "./image-gallery.js";
+import "./figure.js";
+import "./grid.js";
+import "./citation-block.js";
+import "./risk-matrix.js";
+import "./valuation-chart.js";
+import "./prisma-flow.js";
+import "./financial-table.js";
+import "./evidence-grid.js";
+
+export { registerComponent, getComponent, getAllComponents, getComponentNames, getComponentSchema, renderComponent, collectComponentCss, collectComponentJs } from "./registry.js";

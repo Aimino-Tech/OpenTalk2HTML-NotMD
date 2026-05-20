@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Invoice'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-card: #ffffff;
+    --border: #e2e8f0; --text-primary: #1a202c; --text-secondary: #64748b;
+    --accent: #2563eb; --accent-light: #dbeafe; --font-body: system-ui, -apple-system, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', monospace;
+    --radius: 8px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-card: #1e293b;
+    --border: #334155; --text-primary: #f1f5f9; --text-secondary: #94a3b8;
+    --accent: #3b82f6; --accent-light: #1e3a5f;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 800}}px; margin: 0 auto; padding: 48px 24px;
+    line-height: 1.6;
+  }
+  .invoice-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 2px solid var(--accent); }
+  .invoice-header .brand h1 { font-size: 28px; font-weight: 700; color: var(--accent); margin: 0 0 4px; }
+  .invoice-header .brand p { color: var(--text-secondary); margin: 0; font-size: 14px; }
+  .invoice-header .meta { text-align: right; }
+  .invoice-header .meta .number { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+  .invoice-header .meta .date { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
+  .invoice-header .meta .status { display: inline-block; margin-top: 8px; padding: 4px 12px; border-radius: 100px; background: #dcfce7; color: #166534; font-size: 12px; font-weight: 600; }
+  .addresses { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+  .address-box { background: var(--bg-secondary); border-radius: var(--radius); padding: 20px; }
+  .address-box h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); margin: 0 0 8px; }
+  .address-box p { margin: 0; font-size: 14px; color: var(--text-primary); line-height: 1.7; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+  table th { background: var(--bg-secondary); padding: 12px 16px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); }
+  table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  table td.amount { text-align: right; font-family: var(--font-mono); font-weight: 600; }
+  table tr:last-child td { border-bottom: none; }
+  .totals { margin-left: auto; width: 300px; }
+  .totals .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; }
+  .totals .row.total { border-top: 2px solid var(--accent); padding-top: 12px; margin-top: 8px; font-size: 18px; font-weight: 700; color: var(--accent); }
+  .totals .row .label { color: var(--text-secondary); }
+  .terms { margin-top: 48px; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius); font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+  .terms strong { color: var(--text-primary); }
+  .footer { margin-top: 32px; text-align: center; font-size: 13px; color: var(--text-secondary); }
+  @media print { body { padding: 0; } .invoice-header { break-after: avoid; } }
+  @media (max-width: 600px) { .addresses { grid-template-columns: 1fr; } .invoice-header { flex-direction: column; gap: 16px; } .invoice-header .meta { text-align: left; } .totals { width: 100%; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

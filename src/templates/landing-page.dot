@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Landing Page'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-card: #ffffff;
+    --border: #e2e8f0; --text-primary: #0f172a; --text-secondary: #64748b;
+    --accent: #2563eb; --accent-bright: #1d4ed8; --accent-light: #eff6ff;
+    --font-body: system-ui, -apple-system, sans-serif; --font-display: system-ui, -apple-system, sans-serif;
+    --radius: 12px; --radius-lg: 20px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-card: #1e293b;
+    --border: #334155; --text-primary: #f1f5f9; --text-secondary: #94a3b8;
+    --accent: #3b82f6; --accent-bright: #60a5fa; --accent-light: #1e3a5f;
+  }
+  body {
+    font-family: var(--font-body); color: var(--text-primary); line-height: 1.6; margin: 0; background: var(--bg-primary);
+  }
+  .lp-section { padding: 80px 24px; }
+  .lp-section:nth-child(even) { background: var(--bg-secondary); }
+  .lp-container { max-width: {{=it.line_width || 1000}}px; margin: 0 auto; }
+  .lp-hero { text-align: center; padding: 100px 24px 80px; }
+  .lp-hero .badge { display: inline-block; padding: 6px 16px; border-radius: 100px; background: var(--accent-light); color: var(--accent); font-size: 13px; font-weight: 600; margin-bottom: 20px; }
+  .lp-hero h1 { font-size: clamp(36px, 6vw, 56px); font-weight: 800; letter-spacing: -2px; margin: 0 0 16px; line-height: 1.1; }
+  .lp-hero .subtitle { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px; }
+  .lp-hero .cta { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .lp-hero .cta .btn { padding: 12px 32px; border-radius: var(--radius); font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .lp-hero .cta .btn-primary { background: var(--accent); color: #fff; }
+  .lp-hero .cta .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); }
+  .lp-hero .cta .btn-ghost { border: 2px solid var(--border); color: var(--text-primary); }
+  .lp-hero .cta .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; text-align: center; transition: all 0.2s; }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+  .feature-card .icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  .feature-card h3 { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+  .feature-card p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+  .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .testimonial { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+  .testimonial .quote { font-size: 14px; color: var(--text-secondary); font-style: italic; margin-bottom: 16px; }
+  .testimonial .author { display: flex; align-items: center; gap: 12px; }
+  .testimonial .author .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-light); display: flex; align-items: center; justify-content: center; color: var(--accent); font-weight: 700; }
+  .testimonial .author .name { font-size: 14px; font-weight: 600; }
+  .testimonial .author .role { font-size: 12px; color: var(--text-secondary); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; text-align: center; }
+  .pricing-card.featured { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-light); }
+  .pricing-card h3 { font-size: 20px; font-weight: 700; margin: 0 0 8px; }
+  .pricing-card .price { font-size: 36px; font-weight: 800; color: var(--accent); margin: 16px 0; }
+  .pricing-card .price .period { font-size: 14px; color: var(--text-secondary); font-weight: 400; }
+  .pricing-card ul { list-style: none; padding: 0; margin: 0 0 24px; text-align: left; }
+  .pricing-card li { padding: 8px 0; font-size: 14px; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+  .pricing-card li:last-child { border-bottom: none; }
+  .pricing-card .btn { display: inline-block; padding: 12px 32px; border-radius: var(--radius); text-decoration: none; font-weight: 600; font-size: 15px; }
+  .pricing-card .btn-primary { background: var(--accent); color: #fff; }
+  .lp-cta { text-align: center; padding: 80px 24px; }
+  .lp-cta h2 { font-size: 32px; font-weight: 700; margin: 0 0 16px; }
+  .lp-cta p { font-size: 16px; color: var(--text-secondary); margin: 0 0 24px; }
+  .lp-footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 14px; }
+  @media (max-width: 768px) { .lp-hero { padding: 60px 24px 40px; } .lp-section { padding: 40px 24px; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

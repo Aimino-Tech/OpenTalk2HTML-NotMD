@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Meeting Notes'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff;
+    --border: #e5e7eb; --text-primary: #111827; --text-secondary: #6b7280;
+    --accent: #6366f1; --accent-light: #eef2ff;
+    --green: #16a34a; --green-bg: #dcfce7; --amber: #d97706; --amber-bg: #fef3c7;
+    --font-body: system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #111827; --bg-secondary: #1f2937; --bg-card: #1f2937;
+    --border: #374151; --text-primary: #f9fafb; --text-secondary: #9ca3af;
+    --accent: #818cf8; --accent-light: #2e1065;
+    --green: #22c55e; --green-bg: #14532d; --amber: #f59e0b; --amber-bg: #451a03;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 800}}px; margin: 0 auto; padding: 48px 24px;
+    line-height: 1.6;
+  }
+  .meeting-header { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid var(--accent); }
+  .meeting-header h1 { font-size: 26px; font-weight: 700; margin: 0 0 16px; }
+  .meeting-meta { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 14px; }
+  .meeting-meta .label { color: var(--text-secondary); font-weight: 500; }
+  .meeting-meta .value { color: var(--text-primary); }
+  .meeting-meta .value a { color: var(--accent); text-decoration: none; }
+  .agenda-item { margin-bottom: 24px; padding: 20px; background: var(--bg-secondary); border-radius: var(--radius); border-left: 4px solid var(--accent); }
+  .agenda-item h3 { font-size: 16px; font-weight: 600; margin: 0 0 8px; }
+  .agenda-item .time { font-size: 12px; color: var(--text-secondary); font-weight: 500; margin-bottom: 8px; }
+  .agenda-item p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+  .agenda-item .discussion { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .action-items { margin-top: 32px; }
+  .action-items h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+  .action-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; background: var(--bg-card); }
+  .action-item .checkbox { width: 18px; height: 18px; border: 2px solid var(--accent); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+  .action-item .checkbox.done { background: var(--accent); position: relative; }
+  .action-item .checkbox.done::after { content: '✓'; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .action-item .details { flex: 1; }
+  .action-item .details .task { font-size: 14px; font-weight: 500; }
+  .action-item .details .assignee { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .action-item .details .due { font-size: 11px; color: var(--text-secondary); }
+  .action-item .priority { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; text-transform: uppercase; }
+  .action-item .priority.high { background: var(--amber-bg); color: var(--amber); }
+  .action-item .priority.medium { background: var(--accent-light); color: var(--accent); }
+  .action-item .priority.low { background: var(--green-bg); color: var(--green); }
+  @media (max-width: 600px) { body { padding: 24px 16px; } .meeting-meta { grid-template-columns: 1fr; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

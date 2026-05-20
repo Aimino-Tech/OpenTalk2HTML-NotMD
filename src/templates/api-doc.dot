@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'API Reference'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-card: #ffffff;
+    --border: #e2e8f0; --text-primary: #0f172a; --text-secondary: #64748b;
+    --text-tertiary: #94a3b8; --accent: #3b82f6; --accent-light: #eff6ff;
+    --green: #16a34a; --green-bg: #dcfce7; --red: #dc2626; --red-bg: #fee2e2;
+    --amber: #d97706; --amber-bg: #fef3c7; --purple: #7c3aed;
+    --font-body: system-ui, -apple-system, sans-serif; --font-mono: 'SF Mono', 'Fira Code', monospace;
+    --radius: 8px; --radius-sm: 6px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-card: #1e293b;
+    --border: #334155; --text-primary: #f1f5f9; --text-secondary: #94a3b8;
+    --text-tertiary: #64748b; --accent: #60a5fa; --accent-light: #1e3a5f;
+    --green: #22c55e; --green-bg: #14532d; --red: #ef4444; --red-bg: #450a0a;
+    --amber: #f59e0b; --amber-bg: #451a03; --purple: #a78bfa;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    line-height: 1.6; margin: 0;
+  }
+  .api-layout { display: flex; min-height: 100vh; }
+  .api-sidebar { width: 260px; flex-shrink: 0; background: var(--bg-secondary); border-right: 1px solid var(--border); padding: 24px 16px; overflow-y: auto; position: sticky; top: 0; height: 100vh; }
+  .api-sidebar h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-tertiary); font-weight: 600; margin: 20px 0 8px; }
+  .api-sidebar h2:first-child { margin-top: 0; }
+  .api-sidebar a { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: var(--radius-sm); font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: all 0.15s; }
+  .api-sidebar a:hover { background: var(--accent-light); color: var(--accent); }
+  .api-sidebar .method { font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; }
+  .api-sidebar .method.get { color: var(--green); background: var(--green-bg); }
+  .api-sidebar .method.post { color: var(--accent); background: var(--accent-light); }
+  .api-sidebar .method.put { color: var(--amber); background: var(--amber-bg); }
+  .api-sidebar .method.delete { color: var(--red); background: var(--red-bg); }
+  .api-main { flex: 1; padding: 40px 48px; max-width: 900px; }
+  .api-main h1 { font-size: 28px; font-weight: 700; margin: 0 0 8px; }
+  .api-main .base-url { font-family: var(--font-mono); font-size: 14px; color: var(--text-secondary); margin-bottom: 32px; padding: 12px 16px; background: var(--bg-secondary); border-radius: var(--radius); }
+  .endpoint { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+  .endpoint:last-child { border-bottom: none; }
+  .endpoint-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .endpoint-header .method { font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-sm); text-transform: uppercase; }
+  .endpoint-header .method.get { color: var(--green); background: var(--green-bg); }
+  .endpoint-header .method.post { color: var(--accent); background: var(--accent-light); }
+  .endpoint-header .method.put { color: var(--amber); background: var(--amber-bg); }
+  .endpoint-header .method.delete { color: var(--red); background: var(--red-bg); }
+  .endpoint-header .path { font-family: var(--font-mono); font-size: 16px; font-weight: 600; color: var(--text-primary); }
+  .endpoint .desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
+  .endpoint h3 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+  .endpoint .param-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .endpoint .param-table th { text-align: left; padding: 8px 12px; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); border-bottom: 1px solid var(--border); background: var(--bg-secondary); }
+  .endpoint .param-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  .endpoint .param-table .type { font-family: var(--font-mono); font-size: 12px; color: var(--purple); }
+  .endpoint .param-table .required { font-size: 11px; color: var(--red); font-weight: 600; }
+  .endpoint pre { background: #0f172a; color: #e2e8f0; padding: 16px 20px; border-radius: var(--radius); font-family: var(--font-mono); font-size: 13px; line-height: 1.7; overflow-x: auto; margin: 12px 0; }
+  .endpoint pre .comment { color: #64748b; }
+  .endpoint pre .string { color: #22c55e; }
+  .endpoint pre .key { color: #60a5fa; }
+  .endpoint pre .num { color: #f59e0b; }
+  @media (max-width: 768px) { .api-layout { flex-direction: column; } .api-sidebar { width: 100%; height: auto; position: static; padding: 16px; } .api-main { padding: 24px 16px; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+<div class="api-layout">
+  <nav class="api-sidebar">
+    <h2>API Reference</h2>
+    <div id="sidebar-links">
+    {{~it.nav :item}}
+    <a href="#{{=item.id}}">{{=item.label}}</a>
+    {{~}}
+    </div>
+  </nav>
+  <div class="api-main">
+    {{=it.content}}
+  </div>
+</div>
+<script>
+(function(){var links=document.querySelectorAll('.api-sidebar a[href^="#"]');if(links.length>0){var sections=[];links.forEach(function(l){var t=document.getElementById(l.getAttribute('href').slice(1));if(t)sections.push({el:t,link:l})});function onScroll(){var p=window.scrollY+100,c=null;for(var i=sections.length-1;i>=0;i--){if(sections[i].el.offsetTop<=p){c=sections[i];break}}links.forEach(function(l){l.style.background='';l.style.color=''});if(c){c.link.style.background='var(--accent-light)';c.link.style.color='var(--accent)'}}window.addEventListener('scroll',onScroll,{passive:true});onScroll()}})();
+</script>
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+  </div>
+</div>
+</body>
+</html>

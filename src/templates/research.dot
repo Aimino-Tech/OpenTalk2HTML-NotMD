@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Research'}}</title>
+<style>
+  :root {
+    --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-card: #1a1a2e;
+    --border: #2a2a44; --text-primary: #e8e8f0; --text-secondary: #9898b8;
+    --accent: #fbbf24; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #fefce8; --bg-secondary: #ffffff; --bg-card: #ffffff;
+    --border: #e0d8a0; --text-primary: #1a1a2e; --text-secondary: #6a6a4a;
+    --accent: #ca8a04;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 800}}px; margin: 0 auto; padding: 40px 24px;
+    font-size: 16px; line-height: 1.8;
+  }
+  {{=it.custom_css || ''}}
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

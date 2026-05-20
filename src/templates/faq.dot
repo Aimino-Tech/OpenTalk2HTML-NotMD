@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'FAQ'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f9fafb; --bg-card: #ffffff;
+    --border: #e5e7eb; --text-primary: #111827; --text-secondary: #6b7280;
+    --accent: #7c3aed; --accent-light: #f5f3ff;
+    --font-body: system-ui, -apple-system, sans-serif;
+    --radius: 8px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #111827; --bg-secondary: #1f2937; --bg-card: #1f2937;
+    --border: #374151; --text-primary: #f9fafb; --text-secondary: #9ca3af;
+    --accent: #a78bfa; --accent-light: #2e1065;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 800}}px; margin: 0 auto; padding: 48px 24px;
+    line-height: 1.6;
+  }
+  .faq-header { margin-bottom: 40px; }
+  .faq-header h1 { font-size: 28px; font-weight: 700; margin: 0 0 8px; }
+  .faq-header p { color: var(--text-secondary); margin: 0; }
+  .faq-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .faq-nav a { padding: 6px 14px; border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--text-secondary); background: var(--bg-secondary); text-decoration: none; transition: all 0.2s; }
+  .faq-nav a:hover { background: var(--accent-light); color: var(--accent); }
+  .faq-category { margin-bottom: 32px; }
+  .faq-category h2 { font-size: 18px; font-weight: 700; color: var(--accent); margin: 0 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-light); }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; cursor: pointer; user-select: none; font-weight: 600; font-size: 15px; background: var(--bg-secondary); transition: background 0.2s; }
+  .faq-q:hover { background: var(--accent-light); }
+  .faq-q .arrow { font-size: 12px; color: var(--text-secondary); transition: transform 0.2s; }
+  .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s ease; padding: 0 20px; background: var(--bg-primary); }
+  .faq-item.open .faq-a { max-height: 1000px; padding: 16px 20px; }
+  .faq-a p { margin: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .faq-a a { color: var(--accent); }
+  .faq-a code { font-size: 13px; background: var(--accent-light); padding: 1px 5px; border-radius: 4px; }
+  .faq-item:target { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-light); }
+  @media (max-width: 600px) { body { padding: 24px 16px; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+<script>
+(function(){document.querySelectorAll('.faq-q').forEach(function(h){h.addEventListener('click',function(){h.parentElement.classList.toggle('open')})})})();
+</script>
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

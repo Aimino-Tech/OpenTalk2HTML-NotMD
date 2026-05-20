@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Equity Research'}}</title>
+<style>
+  :root {
+    --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-card: #1a1a28;
+    --border: #2a2a44; --text-primary: #e8e8f0; --text-secondary: #9898b8;
+    --accent: #d97706; --accent-green: #34d399; --accent-red: #f87171;
+    --accent-amber: #f59e0b; --accent-blue: #60a5fa;
+    --font-body: 'Inter', system-ui, sans-serif; --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    --radius: 10px; --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #fefce8; --bg-secondary: #ffffff; --bg-card: #ffffff;
+    --border: #e0d8a0; --text-primary: #1a1a2e; --text-secondary: #6a6a4a;
+    --accent: #b45309; --accent-green: #059669; --accent-red: #dc2626;
+    --accent-amber: #d97706; --accent-blue: #2563eb;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 960}}px; margin: 0 auto; padding: 40px 24px;
+    line-height: 1.7; font-size: 15px;
+  }
+  h1, h2, h3, h4 { color: var(--accent); margin-top: 1.5em; margin-bottom: 0.5em; }
+  h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+  h2 { font-size: 22px; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  h3 { font-size: 17px; font-weight: 600; }
+  .company-header { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .company-header .ticker { font-family: var(--font-mono); font-size: 20px; font-weight: 800; color: var(--accent); }
+  .company-header .exchange { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; }
+  .company-header .rating { padding: 4px 14px; border-radius: 100px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .rating.buy { background: rgba(52,211,153,0.15); color: var(--accent-green); }
+  .rating.hold { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+  .rating.sell { background: rgba(248,113,113,0.15); color: var(--accent-red); }
+  .exec-summary { border-left: 4px solid var(--accent-green); padding: 16px 20px; background: var(--bg-card); border-radius: 0 var(--radius) var(--radius) 0; margin-bottom: 24px; }
+  .exec-summary h3 { margin-top: 0; color: var(--accent-green); }
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  table th { padding: 10px 14px; text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); background: var(--bg-secondary); }
+  table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  table tr:nth-child(even) td { background: var(--bg-secondary); }
+  table td.num { text-align: right; font-family: var(--font-mono); font-weight: 600; }
+  table td.pos { color: var(--accent-green); }
+  table td.neg { color: var(--accent-red); }
+  .valuation-area { padding: 20px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; min-height: 120px; }
+  .valuation-bar { display: flex; align-items: flex-end; gap: 4px; height: 100px; margin: 12px 0; }
+  .valuation-bar .seg { flex: 1; border-radius: 3px 3px 0 0; min-width: 30px; position: relative; background: var(--accent); opacity: 0.7; }
+  .valuation-bar .seg.range { opacity: 0.4; }
+  .esg-row { display: flex; gap: 16px; margin: 12px 0; flex-wrap: wrap; }
+  .esg-bar { flex: 1; min-width: 120px; }
+  .esg-bar .label { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .esg-bar .track { height: 8px; background: var(--bg-secondary); border-radius: 100px; overflow: hidden; }
+  .esg-bar .fill { height: 100%; border-radius: 100px; }
+  .esg-bar .fill.e { background: var(--accent-green); }
+  .esg-bar .fill.s { background: var(--accent-blue); }
+  .esg-bar .fill.g { background: var(--accent-amber); }
+  .esg-bar .score { font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--text-secondary); margin-top: 2px; }
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 16px 0; }
+  .risk-cell { padding: 10px; border-radius: 6px; text-align: center; font-size: 12px; font-weight: 600; }
+  .risk-cell.high { background: rgba(248,113,113,0.2); color: var(--accent-red); border: 1px solid rgba(248,113,113,0.3); }
+  .risk-cell.med { background: rgba(245,158,11,0.2); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.3); }
+  .risk-cell.low { background: rgba(52,211,153,0.15); color: var(--accent-green); border: 1px solid rgba(52,211,153,0.2); }
+  .rec-box { padding: 20px; border: 2px solid var(--accent); border-radius: var(--radius); background: var(--bg-card); text-align: center; margin: 24px 0; }
+  .rec-box .action { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+  .rec-box .target { font-family: var(--font-mono); font-size: 16px; color: var(--text-secondary); margin-top: 4px; }
+  .est-tracker { display: flex; gap: 12px; overflow-x: auto; padding: 8px 0; margin: 16px 0; }
+  .est-item { min-width: 80px; text-align: center; padding: 10px; border-radius: var(--radius); background: var(--bg-card); border: 1px solid var(--border); }
+  .est-item .period { font-size: 11px; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.3px; }
+  .est-item .value { font-family: var(--font-mono); font-size: 15px; font-weight: 700; margin: 2px 0; }
+  .est-item .revised { font-size: 11px; }
+  .est-item .revised.up { color: var(--accent-green); }
+  .est-item .revised.down { color: var(--accent-red); }
+  @media print { body { padding: 0; font-size: 12px; } .risk-grid { break-inside: avoid; } table { break-inside: avoid; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

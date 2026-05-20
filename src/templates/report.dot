@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Report'}}</title>
+<style>
+  :root {
+    --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-card: #1a1a28;
+    --border: #2a2a44; --text-primary: #e8e8f0; --text-secondary: #9898b8;
+    --accent: #f59e0b; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #ffffff; --bg-secondary: #f5f5f5; --bg-card: #ffffff;
+    --border: #e0e0e0; --text-primary: #1a1a1a; --text-secondary: #666666;
+    --accent: #d97706;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 900}}px; margin: 0 auto; padding: 40px 24px;
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4 { color: var(--accent); margin-top: 1.5em; margin-bottom: 0.5em; }
+  {{=it.custom_css || ''}}
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

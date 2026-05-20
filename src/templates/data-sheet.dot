@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'light'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Data Sheet'}}</title>
+<style>
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f8fafc; --bg-card: #ffffff;
+    --border: #e2e8f0; --text-primary: #0f172a; --text-secondary: #64748b;
+    --accent: #0891b2; --accent-light: #cffafe; --font-body: system-ui, -apple-system, sans-serif;
+    --font-mono: 'SF Mono', 'Fira Code', monospace;
+    --radius: 6px;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="dark"] {
+    --bg-primary: #0f172a; --bg-secondary: #1e293b; --bg-card: #1e293b;
+    --border: #334155; --text-primary: #f1f5f9; --text-secondary: #94a3b8;
+    --accent: #06b6d4; --accent-light: #164e63;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 1100}}px; margin: 0 auto; padding: 32px 24px;
+    line-height: 1.5;
+  }
+  .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+  .sheet-header h1 { font-size: 22px; font-weight: 700; margin: 0; }
+  .sheet-header .controls { display: flex; gap: 8px; }
+  .sheet-header .controls input, .sheet-header .controls select { padding: 6px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 13px; background: var(--bg-card); color: var(--text-primary); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table th { background: var(--bg-secondary); padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); white-space: nowrap; cursor: pointer; user-select: none; }
+  table th:hover { color: var(--accent); }
+  table th .sort { margin-left: 4px; font-size: 10px; }
+  table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  table tr:hover td { background: var(--accent-light); }
+  table tr:last-child td { border-bottom: none; }
+  .pagination { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; font-size: 13px; color: var(--text-secondary); }
+  .pagination .pages { display: flex; gap: 4px; }
+  .pagination .pages button { padding: 4px 10px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); color: var(--text-primary); cursor: pointer; font-size: 12px; }
+  .pagination .pages button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pagination .pages button:hover:not(.active) { background: var(--bg-secondary); }
+  caption { caption-side: bottom; padding: 8px 0; font-size: 12px; color: var(--text-secondary); text-align: left; }
+  .footer { margin-top: 24px; text-align: center; font-size: 12px; color: var(--text-secondary); }
+  @media print { .sheet-header .controls { display: none; } .pagination { display: none; } }
+  @media (max-width: 600px) { .sheet-header { flex-direction: column; align-items: flex-start; } }
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

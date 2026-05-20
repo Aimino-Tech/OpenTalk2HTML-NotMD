@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Illustration'}}</title>
+<style>
+  :root {
+    --bg-primary: #050508; --bg-card: #0f0f1a;
+    --border: #1a1a30; --text-primary: #e8e8f0; --text-secondary: #7878a0;
+    --accent: #60a5fa; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #f0f4ff; --bg-card: #ffffff;
+    --border: #d0d8f0; --text-primary: #1a1a2e; --text-secondary: #5a6a8a;
+    --accent: #2563eb;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 1000}}px; margin: 0 auto; padding: 40px 24px;
+  }
+  svg { max-width: 100%; height: auto; }
+  {{=it.custom_css || ''}}
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>

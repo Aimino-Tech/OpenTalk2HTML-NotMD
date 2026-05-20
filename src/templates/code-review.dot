@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="{{=it.theme || 'dark'}}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{=it.title || 'Code Review'}}</title>
+<style>
+  :root {
+    --bg-primary: #0d0d1a; --bg-secondary: #1a1a2e; --bg-card: #12121e;
+    --border: #2a2a44; --text-primary: #e8e8f0; --text-secondary: #8888aa;
+    --accent: #34d399; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    {{~it.css_vars :val:key}}{{=key}}: {{=val}};{{~}}
+  }
+  [data-theme="light"] {
+    --bg-primary: #f0fdf4; --bg-secondary: #ffffff; --bg-card: #ffffff;
+    --border: #bbf7d0; --text-primary: #1a1a2e; --text-secondary: #4a7a5a;
+    --accent: #16a34a;
+  }
+  body {
+    font-family: var(--font-body); background: var(--bg-primary); color: var(--text-primary);
+    max-width: {{=it.line_width || 1000}}px; margin: 0 auto; padding: 40px 24px;
+  }
+  pre, code { font-family: var(--font-mono); }
+  {{=it.custom_css || ''}}
+</style>
+{{? it.inject_css }}<style>{{=it.inject_css}}</style>{{?}}
+</head>
+<body>
+{{=it.content}}
+{{? it.inject_js }}<script>{{=it.inject_js}}</script>{{?}}
+</body>
+</html>
