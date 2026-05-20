@@ -4,5 +4,5 @@
   "categories": ["developer-tools", "web-development", "content-generation"],
   "tags": ["html", "html-generation", "dom-manipulation", "templates", "components"],
   "repository": "https://github.com/Aimino-Tech/fast-html-mcp-server",
-  "npm": "@surfsense/fast-html-mcp"
+  "npm": "@aimino.xdn/fast-html-mcp-server"
 }

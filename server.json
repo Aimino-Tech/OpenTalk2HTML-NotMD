@@ -7,7 +7,7 @@
   "packages": [
     {
       "registryType": "npm",
-      "identifier": "@surfsense/fast-html-mcp",
+      "identifier": "@aimino.xdn/fast-html-mcp-server",
       "version": "0.1.1",
       "transport": {
         "type": "stdio"
