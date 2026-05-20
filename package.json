@@ -1,7 +1,7 @@
 {
   "name": "@surfsense/fast-html-mcp",
   "version": "0.1.1",
-  "description": "Five-tier MCP server for lightning-fast HTML generation from AI agents — assembly, patch, read, raw, and consistency tiers with tools, components, and templates",
+  "description": "Five-tier MCP server for lightning-fast HTML generation from AI agents \u2014 assembly, patch, read, raw, and consistency tiers with tools, components, and templates",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "mcpName": "io.github.aimino-tech/fast-html-mcp",
+  "mcpName": "io.github.Aimino-Tech/fast-html-mcp",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -34,11 +34,11 @@
   "license": "GPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Aimino-Tech/fast-html-mcp.git"
+    "url": "git+https://github.com/Aimino-Tech/fast-html-mcp-server.git"
   },
-  "homepage": "https://github.com/Aimino-Tech/fast-html-mcp#readme",
+  "homepage": "https://github.com/Aimino-Tech/fast-html-mcp-server#readme",
   "bugs": {
-    "url": "https://github.com/Aimino-Tech/fast-html-mcp/issues"
+    "url": "https://github.com/Aimino-Tech/fast-html-mcp-server/issues"
   },
   "scripts": {
     "build": "tsc && cp -r src/templates/*.dot dist/templates/",
