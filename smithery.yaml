@@ -7,5 +7,5 @@ startCommand:
     |-
       (config) => ({
         command: 'npx',
-        args: ['-y', '@surfsense/fast-html-mcp']
+        args: ['-y', '@aimino/fast-html-mcp-server']
       })

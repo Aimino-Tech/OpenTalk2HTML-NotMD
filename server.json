@@ -7,7 +7,7 @@
   "packages": [
     {
       "registryType": "npm",
-      "identifier": "@aimino.xdn/fast-html-mcp-server",
+      "identifier": "@aimino/fast-html-mcp-server"
       "version": "0.1.1",
       "transport": {
         "type": "stdio"
