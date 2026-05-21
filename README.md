@@ -1,6 +1,6 @@
 # Fast HTML MCP
 
-[![npm version](https://img.shields.io/npm/v/@aimino.xdn/fast-html-mcp-server)](https://www.npmjs.com/package/@aimino.xdn/fast-html-mcp-server)
+[![npm version](https://img.shields.io/npm/v/@aimino/fast-html-mcp-server)](https://www.npmjs.com/package/@aimino/fast-html-mcp-server)
 [![License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](package.json)
 [![MCP](https://badge.mcpx.dev?type=server 'MCP Server')](https://github.com/modelcontextprotocol/specification)
@@ -12,7 +12,7 @@ MCP name: `io.github.aimino-tech/fast-html-mcp-server`
 ## Quick Start
 
 ```bash
-npx -y @aimino.xdn/fast-html-mcp-server
+npx -y @aimino/fast-html-mcp-server
 ```
 
 Or add to your MCP client config:
@@ -24,7 +24,7 @@ Or add to your MCP client config:
   "mcpServers": {
     "fast-html-mcp-server": {
       "command": "npx",
-      "args": ["-y", "@aimino.xdn/fast-html-mcp-server"]
+      "args": ["-y", "@aimino/fast-html-mcp-server"]
     }
   }
 }
@@ -37,7 +37,7 @@ Or add to your MCP client config:
   "mcpServers": {
     "fast-html-mcp-server": {
       "command": "npx",
-      "args": ["-y", "@aimino.xdn/fast-html-mcp-server"]
+      "args": ["-y", "@aimino/fast-html-mcp-server"]
     }
   }
 }
@@ -51,7 +51,7 @@ Or add to your MCP client config:
   "servers": {
     "fast-html-mcp-server": {
       "command": "npx",
-      "args": ["-y", "@aimino.xdn/fast-html-mcp-server"]
+      "args": ["-y", "@aimino/fast-html-mcp-server"]
     }
   }
 }
@@ -60,7 +60,7 @@ Or add to your MCP client config:
 ### Claude Code
 
 ```bash
-claude mcp add fast-html-mcp-server -e npx -a "-y" -a "@aimino.xdn/fast-html-mcp-server"
+claude mcp add fast-html-mcp-server -e npx -a "-y" -a "@aimino/fast-html-mcp-server"
 ```
 
 ## Working Example
@@ -69,15 +69,15 @@ Here's a complete copy-paste workflow that builds a report page:
 
 ```bash
 # 1. List available templates and components
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_templates","arguments":{}}}' | npx -y @aimino.xdn/fast-html-mcp-server
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_templates","arguments":{}}}' | npx -y @aimino/fast-html-mcp-server
 
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_components","arguments":{}}}' | npx -y @aimino.xdn/fast-html-mcp-server
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_components","arguments":{}}}' | npx -y @aimino/fast-html-mcp-server
 
 # 2. Render a page
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"render_page","arguments":{"template":"report","sections":[{"component":"hero","props":{"title":"Q3 Report","badge":"Draft"}},{"component":"data-table","props":{"headers":["Metric","Value"],"rows":[["Revenue","$1.2M"],["Users","45K"]]}}],"output_path":"/tmp/report.html","options":{"title":"Q3 Report"}}}}}' | npx -y @aimino.xdn/fast-html-mcp-server
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"render_page","arguments":{"template":"report","sections":[{"component":"hero","props":{"title":"Q3 Report","badge":"Draft"}},{"component":"data-table","props":{"headers":["Metric","Value"],"rows":[["Revenue","$1.2M"],["Users","45K"]]}}],"output_path":"/tmp/report.html","options":{"title":"Q3 Report"}}}}}' | npx -y @aimino/fast-html-mcp-server
 
 # 3. Inspect the output
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_html","arguments":{"path":"/tmp/report.html","mode":"compressed"}}}' | npx -y @aimino.xdn/fast-html-mcp-server
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_html","arguments":{"path":"/tmp/report.html","mode":"compressed"}}}' | npx -y @aimino/fast-html-mcp-server
 ```
 
 ## Performance Benchmarks
