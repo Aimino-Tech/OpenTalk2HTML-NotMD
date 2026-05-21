@@ -39,7 +39,7 @@ import {
 import { handlePropagateEdit, handleCheckConsistency } from "./consistency/index.js";
 
 const server = new McpServer({
-  name: "@surfsense/fast-html-mcp",
+    name: "@aimino/fast-html-mcp-server",
   version: "0.1.0",
 });
 

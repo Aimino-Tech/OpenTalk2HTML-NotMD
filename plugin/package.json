@@ -1,5 +1,5 @@
 {
-  "name": "@surfsense/html-mcp-plugin",
+  "name": "@aimino/html-mcp-plugin",
   "version": "0.1.0",
   "description": "OpenCode plugin — Agent-lifecycle intelligence layer for Fast HTML MCP. Intent routing, context compression, quality gates, and document state management.",
   "type": "module",
