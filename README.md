@@ -1,18 +1,18 @@
 # Fast HTML MCP
 
-[![npm version](https://img.shields.io/npm/v/@surfsense/fast-html-mcp)](https://www.npmjs.com/package/@surfsense/fast-html-mcp)
+[![npm version](https://img.shields.io/npm/v/@aimino.xdn/fast-html-mcp-server)](https://www.npmjs.com/package/@aimino.xdn/fast-html-mcp-server)
 [![License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](package.json)
 [![MCP](https://badge.mcpx.dev?type=server 'MCP Server')](https://github.com/modelcontextprotocol/specification)
 **Five-tier MCP server for lightning-fast HTML generation from AI agents.**  
 Assembly-Patch-Read-Raw-Consistency architecture. **15 tools, 22 components, 25 templates** — purpose-built for AI-driven page creation with sub-second patch times and AI-grade token compression.
 
-MCP name: `io.github.aimino-tech/fast-html-mcp`
+MCP name: `io.github.aimino-tech/fast-html-mcp-server`
 
 ## Quick Start
 
 ```bash
-npx -y @surfsense/fast-html-mcp
+npx -y @aimino.xdn/fast-html-mcp-server
 ```
 
 Or add to your MCP client config:
@@ -22,9 +22,9 @@ Or add to your MCP client config:
 ```json
 {
   "mcpServers": {
-    "fast-html-mcp": {
+    "fast-html-mcp-server": {
       "command": "npx",
-      "args": ["-y", "@surfsense/fast-html-mcp"]
+      "args": ["-y", "@aimino.xdn/fast-html-mcp-server"]
     }
   }
 }
@@ -35,9 +35,9 @@ Or add to your MCP client config:
 ```json
 {
   "mcpServers": {
-    "fast-html-mcp": {
+    "fast-html-mcp-server": {
       "command": "npx",
-      "args": ["-y", "@surfsense/fast-html-mcp"]
+      "args": ["-y", "@aimino.xdn/fast-html-mcp-server"]
     }
   }
 }
@@ -49,9 +49,9 @@ Or add to your MCP client config:
 {
   "inputs": [],
   "servers": {
-    "fast-html-mcp": {
+    "fast-html-mcp-server": {
       "command": "npx",
-      "args": ["-y", "@surfsense/fast-html-mcp"]
+      "args": ["-y", "@aimino.xdn/fast-html-mcp-server"]
     }
   }
 }
@@ -60,7 +60,7 @@ Or add to your MCP client config:
 ### Claude Code
 
 ```bash
-claude mcp add fast-html-mcp -e npx -a "-y" -a "@surfsense/fast-html-mcp"
+claude mcp add fast-html-mcp-server -e npx -a "-y" -a "@aimino.xdn/fast-html-mcp-server"
 ```
 
 ## Working Example
@@ -69,15 +69,15 @@ Here's a complete copy-paste workflow that builds a report page:
 
 ```bash
 # 1. List available templates and components
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_templates","arguments":{}}}' | npx -y @surfsense/fast-html-mcp
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_templates","arguments":{}}}' | npx -y @aimino.xdn/fast-html-mcp-server
 
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_components","arguments":{}}}' | npx -y @surfsense/fast-html-mcp
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_components","arguments":{}}}' | npx -y @aimino.xdn/fast-html-mcp-server
 
 # 2. Render a page
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"render_page","arguments":{"template":"report","sections":[{"component":"hero","props":{"title":"Q3 Report","badge":"Draft"}},{"component":"data-table","props":{"headers":["Metric","Value"],"rows":[["Revenue","$1.2M"],["Users","45K"]]}}],"output_path":"/tmp/report.html","options":{"title":"Q3 Report"}}}}}' | npx -y @surfsense/fast-html-mcp
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"render_page","arguments":{"template":"report","sections":[{"component":"hero","props":{"title":"Q3 Report","badge":"Draft"}},{"component":"data-table","props":{"headers":["Metric","Value"],"rows":[["Revenue","$1.2M"],["Users","45K"]]}}],"output_path":"/tmp/report.html","options":{"title":"Q3 Report"}}}}}' | npx -y @aimino.xdn/fast-html-mcp-server
 
 # 3. Inspect the output
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_html","arguments":{"path":"/tmp/report.html","mode":"compressed"}}}' | npx -y @surfsense/fast-html-mcp
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_html","arguments":{"path":"/tmp/report.html","mode":"compressed"}}}' | npx -y @aimino.xdn/fast-html-mcp-server
 ```
 
 ## Performance Benchmarks
@@ -296,8 +296,8 @@ When self-hosting over the network, terminate TLS at your reverse proxy and rest
 ## Development
 
 ```bash
-git clone https://github.com/Aimino-Tech/fast-html-mcp.git
-cd fast-html-mcp
+git clone https://github.com/Aimino-Tech/fast-html-mcp-server.git
+cd fast-html-mcp-server
 npm install
 npm run build
 npm run dev    # hot reload via tsx
