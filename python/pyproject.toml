@@ -1,0 +1,48 @@
+[project]
+name = "fast-html-mcp-server"
+version = "0.1.2"
+description = "Five-tier MCP server for lightning-fast HTML generation from AI agents"
+readme = "README.md"
+license = "GPL-3.0-only"
+requires-python = ">=3.8"
+
+authors = [
+    {name = "Aimino Tech", email = "hello@syntaro.io"},
+]
+maintainers = [
+    {name = "Aimino Tech", email = "hello@syntaro.io"},
+]
+keywords = [
+    "mcp", "mcp-server", "model-context-protocol",
+    "html", "html-generation", "ai",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Internet :: WWW/HTTP",
+]
+
+[project.urls]
+Homepage = "https://github.com/Aimino-Tech/fast-html-mcp-server"
+Repository = "https://github.com/Aimino-Tech/fast-html-mcp-server"
+Documentation = "https://github.com/Aimino-Tech/fast-html-mcp-server#readme"
+"Bug Tracker" = "https://github.com/Aimino-Tech/fast-html-mcp-server/issues"
+
+[project.scripts]
+fast-html-mcp-server = "fast_html_mcp_server.cli:main"
+fast-html-mcp = "fast_html_mcp_server.cli:main"
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
