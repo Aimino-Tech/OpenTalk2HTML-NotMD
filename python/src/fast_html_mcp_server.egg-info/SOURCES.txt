@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/fast_html_mcp_server/__init__.py
+src/fast_html_mcp_server/__main__.py
+src/fast_html_mcp_server/cli.py
+src/fast_html_mcp_server.egg-info/PKG-INFO
+src/fast_html_mcp_server.egg-info/SOURCES.txt
+src/fast_html_mcp_server.egg-info/dependency_links.txt
+src/fast_html_mcp_server.egg-info/entry_points.txt
+src/fast_html_mcp_server.egg-info/top_level.txt
