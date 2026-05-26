@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast HTML MCP — Showcase</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e2e8f0; line-height: 1.6; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+    header { text-align: center; margin-bottom: 48px; }
+    h1 { font-size: 48px; font-weight: 900; letter-spacing: -2px; margin-bottom: 8px; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { font-size: 18px; color: #94a3b8; max-width: 600px; margin: 0 auto; }
+    .badge { display: inline-block; padding: 4px 12px; border-radius: 100px; background: rgba(96,165,250,0.1); color: #60a5fa; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+    .category-section { margin-bottom: 48px; }
+    .category-section h2 { font-size: 24px; font-weight: 700; margin-bottom: 20px; color: #f1f5f9; padding-bottom: 8px; border-bottom: 1px solid #1e293b; }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+    .catalog-card { background: #13131f; border: 1px solid #1e293b; border-radius: 12px; padding: 24px; cursor: pointer; transition: all 0.3s; }
+    .catalog-card:hover { border-color: #60a5fa; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+    .demo-badge { display: inline-block; padding: 3px 10px; border-radius: 6px; background: rgba(96,165,250,0.1); color: #60a5fa; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; font-family: 'SF Mono', 'Fira Code', monospace; }
+    .catalog-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #f1f5f9; }
+    .catalog-card p { font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 12px; }
+    .demo-link { font-size: 13px; font-weight: 600; color: #60a5fa; }
+    footer { text-align: center; padding: 24px 0; color: #475569; font-size: 13px; border-top: 1px solid #1e293b; margin-top: 48px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Interactive Showcase</div>
+      <h1>Fast HTML MCP</h1>
+      <p class="subtitle">Full template coverage — <strong>33</strong> pages generated with <strong>22</strong> components across <strong>6</strong> categories</p>
+    </header>
+    
+
+      <div style="margin-bottom: 48px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="badge" style="background: rgba(99,102,241,0.15); color: #818cf8;">🚀 New</div>
+          <a href="use-cases.html" style="display: inline-block;">
+            <div class="catalog-card" style="text-align: center; padding: 32px; border: 2px solid transparent; background: linear-gradient(135deg, #13131f, #1a1a2e); transition: all 0.3s; border: 1px solid #312e81;">
+              <div style="font-size: 48px; margin-bottom: 12px;">🎯</div>
+              <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Real-World Use Cases</h3>
+              <p style="font-size: 15px; max-width: 500px; margin: 0 auto 16px;">22+ interactive scenarios showing what you can build with Fast HTML MCP — invoices, dashboards, pitch decks, research papers, and more. Includes live preview and copyable prompts.</p>
+              <span style="display: inline-block; padding: 8px 24px; border-radius: 8px; background: #6366f1; color: #fff; font-weight: 600; font-size: 14px;">Explore Use Cases →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <section class="category-section">
+        <h2>General Purpose</h2>
+        <div class="catalog-grid">
+          
+          <div class="catalog-card" onclick="window.location.href='report.html'">
+            <div class="demo-badge">report</div>
+            <h3>Q3 2026 Strategic Report</h3>
+            <p>Professional document template with clear typography and structured layout</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='exploration.html'">
+            <div class="demo-badge">exploration</div>
+            <h3>Customer Behavior Analysis</h3>
+            <p>Interactive data narrative template with wide layout for visual content</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='deck.html'">
+            <div class="demo-badge">deck</div>
+            <h3>AI Agent Architectures</h3>
+            <p>Slide-style presentation template with full-viewport sections</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='code-review.html'">
+            <div class="demo-badge">code-review</div>
+            <h3>PR #247: Authentication Module Refactor</h3>
+            <p>Code-focused template with monospace typography and diff-friendly styling</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='design.html'">
+            <div class="demo-badge">design</div>
+            <h3>Design System: Nebula UI</h3>
+            <p>Visual mockup showcase template with elevated cards</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='prototyping.html'">
+            <div class="demo-badge">prototyping</div>
+            <h3>Dashboard Prototype — Campaign Manager</h3>
+            <p>Interactive component demo template with full-width layout</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='illustrations.html'">
+            <div class="demo-badge">illustrations</div>
+            <h3>System Architecture Visual Guide</h3>
+            <p>SVG and diagram-heavy template with dark canvas background</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='research.html'">
+            <div class="demo-badge">research</div>
+            <h3>Long-Form Research Report</h3>
+            <p>Academic long-form template with serif-like reading experience</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='custom-editor.html'">
+            <div class="demo-badge">custom-editor</div>
+            <h3>Interactive Documentation Playground</h3>
+            <p>Embedded interactive tools template with fixed toolbar support</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='minimal.html'">
+            <div class="demo-badge">minimal</div>
+            <h3>Minimal Content Shell</h3>
+            <p>Minimal shell with no theme or styling — just the content</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='documentation.html'">
+            <div class="demo-badge">documentation</div>
+            <h3>Fast HTML MCP Developer Guide</h3>
+            <p>Professional documentation template with rich dark theme and sidebar navigation</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+        </div>
+      </section>
+
+      <div style="margin-bottom: 48px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="badge" style="background: rgba(99,102,241,0.15); color: #818cf8;">🚀 New</div>
+          <a href="use-cases.html" style="display: inline-block;">
+            <div class="catalog-card" style="text-align: center; padding: 32px; border: 2px solid transparent; background: linear-gradient(135deg, #13131f, #1a1a2e); transition: all 0.3s; border: 1px solid #312e81;">
+              <div style="font-size: 48px; margin-bottom: 12px;">🎯</div>
+              <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Real-World Use Cases</h3>
+              <p style="font-size: 15px; max-width: 500px; margin: 0 auto 16px;">22+ interactive scenarios showing what you can build with Fast HTML MCP — invoices, dashboards, pitch decks, research papers, and more. Includes live preview and copyable prompts.</p>
+              <span style="display: inline-block; padding: 8px 24px; border-radius: 8px; background: #6366f1; color: #fff; font-weight: 600; font-size: 14px;">Explore Use Cases →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <section class="category-section">
+        <h2>Business</h2>
+        <div class="catalog-grid">
+          
+          <div class="catalog-card" onclick="window.location.href='invoice.html'">
+            <div class="demo-badge">invoice</div>
+            <h3>Invoice #INV-2026-0042</h3>
+            <p>Professional invoice with line items, totals, tax, and payment terms</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='data-sheet.html'">
+            <div class="demo-badge">data-sheet</div>
+            <h3>Product Comparison: Cloud Providers</h3>
+            <p>Spreadsheet-like grid with filters, sorting, and pagination</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='dashboard.html'">
+            <div class="demo-badge">dashboard</div>
+            <h3>SaaS Metrics Dashboard</h3>
+            <p>KPI/metric dashboard with cards, charts, data tables, and filter bar</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='budget.html'">
+            <div class="demo-badge">budget</div>
+            <h3>Q4 2026 Department Budget</h3>
+            <p>Financial budget with categories, planned vs actual, totals, and variance indicators</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='financial-summary.html'">
+            <div class="demo-badge">financial-summary</div>
+            <h3>FY2026 Annual Financial Summary</h3>
+            <p>Quarterly/annual financial overview with revenue/expense tables, KPIs, and growth chart</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='financial-dashboard.html'">
+            <div class="demo-badge">financial-dashboard</div>
+            <h3>Real-Time Finance Dashboard</h3>
+            <p>Financial KPI dashboard with metric cards, change indicators, color-coded data, and responsive grid</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+        </div>
+      </section>
+
+      <div style="margin-bottom: 48px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="badge" style="background: rgba(99,102,241,0.15); color: #818cf8;">🚀 New</div>
+          <a href="use-cases.html" style="display: inline-block;">
+            <div class="catalog-card" style="text-align: center; padding: 32px; border: 2px solid transparent; background: linear-gradient(135deg, #13131f, #1a1a2e); transition: all 0.3s; border: 1px solid #312e81;">
+              <div style="font-size: 48px; margin-bottom: 12px;">🎯</div>
+              <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Real-World Use Cases</h3>
+              <p style="font-size: 15px; max-width: 500px; margin: 0 auto 16px;">22+ interactive scenarios showing what you can build with Fast HTML MCP — invoices, dashboards, pitch decks, research papers, and more. Includes live preview and copyable prompts.</p>
+              <span style="display: inline-block; padding: 8px 24px; border-radius: 8px; background: #6366f1; color: #fff; font-weight: 600; font-size: 14px;">Explore Use Cases →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <section class="category-section">
+        <h2>Presentation</h2>
+        <div class="catalog-grid">
+          
+          <div class="catalog-card" onclick="window.location.href='pitch-deck.html'">
+            <div class="demo-badge">pitch-deck</div>
+            <h3>Nova AI — Seed Round</h3>
+            <p>Investor pitch deck with full-viewport slide sections, stats, features, and team grid</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+        </div>
+      </section>
+
+      <div style="margin-bottom: 48px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="badge" style="background: rgba(99,102,241,0.15); color: #818cf8;">🚀 New</div>
+          <a href="use-cases.html" style="display: inline-block;">
+            <div class="catalog-card" style="text-align: center; padding: 32px; border: 2px solid transparent; background: linear-gradient(135deg, #13131f, #1a1a2e); transition: all 0.3s; border: 1px solid #312e81;">
+              <div style="font-size: 48px; margin-bottom: 12px;">🎯</div>
+              <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Real-World Use Cases</h3>
+              <p style="font-size: 15px; max-width: 500px; margin: 0 auto 16px;">22+ interactive scenarios showing what you can build with Fast HTML MCP — invoices, dashboards, pitch decks, research papers, and more. Includes live preview and copyable prompts.</p>
+              <span style="display: inline-block; padding: 8px 24px; border-radius: 8px; background: #6366f1; color: #fff; font-weight: 600; font-size: 14px;">Explore Use Cases →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <section class="category-section">
+        <h2>Communication</h2>
+        <div class="catalog-grid">
+          
+          <div class="catalog-card" onclick="window.location.href='newsletter.html'">
+            <div class="demo-badge">newsletter</div>
+            <h3>Tech Pulse — May 2026</h3>
+            <p>Email-style newsletter with hero, articles, and social links footer</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='changelog.html'">
+            <div class="demo-badge">changelog</div>
+            <h3>Fast HTML MCP v2.5.0</h3>
+            <p>Release notes with version history, features, fixes, and breaking changes</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='faq.html'">
+            <div class="demo-badge">faq</div>
+            <h3>Fast HTML MCP FAQ</h3>
+            <p>Structured Q&A with category anchors and interactive expand/collapse</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='meeting-notes.html'">
+            <div class="demo-badge">meeting-notes</div>
+            <h3>Sprint Planning — Week 42</h3>
+            <p>Meeting agenda, discussion notes, and action items with assignees</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='comparison.html'">
+            <div class="demo-badge">comparison</div>
+            <h3>HTML Generation Tools Comparison</h3>
+            <p>Product/feature comparison tables with highlight column and check/cross indicators</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+        </div>
+      </section>
+
+      <div style="margin-bottom: 48px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="badge" style="background: rgba(99,102,241,0.15); color: #818cf8;">🚀 New</div>
+          <a href="use-cases.html" style="display: inline-block;">
+            <div class="catalog-card" style="text-align: center; padding: 32px; border: 2px solid transparent; background: linear-gradient(135deg, #13131f, #1a1a2e); transition: all 0.3s; border: 1px solid #312e81;">
+              <div style="font-size: 48px; margin-bottom: 12px;">🎯</div>
+              <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Real-World Use Cases</h3>
+              <p style="font-size: 15px; max-width: 500px; margin: 0 auto 16px;">22+ interactive scenarios showing what you can build with Fast HTML MCP — invoices, dashboards, pitch decks, research papers, and more. Includes live preview and copyable prompts.</p>
+              <span style="display: inline-block; padding: 8px 24px; border-radius: 8px; background: #6366f1; color: #fff; font-weight: 600; font-size: 14px;">Explore Use Cases →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <section class="category-section">
+        <h2>Technical</h2>
+        <div class="catalog-grid">
+          
+          <div class="catalog-card" onclick="window.location.href='api-doc.html'">
+            <div class="demo-badge">api-doc</div>
+            <h3>Payment API v3 Reference</h3>
+            <p>API reference documentation with endpoint list, request/response schemas, and code examples</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='landing-page.html'">
+            <div class="demo-badge">landing-page</div>
+            <h3>Nova AI Platform Launch</h3>
+            <p>Marketing landing page with hero CTA, features grid, testimonials, and pricing</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='error-page.html'">
+            <div class="demo-badge">error-page</div>
+            <h3>404 — Page Not Found</h3>
+            <p>404/500 error page with branding, error code, message, search, and navigation links</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+        </div>
+      </section>
+
+      <div style="margin-bottom: 48px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div class="badge" style="background: rgba(99,102,241,0.15); color: #818cf8;">🚀 New</div>
+          <a href="use-cases.html" style="display: inline-block;">
+            <div class="catalog-card" style="text-align: center; padding: 32px; border: 2px solid transparent; background: linear-gradient(135deg, #13131f, #1a1a2e); transition: all 0.3s; border: 1px solid #312e81;">
+              <div style="font-size: 48px; margin-bottom: 12px;">🎯</div>
+              <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #818cf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Real-World Use Cases</h3>
+              <p style="font-size: 15px; max-width: 500px; margin: 0 auto 16px;">22+ interactive scenarios showing what you can build with Fast HTML MCP — invoices, dashboards, pitch decks, research papers, and more. Includes live preview and copyable prompts.</p>
+              <span style="display: inline-block; padding: 8px 24px; border-radius: 8px; background: #6366f1; color: #fff; font-weight: 600; font-size: 14px;">Explore Use Cases →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <section class="category-section">
+        <h2>Research</h2>
+        <div class="catalog-grid">
+          
+          <div class="catalog-card" onclick="window.location.href='equity-research.html'">
+            <div class="demo-badge">equity-research</div>
+            <h3>Apple Inc. (AAPL) — Buy</h3>
+            <p>Full equity research report with executive summary, financial analysis, valuation, risk assessment, ESG, and recommendation</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='lit-review.html'">
+            <div class="demo-badge">lit-review</div>
+            <h3>MCP Protocol: A Systematic Literature Review</h3>
+            <p>PRISMA-compliant systematic literature review with abstract, methodology, PRISMA flow diagram, and thematic synthesis</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='research-briefing.html'">
+            <div class="demo-badge">research-briefing</div>
+            <h3>AI Agent Security Briefing</h3>
+            <p>Quick research briefing with key findings, evidence gap analysis, methodology box, and TL;DR summary</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='scientific-paper.html'">
+            <div class="demo-badge">scientific-paper</div>
+            <h3>Transformers for Code Generation</h3>
+            <p>Academic/scientific paper with title page, abstract, numbered sections, equations, references, and print layout</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='journal-club.html'">
+            <div class="demo-badge">journal-club</div>
+            <h3>Journal Club: MCP Specification Paper</h3>
+            <p>Journal club article review with critical appraisal, PICO framework, evidence meter, and discussion points</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='earnings-summary.html'">
+            <div class="demo-badge">earnings-summary</div>
+            <h3>NVDA Q3 2026 Earnings Summary</h3>
+            <p>Earnings call summary with financial highlights, segment performance, guidance, and source-annotated data</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+          <div class="catalog-card" onclick="window.location.href='industry-overview.html'">
+            <div class="demo-badge">industry-overview</div>
+            <h3>MCP Server Ecosystem 2026</h3>
+            <p>Industry/competitive analysis with market sizing, competitive positioning, SWOT, and growth trajectory</p>
+            <span class="demo-link">View Demo →</span>
+          </div>
+        </div>
+      </section>
+    <footer>
+      Generated by scripts/generate-showcase.ts — Fast HTML MCP v0.1.0
+    </footer>
+  </div>
+  <script>
+  window.SHOWCASE_DATA = [{"template":"report","title":"Q3 2026 Strategic Report","description":"Professional document template with clear typography and structured layout","category":"General Purpose"},{"template":"exploration","title":"Customer Behavior Analysis","description":"Interactive data narrative template with wide layout for visual content","category":"General Purpose"},{"template":"deck","title":"AI Agent Architectures","description":"Slide-style presentation template with full-viewport sections","category":"General Purpose"},{"template":"code-review","title":"PR #247: Authentication Module Refactor","description":"Code-focused template with monospace typography and diff-friendly styling","category":"General Purpose"},{"template":"design","title":"Design System: Nebula UI","description":"Visual mockup showcase template with elevated cards","category":"General Purpose"},{"template":"prototyping","title":"Dashboard Prototype — Campaign Manager","description":"Interactive component demo template with full-width layout","category":"General Purpose"},{"template":"illustrations","title":"System Architecture Visual Guide","description":"SVG and diagram-heavy template with dark canvas background","category":"General Purpose"},{"template":"research","title":"Long-Form Research Report","description":"Academic long-form template with serif-like reading experience","category":"General Purpose"},{"template":"custom-editor","title":"Interactive Documentation Playground","description":"Embedded interactive tools template with fixed toolbar support","category":"General Purpose"},{"template":"minimal","title":"Minimal Content Shell","description":"Minimal shell with no theme or styling — just the content","category":"General Purpose"},{"template":"documentation","title":"Fast HTML MCP Developer Guide","description":"Professional documentation template with rich dark theme and sidebar navigation","category":"General Purpose"},{"template":"invoice","title":"Invoice #INV-2026-0042","description":"Professional invoice with line items, totals, tax, and payment terms","category":"Business"},{"template":"data-sheet","title":"Product Comparison: Cloud Providers","description":"Spreadsheet-like grid with filters, sorting, and pagination","category":"Business"},{"template":"pitch-deck","title":"Nova AI — Seed Round","description":"Investor pitch deck with full-viewport slide sections, stats, features, and team grid","category":"Presentation"},{"template":"dashboard","title":"SaaS Metrics Dashboard","description":"KPI/metric dashboard with cards, charts, data tables, and filter bar","category":"Business"},{"template":"newsletter","title":"Tech Pulse — May 2026","description":"Email-style newsletter with hero, articles, and social links footer","category":"Communication"},{"template":"changelog","title":"Fast HTML MCP v2.5.0","description":"Release notes with version history, features, fixes, and breaking changes","category":"Communication"},{"template":"faq","title":"Fast HTML MCP FAQ","description":"Structured Q&A with category anchors and interactive expand/collapse","category":"Communication"},{"template":"meeting-notes","title":"Sprint Planning — Week 42","description":"Meeting agenda, discussion notes, and action items with assignees","category":"Communication"},{"template":"comparison","title":"HTML Generation Tools Comparison","description":"Product/feature comparison tables with highlight column and check/cross indicators","category":"Communication"},{"template":"api-doc","title":"Payment API v3 Reference","description":"API reference documentation with endpoint list, request/response schemas, and code examples","category":"Technical"},{"template":"landing-page","title":"Nova AI Platform Launch","description":"Marketing landing page with hero CTA, features grid, testimonials, and pricing","category":"Technical"},{"template":"error-page","title":"404 — Page Not Found","description":"404/500 error page with branding, error code, message, search, and navigation links","category":"Technical"},{"template":"budget","title":"Q4 2026 Department Budget","description":"Financial budget with categories, planned vs actual, totals, and variance indicators","category":"Business"},{"template":"financial-summary","title":"FY2026 Annual Financial Summary","description":"Quarterly/annual financial overview with revenue/expense tables, KPIs, and growth chart","category":"Business"},{"template":"equity-research","title":"Apple Inc. (AAPL) — Buy","description":"Full equity research report with executive summary, financial analysis, valuation, risk assessment, ESG, and recommendation","category":"Research"},{"template":"lit-review","title":"MCP Protocol: A Systematic Literature Review","description":"PRISMA-compliant systematic literature review with abstract, methodology, PRISMA flow diagram, and thematic synthesis","category":"Research"},{"template":"research-briefing","title":"AI Agent Security Briefing","description":"Quick research briefing with key findings, evidence gap analysis, methodology box, and TL;DR summary","category":"Research"},{"template":"scientific-paper","title":"Transformers for Code Generation","description":"Academic/scientific paper with title page, abstract, numbered sections, equations, references, and print layout","category":"Research"},{"template":"journal-club","title":"Journal Club: MCP Specification Paper","description":"Journal club article review with critical appraisal, PICO framework, evidence meter, and discussion points","category":"Research"},{"template":"earnings-summary","title":"NVDA Q3 2026 Earnings Summary","description":"Earnings call summary with financial highlights, segment performance, guidance, and source-annotated data","category":"Research"},{"template":"industry-overview","title":"MCP Server Ecosystem 2026","description":"Industry/competitive analysis with market sizing, competitive positioning, SWOT, and growth trajectory","category":"Research"},{"template":"financial-dashboard","title":"Real-Time Finance Dashboard","description":"Financial KPI dashboard with metric cards, change indicators, color-coded data, and responsive grid","category":"Business"}];
+  </script>
+</body>
+</html>
+

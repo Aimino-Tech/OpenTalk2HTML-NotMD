@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment API v3 Reference</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --text-tertiary: #94a3b8;
+      --accent: #3b82f6;
+      --accent-light: #eff6ff;
+      --green: #16a34a;
+      --green-bg: #dcfce7;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --amber: #d97706;
+      --amber-bg: #fef3c7;
+      --purple: #7c3aed;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+      --radius: 8px;
+      --radius-sm: 6px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --border: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+      --accent: #60a5fa;
+      --accent-light: #1e3a5f;
+      --green: #22c55e;
+      --green-bg: #14532d;
+      --red: #ef4444;
+      --red-bg: #450a0a;
+      --amber: #f59e0b;
+      --amber-bg: #451a03;
+      --purple: #a78bfa;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .api-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .api-sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      padding: 24px 16px;
+      overflow-y: auto;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+
+    .api-sidebar h2 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      font-weight: 600;
+      margin: 20px 0 8px;
+    }
+
+    .api-sidebar h2:first-child {
+      margin-top: 0;
+    }
+
+    .api-sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .api-sidebar a:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .api-sidebar .method {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .api-sidebar .method.get {
+      color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .api-sidebar .method.post {
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .api-sidebar .method.put {
+      color: var(--amber);
+      background: var(--amber-bg);
+    }
+
+    .api-sidebar .method.delete {
+      color: var(--red);
+      background: var(--red-bg);
+    }
+
+    .api-main {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 900px;
+    }
+
+    .api-main h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .api-main .base-url {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      padding: 12px 16px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+    }
+
+    .endpoint {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .endpoint:last-child {
+      border-bottom: none;
+    }
+
+    .endpoint-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .endpoint-header .method {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+    }
+
+    .endpoint-header .method.get {
+      color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .endpoint-header .method.post {
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .endpoint-header .method.put {
+      color: var(--amber);
+      background: var(--amber-bg);
+    }
+
+    .endpoint-header .method.delete {
+      color: var(--red);
+      background: var(--red-bg);
+    }
+
+    .endpoint-header .path {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .endpoint .desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .endpoint h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .endpoint .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .endpoint .param-table th {
+      text-align: left;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-tertiary);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .endpoint .param-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .endpoint .param-table .type {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--purple);
+    }
+
+    .endpoint .param-table .required {
+      font-size: 11px;
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    .endpoint pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 12px 0;
+    }
+
+    .endpoint pre .comment {
+      color: #64748b;
+    }
+
+    .endpoint pre .string {
+      color: #22c55e;
+    }
+
+    .endpoint pre .key {
+      color: #60a5fa;
+    }
+
+    .endpoint pre .num {
+      color: #f59e0b;
+    }
+
+    @media (max-width: 768px) {
+      .api-layout {
+        flex-direction: column;
+      }
+
+      .api-sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        padding: 16px;
+      }
+
+      .api-main {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .tabs-component {
+      margin: 1em 0;
+    }
+
+    .tabs-header {
+      display: flex;
+      gap: 2px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-elevated, var(--bg-card));
+      color: var(--accent);
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 16px 0;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .code-block-component {
+      background: #0d0d1a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+      overflow: hidden;
+    }
+
+    .code-lang {
+      padding: 8px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-block-component pre {
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin: 0;
+    }
+
+    .code-block-component code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .code-filename {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+  </style>
+</head>
+<body>
+  <div class="api-layout">
+    <nav class="api-sidebar">
+      <h2>API Reference</h2>
+      <div id="sidebar-links"> </div>
+    </nav>
+    <div class="api-main"> <!-- fm:section:0:hero -->
+      <div class="hero-section">
+        <div class="hero-badge">Stable v3.0</div>
+        <h1 class="hero-title">Payment API Reference</h1>
+        <p class="hero-subtitle">RESTful API for processing payments, managing subscriptions, and
+          handling webhooks</p>
+      </div>
+      <!-- /fm:section:0:hero -->
+      <!-- fm:section:1:stats-grid -->
+      <div class="stats-grid" style="--stat-cols:4">
+        <div class="stat-card">
+          <div class="stat-value">24</div>
+          <div class="stat-label">Endpoints</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">99.99%</div>
+          <div class="stat-label">Uptime SLA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">&lt;50ms</div>
+          <div class="stat-label">P99 Latency</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">200+</div>
+          <div class="stat-label">Integrations</div>
+        </div>
+      </div>
+      <!-- /fm:section:1:stats-grid -->
+      <!-- fm:section:2:tabs -->
+      <div class="tabs-component">
+        <div class="tabs-header" role="tablist"> <button class="tab-btn active" data-tab="0"
+            role="tab">Payments</button> <button class="tab-btn" data-tab="1"
+            role="tab">Subscriptions</button> <button class="tab-btn" data-tab="2"
+            role="tab">Webhooks</button> </div>
+        <div class="tab-panel active" data-panel="0" role="tabpanel">The Payments API allows you to
+          create, capture, refund, and manage payments. Supports credit cards, digital wallets, and
+          bank transfers. All amounts are in cents (smallest currency unit).</div>
+        <div class="tab-panel" data-panel="1" role="tabpanel">Create and manage recurring billing
+          with support for monthly, yearly, and custom billing periods. Automatic retry logic with
+          configurable schedules and dunning management.</div>
+        <div class="tab-panel" data-panel="2" role="tabpanel">Receive real-time notifications for
+          payment events including succeeded, failed, refunded, and disputed. Webhooks are delivered
+          with at-least-once semantics and signature verification.</div>
+      </div>
+      <!-- /fm:section:2:tabs -->
+      <!-- fm:section:3:code-block -->
+      <div class="code-block-component">
+        <div class="code-lang">javascript</div> <pre><code class="language-javascript">// Create a payment intent
+const stripe = require('stripe')('sk_test_...');
+
+const paymentIntent = await stripe.paymentIntents.create({
+  amount: 2000, // $20.00
+  currency: 'usd',
+  customer: 'cus_abc123',
+  metadata: { order_id: 'ord_789' },
+  automatic_payment_methods: { enabled: true },
+});
+
+console.log(paymentIntent.id); // pi_xyz789</code></pre>
+      </div>
+      <!-- /fm:section:3:code-block -->
+      <!-- fm:section:4:data-table -->
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>Endpoint Summary</caption>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Endpoint</th>
+              <th>Description</th>
+              <th>Auth Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>POST</td>
+              <td>/v3/payments</td>
+              <td>Create a payment</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/v3/payments/:id</td>
+              <td>Retrieve a payment</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td>/v3/payments/:id/capture</td>
+              <td>Capture authorized payment</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>POST</td>
+              <td>/v3/payments/:id/refund</td>
+              <td>Refund a payment</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>GET</td>
+              <td>/v3/payments</td>
+              <td>List all payments</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- /fm:section:4:data-table -->
+    </div>
+  </div>
+  <script>
+    (function() {
+      var links = document.querySelectorAll('.api-sidebar a[href^="#"]');
+      if (links.length > 0) {
+        var sections = [];
+        links.forEach(function(l) {
+          var t = document.getElementById(l.getAttribute('href').slice(1));
+          if (t) sections.push({
+            el: t,
+            link: l
+          })
+        });
+
+        function onScroll() {
+          var p = window.scrollY + 100,
+            c = null;
+          for (var i = sections.length - 1; i >= 0; i--) {
+            if (sections[i].el.offsetTop <= p) {
+              c = sections[i];
+              break
+            }
+          }
+          links.forEach(function(l) {
+            l.style.background = '';
+            l.style.color = ''
+          });
+          if (c) {
+            c.link.style.background = 'var(--accent-light)';
+            c.link.style.color = 'var(--accent)'
+          }
+        }
+        window.addEventListener('scroll', onScroll, {
+          passive: true
+        });
+        onScroll()
+      }
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.tabs-component').forEach(tabs => {
+      tabs.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = btn.dataset.tab;
+          tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          tabs.querySelectorAll('.tab-panel').forEach(p => p.classList.remove(
+            'active'));
+          btn.classList.add('active');
+          tabs.querySelector('.tab-panel[data-panel="' + idx + '"]')?.classList.add(
+            'active');
+        });
+      });
+    });
+  </script>
+  </div>
+  </div>
+</body>
+</html>

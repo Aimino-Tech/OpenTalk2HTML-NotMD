@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Page</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <h1 class="hero-title">Plain Content Page</h1>
+    <p class="hero-subtitle">This template strips all styling for maximum compatibility</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Raw Data</caption>
+      <thead>
+        <tr>
+          <th>Key</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Format</td>
+          <td>Unstyled HTML</td>
+        </tr>
+        <tr>
+          <td>CSS</td>
+          <td>System fonts only</td>
+        </tr>
+        <tr>
+          <td>Use Case</td>
+          <td>Embedding in other systems</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:1:data-table -->
+</body>
+</html>

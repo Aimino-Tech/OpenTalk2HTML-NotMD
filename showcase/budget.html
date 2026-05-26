@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q4 2026 Budget</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --accent: #059669;
+      --accent-light: #d1fae5;
+      --accent-red: #dc2626;
+      --accent-amber: #d97706;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+      --radius: 8px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --border: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent: #22c55e;
+      --accent-light: #14532d;
+      --accent-red: #ef4444;
+      --accent-amber: #f59e0b;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      line-height: 1.5;
+    }
+
+    .budget-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .budget-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .budget-header .summary {
+      text-align: right;
+    }
+
+    .budget-header .summary .total {
+      font-size: 28px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+    }
+
+    .budget-header .summary .total.surplus {
+      color: var(--accent);
+    }
+
+    .budget-header .summary .total.deficit {
+      color: var(--accent-red);
+    }
+
+    .budget-header .summary .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+    }
+
+    .summary-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+    }
+
+    .summary-card .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .summary-card .value {
+      font-size: 22px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      margin-top: 4px;
+    }
+
+    .summary-card.planned .value {
+      color: var(--accent);
+    }
+
+    .summary-card.actual .value {
+      color: var(--text-primary);
+    }
+
+    .summary-card.variance .value {
+      color: var(--accent-amber);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    table th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table td.amount {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    table td.amount.positive {
+      color: var(--accent);
+    }
+
+    table td.amount.negative {
+      color: var(--accent-red);
+    }
+
+    table .category-row {
+      background: var(--accent-light);
+      font-weight: 600;
+    }
+
+    table .category-row td {
+      padding: 8px 14px;
+    }
+
+    table .total-row {
+      font-weight: 700;
+      border-top: 2px solid var(--text-primary);
+    }
+
+    table .total-row td {
+      padding: 12px 14px;
+    }
+
+    .variance-bar {
+      display: inline-block;
+      height: 8px;
+      border-radius: 4px;
+      min-width: 40px;
+    }
+
+    .variance-bar.positive {
+      background: var(--accent);
+    }
+
+    .variance-bar.negative {
+      background: var(--accent-red);
+    }
+
+    .variance-bar.neutral {
+      background: var(--accent-amber);
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .summary-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .budget-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .budget-header .summary {
+        text-align: left;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .financial-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0
+    }
+
+    .financial-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px
+    }
+
+    .financial-table caption {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-primary);
+      caption-side: top;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card)
+    }
+
+    .financial-section th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .financial-table td {
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle
+    }
+
+    .financial-table tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, .02)
+    }
+
+    .financial-table tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    .fin-label {
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap
+    }
+
+    .fin-value {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-align: right;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding-left: 20px
+    }
+
+    .fin-change {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+      padding-left: 12px
+    }
+
+    .change-positive {
+      color: #34d399
+    }
+
+    .change-negative {
+      color: #f87171
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Draft</div>
+    <h1 class="hero-title">Q4 2026 Budget Plan</h1>
+    <p class="hero-subtitle">Departmental budget allocation and tracking for the fourth quarter</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:4">
+    <div class="stat-card">
+      <div class="stat-value">$4.8M</div>
+      <div class="stat-label">Total Budget</div>
+      <div class="stat-trend trend-up">↑ 8%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$1.2M</div>
+      <div class="stat-label">Planned Spend</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">82%</div>
+      <div class="stat-label">Allocated</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$864K</div>
+      <div class="stat-label">Remaining</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:financial-table -->
+  <div class="financial-table-wrap">
+    <table class="financial-table">
+      <caption>Department Budget Allocation</caption>
+      <thead class="financial-section">
+        <tr>
+          <th colspan="3">Engineering</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fin-label">Salaries &amp; Benefits</td>
+          <td class="fin-value">$1,850,000</td>
+          <td class="fin-change change-positive">+5.2%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Infrastructure</td>
+          <td class="fin-value">$420,000</td>
+          <td class="fin-change change-positive">+12.0%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Tools &amp; Licenses</td>
+          <td class="fin-value">$180,000</td>
+          <td class="fin-change change-positive">+3.1%</td>
+        </tr>
+      </tbody>
+      <thead class="financial-section">
+        <tr>
+          <th colspan="3">Marketing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fin-label">Advertising</td>
+          <td class="fin-value">$680,000</td>
+          <td class="fin-change change-positive">+15.0%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Events</td>
+          <td class="fin-value">$240,000</td>
+          <td class="fin-change change-negative">-8.0%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Content</td>
+          <td class="fin-value">$120,000</td>
+          <td class="fin-change change-positive">+20.0%</td>
+        </tr>
+      </tbody>
+      <thead class="financial-section">
+        <tr>
+          <th colspan="3">Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fin-label">Facilities</td>
+          <td class="fin-value">$520,000</td>
+          <td class="fin-change change-positive">+2.0%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Legal &amp; Compliance</td>
+          <td class="fin-value">$180,000</td>
+          <td class="fin-change change-positive">+10.0%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Admin</td>
+          <td class="fin-value">$140,000</td>
+          <td class="fin-change change-positive">0.0%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:2:financial-table -->
+</body>
+</html>

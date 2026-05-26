@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova AI Platform — Product Changelog</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--green:#34d399;--amber:#fbbf24;--blue:#60a5fa;--red:#f87171;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:800px;margin:0 auto;padding:40px 24px;line-height:1.6}
+.header{text-align:center;margin-bottom:40px;padding-bottom:24px;border-bottom:2px solid var(--accent)}
+.header .rss{padding:4px 12px;border-radius:100px;background:rgba(99,102,241,0.1);color:var(--accent);font-size:11px;font-weight:600;display:inline-block;margin-bottom:8px}
+.header h1{font-size:28px;margin:0;letter-spacing:-1px}
+.header p{color:var(--text2);font-size:14px;margin:4px 0 0}
+.version{margin-bottom:28px;padding:20px;background:var(--bg2);border-radius:var(--r);border:1px solid var(--border)}
+.version:target{border-color:var(--accent)}
+.version .vhead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.version .vhead h2{font-size:18px;margin:0;color:var(--text)}
+.version .vhead .date{font-size:12px;color:var(--text3)}
+.version .vhead .pill{display:inline-block;padding:2px 10px;border-radius:100px;font-size:10px;font-weight:600}
+.pill-latest{background:rgba(52,211,153,0.15);color:var(--green);border:1px solid rgba(52,211,153,0.2)}
+.pill-stable{background:rgba(99,102,241,0.15);color:var(--accent);border:1px solid rgba(99,102,241,0.2)}
+.pill-legacy{background:rgba(248,113,113,0.1);color:var(--red);border:1px solid rgba(248,113,113,0.15)}
+.changes{list-style:none;padding:0;margin:0}
+.changes li{padding:6px 0 6px 20px;font-size:13px;color:var(--text2);position:relative;line-height:1.6}
+.changes li::before{content:'';position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%}
+.changes li.added::before{background:var(--green)}.changes li.fixed::before{background:var(--amber)}.changes li.changed::before{background:var(--blue)}.changes li.removed::before{background:var(--red)}
+.changes li .tag{display:inline-block;padding:1px 6px;border-radius:4px;font-size:9px;font-weight:600;text-transform:uppercase;margin-right:6px}
+.tag-added{background:rgba(52,211,153,0.1);color:var(--green)}
+.tag-fixed{background:rgba(251,191,36,0.1);color:var(--amber)}
+.tag-changed{background:rgba(96,165,250,0.1);color:var(--blue)}
+.tag-removed{background:rgba(248,113,113,0.1);color:var(--red)}
+.footer{text-align:center;padding:24px;font-size:12px;color:var(--text3);border-top:1px solid var(--border);margin-top:32px}
+</style>
+</head>
+<body>
+<div class="header"><div class="rss">📡 Changelog</div><h1>Nova AI Platform</h1><p>Product updates, features, and improvements</p></div>
+<div class="version" id="v2.6.0"><div class="vhead"><h2>v2.6.0 — Multimodal & Tool-Use (Latest)</h2><span class="date">May 20, 2026</span><span class="pill pill-latest">Latest</span></div><ul class="changes">
+<li class="added"><span class="tag tag-added">Added</span>Multimodal vision support — upload images for analysis with contextual understanding</li>
+<li class="added"><span class="tag tag-added">Added</span>Native function-calling: 15+ pre-built integrations (Slack, Notion, Gmail, Jira)</li>
+<li class="changed"><span class="tag tag-changed">Changed</span>Improved reasoning accuracy by 28% on MATH and GSM8K benchmarks</li>
+<li class="changed"><span class="tag tag-changed">Changed</span>Reduced average response latency by 35% through speculative decoding</li>
+<li class="fixed"><span class="tag tag-fixed">Fixed</span>Edge case where tool calls with large payloads would timeout</li>
+<li class="fixed"><span class="tag tag-fixed">Fixed</span>Context window truncation logic for non-English inputs</li>
+</ul></div>
+<div class="version" id="v2.5.0"><div class="vhead"><h2>v2.5.0 — Enterprise & Security</h2><span class="date">April 8, 2026</span><span class="pill pill-stable">Stable</span></div><ul class="changes">
+<li class="added"><span class="tag tag-added">Added</span>SOC 2 Type II compliance report and audit log export</li>
+<li class="added"><span class="tag tag-added">Added</span>Custom moderation policies with keyword and sentiment rules</li>
+<li class="changed"><span class="tag tag-changed">Changed</span>Rate limiting now configurable per API key tier</li>
+<li class="fixed"><span class="tag tag-fixed">Fixed</span>Webhook retry logic with exponential backoff</li>
+<li class="fixed"><span class="tag tag-fixed">Fixed</span>SSO session timeout edge case on token refresh</li>
+</ul></div>
+<div class="version" id="v2.4.0"><div class="vhead"><h2>v2.4.0 — Developer Experience</h2><span class="date">February 20, 2026</span><span class="pill pill-stable">Stable</span></div><ul class="changes">
+<li class="added"><span class="tag tag-added">Added</span>Streaming mode with token-level delta events</li>
+<li class="added"><span class="tag tag-added">Added</span>Python and Go SDKs with full API coverage</li>
+<li class="changed"><span class="tag tag-changed">Changed</span>API response schema v2.1 with consistent error format</li>
+<li class="removed"><span class="tag tag-removed">Removed</span>Deprecated v1 endpoints (scheduled sunset)</li>
+</ul></div>
+<div class="footer"><a href="#" style="color:var(--accent);text-decoration:none">Subscribe to changelog updates</a> • Follow on <a href="#" style="color:var(--accent);text-decoration:none">GitHub</a></div>
+</body>
+</html>

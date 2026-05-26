@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova AI — Seed Round Pitch Deck</title>
+<style>
+:root{--bg:#0f172a;--bg2:#1e293b;--border:#334155;--text:#f1f5f9;--text2:#94a3b8;--text3:#64748b;--accent:#8b5cf6;--green:#22c55e;--red:#ef4444;--amber:#f59e0b;--blue:#3b82f6;--font:'Inter',system-ui,sans-serif;--r:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6}
+.slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 48px;border-bottom:1px solid var(--border);position:relative}
+.slide-num{position:absolute;bottom:24px;right:48px;font-size:12px;color:var(--text3);font-weight:500}
+.center{text-align:center;align-items:center}
+.badge{display:inline-block;padding:6px 16px;border-radius:100px;background:rgba(139,92,246,0.15);color:var(--accent);font-size:12px;font-weight:600;margin-bottom:16px;border:1px solid rgba(139,92,246,0.2)}
+h1{font-size:clamp(36px,5vw,56px);font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:16px}
+h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px}
+h3{font-size:18px;font-weight:700;margin-bottom:8px}
+p{font-size:18px;color:var(--text2);max-width:640px;line-height:1.7;margin-bottom:24px}
+p.center{margin-left:auto;margin-right:auto;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:700px;margin:0 auto}
+.stat{text-align:center}
+.stat .num{font-size:36px;font-weight:800;color:var(--accent);letter-spacing:-1px}
+.stat .lbl{font-size:14px;color:var(--text2);margin-top:4px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:800px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:800px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:28px}
+.card .icon{font-size:32px;margin-bottom:12px}
+.card p{font-size:14px;color:var(--text2);margin:0;line-height:1.6}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:800px}
+.metric h3{font-size:14px;color:var(--accent);margin-bottom:4px}
+.metric .val{font-size:24px;font-weight:700}
+.metric .sub{font-size:12px;color:var(--text3)}
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:700px}
+.member{text-align:center}
+.member .ava{width:80px;height:80px;border-radius:50%;background:var(--accent);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff}
+.member .role{font-size:13px;color:var(--text3);margin-top:2px}
+.cta{padding:16px 48px;background:var(--accent);color:#fff;border-radius:var(--r);font-size:18px;font-weight:600;display:inline-block;text-decoration:none}
+.footer{text-align:center;padding:24px;font-size:12px;color:var(--text3);border-top:1px solid var(--border)}
+@media(max-width:768px){.slide{padding:60px 24px}.grid-2,.grid-3{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}.team{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="slide center"><div class="badge">Seed Round • $5M Raise</div><h1>Nova AI</h1><p class="center" style="font-size:22px;color:var(--text)">Intelligence That Works for You</p><p class="center" style="max-width:500px">Building the next-generation AI platform for enterprise productivity</p><div style="margin-top:12px"><a href="#" class="cta">Investor Deck ↓</a></div><div class="slide-num">1/6</div></div>
+<div class="slide center"><h2>The Problem</h2><p class="center" style="max-width:600px;font-size:20px">Enterprises spend <strong style="color:var(--red)">$420B/year</strong> on knowledge work that AI agents can automate — but current solutions are too slow, too costly, and too hard to integrate.</p><div class="stats"><div class="stat"><div class="num">60%</div><div class="lbl">of time spent on repetitive tasks</div></div><div class="stat"><div class="num">$18K</div><div class="lbl">annual cost per knowledge worker</div></div><div class="stat"><div class="num">73%</div><div class="lbl">of executives cite integration as barrier</div></div></div><div class="slide-num">2/6</div></div>
+<div class="slide center"><h2>Our Solution</h2><p class="center" style="max-width:600px">Nova AI is a unified AI agent platform with native MCP support, 25+ pre-built tools, and enterprise-grade security — deployable in minutes, not months.</p><div class="grid-3"><div class="card"><div class="icon">⚡</div><h3>10x Faster</h3><p>Sub-second HTML generation with our purpose-built rendering engine</p></div><div class="card"><div class="icon">🔌</div><h3>50+ Integrations</h3><p>Connect to any tool via MCP protocol with zero custom code</p></div><div class="card"><div class="icon">🔒</div><h3>Enterprise Ready</h3><p>SOC 2, HIPAA, GDPR compliant with RBAC and audit trails</p></div></div><div class="slide-num">3/6</div></div>
+<div class="slide center"><h2>Traction</h2><div class="metrics"><div class="metric"><div class="val" style="color:var(--green)">$2.8M</div><div class="sub">ARR (growing 25% MoM)</div></div><div class="metric"><div class="val" style="color:var(--blue)">1,200+</div><div class="sub">Active organizations</div></div><div class="metric"><div class="val" style="color:var(--amber)">98%</div><div class="sub">Customer retention rate</div></div><div class="metric"><div class="val" style="color:var(--accent)">4.9★</div><div class="sub">Average rating across platforms</div></div></div><div class="slide-num">4/6</div></div>
+<div class="slide center"><h2>Team</h2><p class="center" style="max-width:500px">Ex-Google, Meta, and OpenAI engineers with deep AI infrastructure expertise</p><div class="team"><div class="member"><div class="ava">SK</div><h3>Sarah Kim</h3><div class="role">CEO • Ex-Google AI</div></div><div class="member"><div class="ava">AR</div><h3>Alex Rivera</h3><div class="role">CTO • Ex-Meta AI</div></div><div class="member"><div class="ava">MT</div><h3>Michael Torres</h3><div class="role">Head of Product • Ex-OpenAI</div></div></div><div class="slide-num">5/6</div></div>
+<div class="slide center"><h2>Join Us</h2><p class="center" style="max-width:500px">We're raising a $5M seed round to accelerate product development, expand the engineering team, and scale to 10,000 customers by end of 2027.</p><div style="margin-top:20px"><a href="#" class="cta">Investor Packet →</a></div><div class="slide-num">6/6</div></div>
+<div class="footer">Nova AI Technologies Inc. • hello@nova-ai.com • This presentation is confidential and intended for accredited investors only.</div>
+</body>
+</html>

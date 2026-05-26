@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebula UI — Design System v2.0</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--green:#34d399;--red:#f87171;--amber:#fbbf24;--blue:#60a5fa;--pink:#f472b6;--teal:#2dd4bf;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:960px;margin:0 auto;padding:40px 24px;line-height:1.6}
+.header{margin-bottom:36px;padding-bottom:24px;border-bottom:2px solid var(--accent)}
+.header .badge{display:inline-block;padding:4px 14px;border-radius:100px;background:rgba(99,102,241,0.1);color:var(--accent);font-size:11px;font-weight:600;margin-bottom:8px}
+.header h1{font-size:28px;margin:0 0 4px;letter-spacing:-1px}
+.header p{color:var(--text2);font-size:14px;margin:0}
+h2{font-size:17px;color:var(--accent);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;color:var(--text);margin:16px 0 8px}
+.color-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:24px}
+.swatch{border-radius:var(--r);padding:20px 14px;text-align:center;font-size:11px;font-weight:600;color:#fff;min-height:80px;display:flex;flex-direction:column;justify-content:flex-end}
+.swatch .name{margin-top:4px;font-weight:400;opacity:0.8;font-size:10px}
+.typo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.typo-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.typo-item .sample{color:var(--text)}.typo-item .info{font-size:11px;color:var(--text3);margin-top:4px;font-family:var(--mono)}
+.component-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.comp-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center}
+.comp-card .demo{font-size:28px;margin-bottom:8px}
+.comp-card h3{font-size:13px;margin:0 0 4px}
+.comp-card p{font-size:11px;color:var(--text3);margin:0;line-height:1.5}
+.spacing-demo{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.sp-box{background:var(--accent);border-radius:4px;opacity:0.6}.sp-label{font-size:11px;color:var(--text3);font-family:var(--mono)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.btn{padding:10px 24px;border-radius:var(--r);font-size:13px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.btn-primary{background:var(--accent);color:#fff}.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btn-danger{background:var(--red);color:#fff}.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-sm{padding:6px 14px;font-size:11px}.btn-lg{padding:14px 32px;font-size:15px}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:20px;margin-top:32px}
+@media(max-width:768px){.color-grid{grid-template-columns:repeat(3,1fr)}.component-grid{grid-template-columns:1fr}.typo-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div class="badge">Design System v2.0</div><h1>Nebula UI</h1><p>Component specifications, usage guidelines, and design tokens</p></div>
+<h2>🎨 Color Palette</h2>
+<div class="color-grid">
+<div class="swatch" style="background:#6366f1"><span>#6366f1</span><span class="name">Primary</span></div>
+<div class="swatch" style="background:#8b5cf6"><span>#8b5cf6</span><span class="name">Secondary</span></div>
+<div class="swatch" style="background:#34d399"><span>#34d399</span><span class="name">Success</span></div>
+<div class="swatch" style="background:#f87171"><span>#f87171</span><span class="name">Danger</span></div>
+<div class="swatch" style="background:#fbbf24"><span>#fbbf24</span><span class="name">Warning</span></div>
+<div class="swatch" style="background:#60a5fa"><span>#60a5fa</span><span class="name">Info</span></div>
+<div class="swatch" style="background:#1a1a28;border:1px solid var(--border);color:var(--text2)"><span>#1a1a28</span><span class="name">Surface</span></div>
+<div class="swatch" style="background:#12121a;border:1px solid var(--border);color:var(--text2)"><span>#12121a</span><span class="name">Background</span></div>
+<div class="swatch" style="background:#2a2a44"><span>#2a2a44</span><span class="name">Border</span></div>
+</div>
+<h2>🔤 Typography</h2>
+<div class="typo-grid">
+<div class="typo-item"><div class="sample" style="font-size:32px;font-weight:900">Heading 1</div><div class="info">Inter Bold 900 • 32px • -1px tracking</div></div>
+<div class="typo-item"><div class="sample" style="font-size:24px;font-weight:700">Heading 2</div><div class="info">Inter Bold 700 • 24px • -0.5px tracking</div></div>
+<div class="typo-item"><div class="sample" style="font-size:18px;font-weight:600">Heading 3</div><div class="info">Inter SemiBold 600 • 18px</div></div>
+<div class="typo-item"><div class="sample" style="font-size:14px">Body Text</div><div class="info">Inter Regular 400 • 14px • 1.6 line-height</div></div>
+<div class="typo-item"><div class="sample" style="font-size:12px;color:var(--text2)">Small / Caption</div><div class="info">Inter Regular 400 • 12px • color: text-secondary</div></div>
+<div class="typo-item"><div class="sample" style="font-family:var(--mono);font-size:13px">Code / Mono</div><div class="info">JetBrains Mono • 13px</div></div>
+</div>
+<h2>🧩 Components</h2>
+<div class="component-grid">
+<div class="comp-card"><div class="demo">🔘</div><h3>Button</h3><p>Primary, secondary, danger, ghost. Sizes: sm, md, lg.</p></div>
+<div class="comp-card"><div class="demo">📋</div><h3>Card</h3><p>Surface container with optional header, body, footer slots.</p></div>
+<div class="comp-card"><div class="demo">📊</div><h3>Data Table</h3><p>Sortable, filterable table with sticky headers and pagination.</p></div>
+<div class="comp-card"><div class="demo">💬</div><h3>Callout</h3><p>Contextual notices: info, warning, error, tip variants.</p></div>
+<div class="comp-card"><div class="demo">🏷️</div><h3>Badge</h3><p>Status indicators with color variants and size options.</p></div>
+<div class="comp-card"><div class="demo">📝</div><h3>Input</h3><p>Text input, textarea, select with validation states.</p></div>
+</div>
+<h2>🛠️ Usage Guidelines</h2>
+<div class="btn-row">
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-danger">Danger</button>
+<button class="btn btn-ghost">Ghost</button>
+<button class="btn btn-primary btn-sm">Small</button>
+<button class="btn btn-primary btn-lg">Large</button>
+</div>
+<p style="color:var(--text2);font-size:13px;line-height:1.7">Buttons use the <code style="color:var(--accent)">--radius</code> token for border radius and <code style="color:var(--accent)">--transition</code> for hover effects. Always include a clear call-to-action label. Use the loading state spinner for async operations.</p>
+<div class="footer">Nebula UI Design System • Version 2.0 • Last updated June 2026 • <a href="#" style="color:var(--accent);text-decoration:none">Figma Library →</a></div>
+</body>
+</html>

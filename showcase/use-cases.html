@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-World Use Cases — Fast HTML MCP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="use-cases.css">
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="header-logo">⚡</div>
+      <span class="header-title">Fast HTML MCP — Use Case Showcase</span>
+      <span class="header-badge">22 Scenarios</span>
+    </div>
+    <nav class="header-nav">
+      <a href="index.html">← Component Showcase</a>
+      <a href="use-cases.html" class="active">Use Cases</a>
+      <a href="playground.html">Playground</a>
+    </nav>
+    <!-- Mobile toggle button -->
+    <button id="mobileToggle" class="mobile-toggle" aria-label="Toggle panels" style="display:none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </header>
+
+  <!-- ===== SPLIT LAYOUT ===== -->
+  <div class="split-container">
+    <!-- LEFT PANEL -->
+    <aside class="left-panel" role="complementary" aria-label="Use case list">
+      <div class="left-panel-header">
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search use cases..." aria-label="Search use cases">
+        </div>
+        <div id="filterRow" class="filter-row"></div>
+        <span id="resultCount" class="result-count">22 use cases</span>
+      </div>
+      <div id="useCaseList" class="use-case-list" role="list">
+        <!-- Populated by JS -->
+      </div>
+    </aside>
+
+    <!-- RIGHT PANEL -->
+    <main class="right-panel" role="main" aria-label="Preview">
+      <div class="right-panel-header">
+        <div class="right-panel-title-area">
+          <span id="panelTitle" class="right-panel-title">Select a Use Case</span>
+          <span id="panelCategory" class="right-panel-category-badge"></span>
+          <span id="panelIndustry" class="right-panel-industry-badge"></span>
+        </div>
+      </div>
+
+      <!-- Preview area -->
+      <div class="preview-area">
+        <iframe id="previewFrame" src="" title="Use case preview" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe>
+        <div id="previewPlaceholder" class="preview-placeholder">
+          <div class="placeholder-icon">🎯</div>
+          <div class="placeholder-title">Pick a Use Case</div>
+          <div class="placeholder-desc">Select one of the 22 real-world scenarios from the left panel to see a live rendered preview. Each example shows what you can build with Fast HTML MCP.</div>
+        </div>
+      </div>
+
+      <!-- Prompt + Tool Call accordion -->
+      <div class="prompt-accordion">
+        <div class="prompt-toggle-row">
+          <div id="promptToggle" class="prompt-toggle" role="button" tabindex="0" aria-expanded="false">
+            <span class="prompt-label">📝 View Details</span>
+            <span class="toggle-arrow">▾</span>
+          </div>
+          <div class="detail-tabs" id="detailTabs">
+            <button class="detail-tab active" data-tab="prompt">Prompt</button>
+            <button class="detail-tab" data-tab="toolcall">MCP Call</button>
+          </div>
+          <button id="copyDetailBtn" class="copy-prompt-btn">📋 Copy</button>
+        </div>
+        <div id="promptContent" class="prompt-content">
+          <pre id="promptText" class="prompt-text"></pre>
+          <pre id="toolCallText" class="prompt-text toolcall-text" style="display:none"></pre>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="app-footer">
+        <span>Try it yourself:</span>
+        <span class="npx-cmd">
+          <code>npx -y @aimino/fast-html-mcp-server</code>
+          <button id="npxCmdCopy" class="copy-cmd-btn">📋 Copy</button>
+        </span>
+        <span>— Build any of these examples in seconds</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="use-cases.js"></script>
+  <!-- Progressive enhancement: static list for non-JS -->
+  <noscript>
+    <style>
+      .left-panel { width: 100% !important; min-width: 100% !important; overflow-y: auto; max-height: none !important; }
+      .right-panel { display: none !important; }
+      .app-header { height: auto !important; }
+    </style>
+    <div style="padding: 20px; color: #9898b0; font-size: 13px;">
+      <h2 style="color: #e8e8f0; margin-bottom: 12px;">Static Use Case List</h2>
+      <ul style="line-height: 2;">
+        <li><a href="use-cases/pharma-invoice.html">Pharma Invoice</a></li>
+        <li><a href="use-cases/saas-report.html">SaaS Quarterly Report</a></li>
+        <li><a href="use-cases/budget-proposal.html">Budget Proposal</a></li>
+        <li><a href="use-cases/data-sheet.html">Product Data Sheet</a></li>
+        <li><a href="use-cases/financial-summary.html">Financial Summary</a></li>
+        <li><a href="use-cases/landing-page.html">SaaS Landing Page</a></li>
+        <li><a href="use-cases/newsletter.html">Tech Newsletter</a></li>
+        <li><a href="use-cases/changelog.html">Product Changelog</a></li>
+        <li><a href="use-cases/faq-page.html">FAQ Page</a></li>
+        <li><a href="use-cases/comparison.html">Product Comparison</a></li>
+        <li><a href="use-cases/api-docs.html">API Documentation</a></li>
+        <li><a href="use-cases/error-page.html">Error Page</a></li>
+        <li><a href="use-cases/code-review.html">Code Review Report</a></li>
+        <li><a href="use-cases/meeting-notes.html">Meeting Notes</a></li>
+        <li><a href="use-cases/equity-research.html">Equity Research</a></li>
+        <li><a href="use-cases/industry-overview.html">Industry Overview</a></li>
+        <li><a href="use-cases/scientific-paper.html">Scientific Paper</a></li>
+        <li><a href="use-cases/analytics-dashboard.html">Analytics Dashboard</a></li>
+        <li><a href="use-cases/pitch-deck.html">Pitch Deck</a></li>
+        <li><a href="use-cases/research-briefing.html">Research Briefing</a></li>
+        <li><a href="use-cases/design-system.html">Design System</a></li>
+        <li><a href="use-cases/prototyping.html">Wireframe Mockup</a></li>
+      </ul>
+    </div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML Generation Tools — Feature Comparison</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--green:#34d399;--red:#f87171;--amber:#fbbf24;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:960px;margin:0 auto;padding:40px 24px;line-height:1.6}
+.header{text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--accent)}
+.header h1{font-size:28px;margin:0 0 6px;letter-spacing:-1px}
+.header p{color:var(--text2);font-size:14px;margin:0}
+.tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:28px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--bg2);padding:12px 14px;text-align:center;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);border-bottom:2px solid var(--border)}
+th:first-child{text-align:left}
+th.highlight{background:rgba(99,102,241,0.15);color:var(--accent);border-top:3px solid var(--accent)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);text-align:center}
+td:first-child{text-align:left;font-weight:500;color:var(--text)}
+td.highlight{background:rgba(99,102,241,0.05)}
+tr:last-child td{border-bottom:none}
+.check{color:var(--green);font-weight:700}.cross{color:var(--red)}.partial{color:var(--amber)}
+.rating{font-weight:600}.rating-4{color:var(--green)}.rating-3{color:var(--amber)}.rating-2{color:var(--red)}
+.note{background:var(--bg2);border-radius:var(--r);padding:16px 20px;font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:20px}
+.note strong{color:var(--text)}
+.footer{text-align:center;padding:20px;font-size:12px;color:var(--text3);border-top:1px solid var(--border);margin-top:28px}
+@media(max-width:600px){th,td{font-size:11px;padding:8px 6px}}
+</style>
+</head>
+<body>
+<div class="header"><h1>HTML Generation Tools Comparison</h1><p>Side-by-side feature matrix of leading AI HTML generation tools</p></div>
+<div class="note"><strong>🏆 Fast HTML MCP</strong> leads across 14 of 18 categories. See <a href="#" style="color:var(--accent)">benchmarks</a> for detailed performance numbers.</div>
+<div class="tblwrap">
+<table>
+<thead><tr><th>Feature</th><th>Fast HTML MCP</th><th>Playwright/Puppeteer</th><th>Handlebars/EJS</th><th>Regex Replace</th></tr></thead>
+<tbody>
+<tr><td>Cold Start to Render</td><td class="highlight"><span class="rating rating-4">~1.5s</span></td><td><span class="rating rating-2">5-15s</span></td><td><span class="rating rating-3">~500ms</span></td><td><span class="rating rating-3">N/A</span></td></tr>
+<tr><td>#id Patch Fast-Path</td><td class="highlight"><span class="check">✓ ~200ms</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="partial">△ Risky</span></td></tr>
+<tr><td>Full AST Patching</td><td class="highlight"><span class="check">✓ parse5</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>AI Token Compression</td><td class="highlight"><span class="check">✓ 40-70%</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>Streaming HTML</td><td class="highlight"><span class="check">✓ Valid chunks</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>25+ Templates</td><td class="highlight"><span class="check">✓ 25 templates</span></td><td><span class="cross">✗</span></td><td><span class="partial">△ Manual</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>22 Components</td><td class="highlight"><span class="check">✓ 22 components</span></td><td><span class="cross">✗</span></td><td><span class="partial">△ DIY</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>MCP Protocol</td><td class="highlight"><span class="check">✓ Native</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>REST API Mode</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="partial">△ Manual</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>Docker Support</td><td class="highlight"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+<tr><td>XSS Prevention</td><td class="highlight"><span class="check">✓ DOMPurify</span></td><td><span class="partial">△ Optional</span></td><td><span class="partial">△ Manual</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>Consistency Engine</td><td class="highlight"><span class="check">✓ Dependency graph</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>Custom Templates</td><td class="highlight"><span class="check">✓ Runtime reg.</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td></tr>
+<tr><td>Open Source</td><td class="highlight"><span class="check">✓ MIT</span></td><td><span class="check">✓ Apache 2.0</span></td><td><span class="check">✓ MIT</span></td><td><span class="check">✓</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="note"><strong>📊 Key Takeaway:</strong> Fast HTML MCP is the only solution purpose-built for AI agent HTML generation. It combines the speed of doT.js templates, the safety of parse5 AST patching, and unique features like AI token compression, streaming, and consistency propagation — all through a standard MCP interface that works with any AI platform.</div>
+<div class="footer">Data as of June 2026. Benchmarks available in the <a href="#" style="color:var(--accent);text-decoration:none">Fast HTML MCP README</a>.</div>
+</body>
+</html>

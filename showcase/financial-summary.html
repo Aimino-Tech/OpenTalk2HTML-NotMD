@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FY2026 Financial Summary</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --accent: #2563eb;
+      --accent-green: #16a34a;
+      --accent-red: #dc2626;
+      --accent-amber: #d97706;
+      --accent-light: #eff6ff;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+      --radius: 10px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --border: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent: #60a5fa;
+      --accent-green: #22c55e;
+      --accent-red: #ef4444;
+      --accent-amber: #f59e0b;
+      --accent-light: #1e3a5f;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      line-height: 1.5;
+    }
+
+    .fs-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .fs-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .fs-header .period {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .kpi-card .kpi-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .kpi-card .kpi-value {
+      font-size: 26px;
+      font-weight: 800;
+      margin: 4px 0;
+      font-family: var(--font-mono);
+      letter-spacing: -1px;
+    }
+
+    .kpi-card .kpi-change {
+      font-size: 13px;
+    }
+
+    .kpi-card .kpi-change.up {
+      color: var(--accent-green);
+    }
+
+    .kpi-card .kpi-change.down {
+      color: var(--accent-red);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    table th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table td.amount {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    table td.amount.positive {
+      color: var(--accent-green);
+    }
+
+    table td.amount.negative {
+      color: var(--accent-red);
+    }
+
+    table .total-row {
+      font-weight: 700;
+      border-top: 2px solid var(--text-primary);
+    }
+
+    table .total-row td {
+      padding: 12px 14px;
+    }
+
+    table .section-header td {
+      font-weight: 700;
+      color: var(--accent);
+      padding: 16px 14px 8px;
+      border-bottom: none;
+    }
+
+    .chart-placeholder {
+      height: 200px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .growth-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 160px;
+      padding: 16px 0;
+    }
+
+    .growth-bar .bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      min-width: 20px;
+      position: relative;
+    }
+
+    .growth-bar .bar .val {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .growth-bar .bar .label {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    .growth-bar .bar.revenue {
+      background: var(--accent);
+    }
+
+    .growth-bar .bar.expense {
+      background: var(--accent-red);
+    }
+
+    .growth-bar .bar.profit {
+      background: var(--accent-green);
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fs-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .financial-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0
+    }
+
+    .financial-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px
+    }
+
+    .financial-table caption {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--text-primary);
+      caption-side: top;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card)
+    }
+
+    .financial-section th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: var(--accent);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .financial-table td {
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle
+    }
+
+    .financial-table tbody tr:nth-child(even) {
+      background: rgba(255, 255, 255, .02)
+    }
+
+    .financial-table tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    .fin-label {
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap
+    }
+
+    .fin-value {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-align: right;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding-left: 20px
+    }
+
+    .fin-change {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-align: right;
+      font-weight: 700;
+      font-size: 12px;
+      padding-left: 12px
+    }
+
+    .change-positive {
+      color: #34d399
+    }
+
+    .change-negative {
+      color: #f87171
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Annual Report</div>
+    <h1 class="hero-title">FY2026 Financial Summary</h1>
+    <p class="hero-subtitle">Consolidated financial results for the fiscal year ending December 31,
+      2026</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:4">
+    <div class="stat-card">
+      <div class="stat-value">$16.8B</div>
+      <div class="stat-label">Total Revenue</div>
+      <div class="stat-trend trend-up">↑ 14%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$4.2B</div>
+      <div class="stat-label">Net Income</div>
+      <div class="stat-trend trend-up">↑ 18%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">25%</div>
+      <div class="stat-label">Net Margin</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$2.47</div>
+      <div class="stat-label">EPS</div>
+      <div class="stat-trend trend-up">↑ 16%</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:financial-table -->
+  <div class="financial-table-wrap">
+    <table class="financial-table">
+      <caption>Quarterly Revenue Breakdown</caption>
+      <thead class="financial-section">
+        <tr>
+          <th colspan="3">Revenue by Quarter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fin-label">Q1 2026</td>
+          <td class="fin-value">$3,800M</td>
+          <td class="fin-change change-positive">+11.2%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Q2 2026</td>
+          <td class="fin-value">$4,100M</td>
+          <td class="fin-change change-positive">+7.9%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Q3 2026</td>
+          <td class="fin-value">$4,200M</td>
+          <td class="fin-change change-positive">+2.4%</td>
+        </tr>
+        <tr>
+          <td class="fin-label">Q4 2026 (Est.)</td>
+          <td class="fin-value">$4,700M</td>
+          <td class="fin-change change-positive">+11.9%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:2:financial-table -->
+  <!-- fm:section:3:callout -->
+  <div class="callout callout-info"> <span class="callout-icon">📈</span>
+    <div class="callout-body"> <strong class="callout-title">YoY Highlights</strong> <span
+        class="callout-text">Annual recurring revenue grew 14% YoY to $16.8B, driven primarily by
+        Cloud Services (+22%) and Enterprise SaaS (+15%). Operating margin improved 320 basis points
+        to 28.4%.</span> </div>
+  </div>
+  <!-- /fm:section:3:callout -->
+</body>
+</html>

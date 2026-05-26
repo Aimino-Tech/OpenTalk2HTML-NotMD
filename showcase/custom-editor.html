@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Playground</title>
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-card: #1a1a2e;
+      --bg-elevated: #262642;
+      --border: #2a2a4a;
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898b8;
+      --accent: #f59e0b;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-elevated: #f5f5f5;
+      --border: #e0e0e0;
+      --text-primary: #1a1a2e;
+      --text-secondary: #666666;
+      --accent: #d97706;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 0;
+      margin: 0;
+    }
+
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .tabs-component {
+      margin: 1em 0;
+    }
+
+    .tabs-header {
+      display: flex;
+      gap: 2px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-elevated, var(--bg-card));
+      color: var(--accent);
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 16px 0;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .code-block-component {
+      background: #0d0d1a;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+      overflow: hidden;
+    }
+
+    .code-lang {
+      padding: 8px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .code-block-component pre {
+      padding: 16px 20px;
+      overflow-x: auto;
+      margin: 0;
+    }
+
+    .code-block-component code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-primary);
+    }
+
+    .code-filename {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Interactive Tool</div>
+    <h1 class="hero-title">API Playground</h1>
+    <p class="hero-subtitle">Try out API endpoints directly in the browser with live response
+      preview</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:tabs -->
+  <div class="tabs-component">
+    <div class="tabs-header" role="tablist"> <button class="tab-btn active" data-tab="0"
+        role="tab">REST API</button> <button class="tab-btn" data-tab="1"
+        role="tab">GraphQL</button> <button class="tab-btn" data-tab="2"
+        role="tab">WebSocket</button> </div>
+    <div class="tab-panel active" data-panel="0" role="tabpanel">The REST API playground allows you
+      to test endpoints, view responses, and generate client code. Try the GET /users endpoint to
+      see a paginated response with user data. Use the authentication header field to test different
+      auth scopes.</div>
+    <div class="tab-panel" data-panel="1" role="tabpanel">The GraphQL playground provides an
+      interactive query editor with schema documentation, query validation, and real-time response
+      preview. Write queries, mutations, or subscriptions and see results instantly.</div>
+    <div class="tab-panel" data-panel="2" role="tabpanel">Test real-time WebSocket connections with
+      the interactive WebSocket playground. Send messages, view connection logs, and monitor latency
+      in real-time.</div>
+  </div>
+  <!-- /fm:section:1:tabs -->
+  <!-- fm:section:2:code-block -->
+  <div class="code-block-component">
+    <div class="code-lang">bash</div> <pre><code class="language-bash"># Test the user endpoint
+curl -X GET https://api.example.com/v2/users \
+  -H "Authorization: Bearer sk_test_..." \
+  -H "Content-Type: application/json" \
+  | jq '.data[:3] | {users: [.[] | {name, email, role}]}'</code></pre>
+  </div>
+  <!-- /fm:section:2:code-block -->
+  <!-- fm:section:3:callout -->
+  <div class="callout callout-info"> <span class="callout-icon">🔌</span>
+    <div class="callout-body"> <strong class="callout-title">Authentication</strong> <span
+        class="callout-text">All playground requests include your current session token
+        automatically. Use the 'Impersonate' button to test different permission levels.</span>
+    </div>
+  </div>
+  <!-- /fm:section:3:callout -->
+  <script>
+    document.querySelectorAll('.tabs-component').forEach(tabs => {
+      tabs.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = btn.dataset.tab;
+          tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          tabs.querySelectorAll('.tab-panel').forEach(p => p.classList.remove(
+            'active'));
+          btn.classList.add('active');
+          tabs.querySelector('.tab-panel[data-panel="' + idx + '"]')?.classList.add(
+            'active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

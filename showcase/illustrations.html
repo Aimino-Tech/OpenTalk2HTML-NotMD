@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System Architecture Guide</title>
+  <style>
+    :root {
+      --bg-primary: #050508;
+      --bg-card: #0f0f1a;
+      --border: #1a1a30;
+      --text-primary: #e8e8f0;
+      --text-secondary: #7878a0;
+      --accent: #60a5fa;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f4ff;
+      --bg-card: #ffffff;
+      --border: #d0d8f0;
+      --text-primary: #1a1a2e;
+      --text-secondary: #5a6a8a;
+      --accent: #2563eb;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .content-figure {
+      margin: 1.5em 0;
+      text-align: center;
+    }
+
+    .content-figure img,
+    .content-figure svg {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .figure-caption {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .figure-attribution {
+      display: block;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+      font-style: normal;
+    }
+
+    .card-deck {
+      display: grid;
+      grid-template-columns: repeat(var(--deck-cols, 3), 1fr);
+      gap: 16px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .card-deck {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .deck-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .deck-card:hover {
+      border-color: var(--border-active, var(--accent));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .deck-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .deck-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .deck-content {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .deck-footer {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Architecture Guide</div>
+    <h1 class="hero-title">System Architecture Visual Guide</h1>
+    <p class="hero-subtitle">Comprehensive visual reference for the Fast HTML MCP server
+      architecture and data flow</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:figure -->
+  <figure class="content-figure"> <svg viewBox="0 0 800 300" style="width:100%;max-width:800px">
+      <rect x="10" y="10" width="180" height="120" rx="8" fill="rgba(59,130,246,0.15)"
+        stroke="#3b82f6" stroke-width="2"></rect><text x="100" y="50" text-anchor="middle"
+        fill="#3b82f6" font-weight="bold" font-size="14">Assembly Tier</text><text x="100" y="75"
+        text-anchor="middle" fill="#94a3b8" font-size="11">render_page</text><text x="100" y="95"
+        text-anchor="middle" fill="#94a3b8" font-size="11">doT.js + parse5</text>
+      <rect x="210" y="10" width="180" height="120" rx="8" fill="rgba(52,211,153,0.15)"
+        stroke="#34d399" stroke-width="2"></rect><text x="300" y="50" text-anchor="middle"
+        fill="#34d399" font-weight="bold" font-size="14">Patch Tier</text><text x="300" y="75"
+        text-anchor="middle" fill="#94a3b8" font-size="11">patch_html</text><text x="300" y="95"
+        text-anchor="middle" fill="#94a3b8" font-size="11">CSS Selectors</text>
+      <rect x="410" y="10" width="180" height="120" rx="8" fill="rgba(245,158,11,0.15)"
+        stroke="#f59e0b" stroke-width="2"></rect><text x="500" y="50" text-anchor="middle"
+        fill="#f59e0b" font-weight="bold" font-size="14">Read Tier</text><text x="500" y="75"
+        text-anchor="middle" fill="#94a3b8" font-size="11">read_html</text><text x="500" y="95"
+        text-anchor="middle" fill="#94a3b8" font-size="11">4 modes</text>
+      <rect x="610" y="10" width="180" height="120" rx="8" fill="rgba(168,85,247,0.15)"
+        stroke="#a855f7" stroke-width="2"></rect><text x="700" y="50" text-anchor="middle"
+        fill="#a855f7" font-weight="bold" font-size="14">Raw Tier</text><text x="700" y="75"
+        text-anchor="middle" fill="#94a3b8" font-size="11">write_raw_html</text><text x="700" y="95"
+        text-anchor="middle" fill="#94a3b8" font-size="11">format / preview</text>
+      <line x1="190" y1="70" x2="210" y2="70" stroke="#64748b" stroke-width="2"
+        marker-end="url(#arrow)"></line>
+      <line x1="390" y1="70" x2="410" y2="70" stroke="#64748b" stroke-width="2"
+        marker-end="url(#arrow)"></line>
+      <line x1="590" y1="70" x2="610" y2="70" stroke="#64748b" stroke-width="2"
+        marker-end="url(#arrow)"></line>
+    </svg>
+    <figcaption class="figure-caption"> Fast HTML MCP Four-Tier Architecture — Assembly, Patch,
+      Read, and Raw tiers working in sequence <span class="figure-attribution">— Fast HTML MCP
+        Team</span> </figcaption>
+  </figure>
+  <!-- /fm:section:1:figure -->
+  <!-- fm:section:2:card-deck -->
+  <div class="card-deck" style="--deck-cols:2">
+    <div class="deck-card">
+      <div class="deck-icon">⚡</div>
+      <h3 class="deck-title">Assembly</h3>
+      <p class="deck-content">doT.js templates render 10x faster than Handlebars/EJS, critical for
+        AI agent latency.</p>
+    </div>
+    <div class="deck-card">
+      <div class="deck-icon">🛠️</div>
+      <h3 class="deck-title">Patch</h3>
+      <p class="deck-content">parse5 AST manipulation (not regex) with #id fast-path for 10x
+        speedups on common edits.</p>
+    </div>
+  </div>
+  <!-- /fm:section:2:card-deck -->
+  <!-- fm:section:3:callout -->
+  <div class="callout callout-info"> <span class="callout-icon">🎯</span>
+    <div class="callout-body"> <strong class="callout-title">Key Innovation</strong> <span
+        class="callout-text">The #id fast-path detects id selectors and uses direct text
+        substitution instead of full AST parsing, achieving ~10x speedup for the most common editing
+        pattern.</span> </div>
+  </div>
+  <!-- /fm:section:3:callout -->
+</body>
+</html>

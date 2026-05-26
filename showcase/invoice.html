@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice #INV-2026-0042</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fa;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --text-primary: #1a202c;
+      --text-secondary: #64748b;
+      --accent: #2563eb;
+      --accent-light: #dbeafe;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+      --radius: 8px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --border: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent: #3b82f6;
+      --accent-light: #1e3a5f;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      line-height: 1.6;
+    }
+
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .invoice-header .brand h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 4px;
+    }
+
+    .invoice-header .brand p {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .invoice-header .meta {
+      text-align: right;
+    }
+
+    .invoice-header .meta .number {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .invoice-header .meta .date {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .invoice-header .meta .status {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .addresses {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .address-box {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .address-box h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      margin: 0 0 8px;
+    }
+
+    .address-box p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 32px;
+    }
+
+    table th {
+      background: var(--bg-secondary);
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border);
+    }
+
+    table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    table td.amount {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .totals {
+      margin-left: auto;
+      width: 300px;
+    }
+
+    .totals .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .totals .row.total {
+      border-top: 2px solid var(--accent);
+      padding-top: 12px;
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .totals .row .label {
+      color: var(--text-secondary);
+    }
+
+    .terms {
+      margin-top: 48px;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .terms strong {
+      color: var(--text-primary);
+    }
+
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+
+      .invoice-header {
+        break-after: avoid;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .addresses {
+        grid-template-columns: 1fr;
+      }
+
+      .invoice-header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .invoice-header .meta {
+        text-align: left;
+      }
+
+      .totals {
+        width: 100%;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Invoice</div>
+    <h1 class="hero-title">Invoice #INV-2026-0042</h1>
+    <p class="hero-subtitle">Professional services rendered for Q3 2026 engagement</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Line Items</caption>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Hours</th>
+          <th>Rate</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Technical Architecture Consulting</td>
+          <td>40</td>
+          <td>$250</td>
+          <td>$10,000</td>
+        </tr>
+        <tr>
+          <td>Full-Stack Development Sprint</td>
+          <td>80</td>
+          <td>$225</td>
+          <td>$18,000</td>
+        </tr>
+        <tr>
+          <td>Code Review &amp; Quality Assurance</td>
+          <td>20</td>
+          <td>$200</td>
+          <td>$4,000</td>
+        </tr>
+        <tr>
+          <td>Documentation &amp; Knowledge Transfer</td>
+          <td>12</td>
+          <td>$175</td>
+          <td>$2,100</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:1:data-table -->
+  <!-- fm:section:2:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Summary</caption>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Subtotal</td>
+          <td>$34,100</td>
+        </tr>
+        <tr>
+          <td>Sales Tax (8.875%)</td>
+          <td>$3,026</td>
+        </tr>
+        <tr>
+          <td>Total Due</td>
+          <td>$37,126</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:2:data-table -->
+  <!-- fm:section:3:callout -->
+  <div class="callout callout-info"> <span class="callout-icon">📅</span>
+    <div class="callout-body"> <strong class="callout-title">Payment Terms</strong> <span
+        class="callout-text">Net 30. Due by October 15, 2026. Please include invoice number with
+        payment. Wire transfer or ACH preferred.</span> </div>
+  </div>
+  <!-- /fm:section:3:callout -->
+</body>
+</html>

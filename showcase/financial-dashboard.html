@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Dashboard</title>
+  <style>
+    :root {
+      --bg-primary: #0a0f0a;
+      --bg-secondary: #121a12;
+      --bg-card: #1a2a1a;
+      --border: #2a442a;
+      --text-primary: #e0f0e0;
+      --text-secondary: #90b090;
+      --accent: #34d399;
+      --accent-red: #f87171;
+      --accent-amber: #fbbf24;
+      --accent-blue: #60a5fa;
+      --accent-purple: #a78bfa;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+      --radius: 10px;
+      --shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0faf0;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --border: #c0d8c0;
+      --text-primary: #134e1a;
+      --text-secondary: #5a7a5a;
+      --accent: #059669;
+      --accent-red: #dc2626;
+      --accent-amber: #d97706;
+      --accent-blue: #2563eb;
+      --accent-purple: #7c3aed;
+      --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 4px;
+    }
+
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .dash-header .period {
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-bar select,
+    .filter-bar input {
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 13px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-family: inherit;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .kpi-card .kpi-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .kpi-card .kpi-value {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 4px 0;
+      font-family: var(--font-mono);
+      letter-spacing: -1px;
+    }
+
+    .kpi-card .kpi-change {
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .kpi-card .kpi-change.up {
+      color: var(--accent);
+    }
+
+    .kpi-card .kpi-change.down {
+      color: var(--accent-red);
+    }
+
+    .kpi-card .kpi-change.neutral {
+      color: var(--accent-amber);
+    }
+
+    .kpi-card .kpi-change .arrow {
+      font-size: 14px;
+    }
+
+    .metric.up {
+      color: var(--accent);
+    }
+
+    .metric.down {
+      color: var(--accent-red);
+    }
+
+    .metric.neutral {
+      color: var(--accent-amber);
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h2 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 14px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    table th {
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table td.num {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    table tr:nth-child(even) td {
+      background: var(--bg-secondary);
+    }
+
+    .sparkline-area {
+      height: 60px;
+      margin: 8px 0;
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+    }
+
+    .sparkline-area .spark-bar {
+      flex: 1;
+      border-radius: 2px 2px 0 0;
+      min-width: 3px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .sparkline-area .spark-bar:hover {
+      opacity: 1;
+    }
+
+    .color-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .color-dot.green {
+      background: var(--accent);
+    }
+
+    .color-dot.red {
+      background: var(--accent-red);
+    }
+
+    .color-dot.amber {
+      background: var(--accent-amber);
+    }
+
+    .color-dot.blue {
+      background: var(--accent-blue);
+    }
+
+    .color-dot.purple {
+      background: var(--accent-purple);
+    }
+
+    @media (max-width: 900px) {
+      .dash-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dash-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      body {
+        padding: 16px;
+      }
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        font-size: 12px;
+      }
+
+      .kpi-grid {
+        break-inside: avoid;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Live Data</div>
+    <h1 class="hero-title">Financial Operations Dashboard</h1>
+    <p class="hero-subtitle">Real-time monitoring of financial KPIs across all business units</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:4">
+    <div class="stat-card">
+      <div class="stat-value">$42.8M</div>
+      <div class="stat-label">Cash on Hand</div>
+      <div class="stat-trend trend-up">↑ 5%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$18.2M</div>
+      <div class="stat-label">AR Outstanding</div>
+      <div class="stat-trend trend-down">↓ 3%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">94%</div>
+      <div class="stat-label">Collection Rate</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">47 days</div>
+      <div class="stat-label">DSO</div>
+      <div class="stat-trend trend-down">↓ 2%</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Accounts Receivable Aging</caption>
+      <thead>
+        <tr>
+          <th>Aging Bucket</th>
+          <th>Amount</th>
+          <th>% of Total</th>
+          <th>Risk Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Current (0-30 days)</td>
+          <td>$12.4M</td>
+          <td>68%</td>
+          <td>Low</td>
+        </tr>
+        <tr>
+          <td>31-60 days</td>
+          <td>$3.8M</td>
+          <td>21%</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td>61-90 days</td>
+          <td>$1.4M</td>
+          <td>8%</td>
+          <td>High</td>
+        </tr>
+        <tr>
+          <td>90+ days</td>
+          <td>$600K</td>
+          <td>3%</td>
+          <td>Critical</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:2:data-table -->
+</body>
+</html>

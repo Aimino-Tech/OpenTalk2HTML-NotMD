@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Server Ecosystem 2026</title>
+  <style>
+    :root {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #18182a;
+      --bg-card: #1e1e38;
+      --border: #2e2e52;
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898be;
+      --accent: #fb7185;
+      --accent-dim: #3a1a28;
+      --accent-green: #4ade80;
+      --accent-amber: #fbbf24;
+      --accent-blue: #60a5fa;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+      --radius: 10px;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #fff8f8;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --border: #e0d0d0;
+      --text-primary: #1a0a0a;
+      --text-secondary: #6a4a4a;
+      --accent: #e11d48;
+      --accent-dim: #ffe4e6;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      line-height: 1.5;
+    }
+
+    .market-sizing {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+
+    .market-sizing h2 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 14px;
+      color: var(--accent);
+    }
+
+    .market-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 120px;
+      margin-bottom: 8px;
+    }
+
+    .market-bar .seg {
+      flex: 1;
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 8px 4px 4px;
+      position: relative;
+      min-height: 20px;
+    }
+
+    .market-bar .seg .val {
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #fff;
+    }
+
+    .market-bar .seg .lbl {
+      font-size: 10px;
+      color: rgba(255, 255, 255, .7);
+      margin-top: 2px;
+    }
+
+    .market-bar .seg.tam {
+      background: var(--accent);
+    }
+
+    .market-bar .seg.sam {
+      background: var(--accent-blue);
+    }
+
+    .market-bar .seg.som {
+      background: var(--accent-green);
+    }
+
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .comp-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .comp-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .comp-card .comp-ticker {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .comp-card .comp-metric {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comp-card .comp-metric:last-child {
+      border-bottom: none;
+    }
+
+    .comp-card .comp-metric span:first-child {
+      color: var(--text-secondary);
+    }
+
+    .comp-card .comp-metric span:last-child {
+      font-weight: 600;
+    }
+
+    .share-chart {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 30px;
+      margin: 12px 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .share-chart .slice {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      min-width: 12px;
+    }
+
+    .swot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .swot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .swot-card h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0 0 8px;
+    }
+
+    .swot-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .swot-card li {
+      padding: 4px 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .swot-card li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+
+    .swot-card.strengths {
+      border-left: 4px solid var(--accent-green);
+    }
+
+    .swot-card.strengths h3 {
+      color: var(--accent-green);
+    }
+
+    .swot-card.weaknesses {
+      border-left: 4px solid var(--accent-red);
+    }
+
+    .swot-card.weaknesses h3,
+    .swot-card.weaknesses li::before {
+      color: var(--accent-red);
+    }
+
+    .swot-card.opportunities {
+      border-left: 4px solid var(--accent-blue);
+    }
+
+    .swot-card.opportunities h3,
+    .swot-card.opportunities li::before {
+      color: var(--accent-blue);
+    }
+
+    .swot-card.threats {
+      border-left: 4px solid var(--accent-amber);
+    }
+
+    .swot-card.threats h3,
+    .swot-card.threats li::before {
+      color: var(--accent-amber);
+    }
+
+    .growth-chart {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .growth-chart h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+
+    .g-bar {
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+      height: 140px;
+    }
+
+    .g-bar .bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      min-width: 18px;
+      background: var(--accent);
+      opacity: .7;
+    }
+
+    .g-bar .bar .lbl {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    .g-bar .bar .val {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      margin-bottom: 2px;
+    }
+
+    .g-bar .bar.highlight {
+      opacity: 1;
+      background: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 13px;
+    }
+
+    table th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .forbes-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .forbes-card .force-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      min-width: 100px;
+    }
+
+    .forbes-card .force-bar {
+      flex: 1;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--bg-secondary);
+      margin: auto 8px;
+      overflow: hidden;
+    }
+
+    .forbes-card .force-bar .fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    .forbes-card .force-level {
+      font-size: 12px;
+      font-weight: 600;
+      min-width: 50px;
+      text-align: right;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .swot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comp-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .market-bar {
+        height: 80px;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+
+    .card-deck {
+      display: grid;
+      grid-template-columns: repeat(var(--deck-cols, 3), 1fr);
+      gap: 16px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .card-deck {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .deck-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .deck-card:hover {
+      border-color: var(--border-active, var(--accent));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .deck-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .deck-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .deck-content {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .deck-footer {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Industry Analysis</div>
+    <h1 class="hero-title">MCP Server Ecosystem: Market Overview 2026</h1>
+    <p class="hero-subtitle">Comprehensive analysis of the rapidly growing Model Context Protocol
+      server ecosystem</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:4">
+    <div class="stat-card">
+      <div class="stat-value">2,400+</div>
+      <div class="stat-label">MCP Servers</div>
+      <div class="stat-trend trend-up">↑ 340%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$8.2B</div>
+      <div class="stat-label">Market Size</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">142%</div>
+      <div class="stat-label">YoY Growth</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">85%</div>
+      <div class="stat-label">Developer Adoption</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Competitive Landscape</caption>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Leaders</th>
+          <th>Growth</th>
+          <th>Key Differentiator</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>HTML Generation</td>
+          <td>Fast HTML MCP</td>
+          <td>142%</td>
+          <td>5-tier architecture, sub-second rendering</td>
+        </tr>
+        <tr>
+          <td>Data Storage</td>
+          <td>MCP Filesystem</td>
+          <td>98%</td>
+          <td>File system access with permission model</td>
+        </tr>
+        <tr>
+          <td>API Integration</td>
+          <td>MCP APIs</td>
+          <td>210%</td>
+          <td>20,000+ API connectors</td>
+        </tr>
+        <tr>
+          <td>Search</td>
+          <td>Web Search MCP</td>
+          <td>175%</td>
+          <td>Real-time search with source verification</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:2:data-table -->
+  <!-- fm:section:3:card-deck -->
+  <div class="card-deck" style="--deck-cols:2">
+    <div class="deck-card">
+      <div class="deck-icon">💪</div>
+      <h3 class="deck-title">Strengths</h3>
+      <p class="deck-content">First-mover advantage in HTML generation, comprehensive 5-tier
+        architecture, 25 pre-built templates, superior token compression.</p>
+    </div>
+    <div class="deck-card">
+      <div class="deck-icon">📈</div>
+      <h3 class="deck-title">Opportunities</h3>
+      <p class="deck-content">Growing demand for AI-generated content, expanding enterprise adoption
+        of MCP protocol, plugin ecosystem development.</p>
+    </div>
+  </div>
+  <!-- /fm:section:3:card-deck -->
+</body>
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Protocol Literature Review</title>
+  <style>
+    :root {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #181825;
+      --bg-card: #1e1e30;
+      --border: #2e2e4a;
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898b8;
+      --accent: #60a5fa;
+      --accent-green: #34d399;
+      --accent-red: #f87171;
+      --accent-amber: #fbbf24;
+      --accent-purple: #a78bfa;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+      --radius: 10px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f4ff;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --border: #c8d0e0;
+      --text-primary: #1a1a2e;
+      --text-secondary: #5a6a7a;
+      --accent: #2563eb;
+      --accent-green: #059669;
+      --accent-red: #dc2626;
+      --accent-amber: #d97706;
+      --accent-purple: #7c3aed;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--accent);
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .abstract-box {
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .abstract-box h3 {
+      margin-top: 0;
+      font-style: normal;
+    }
+
+    .prisma-container {
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin: 16px 0;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .prisma-container .phase {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .prisma-container .phase .count {
+      font-size: 28px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+    }
+
+    .prisma-container .phase .label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .prisma-arrow {
+      color: var(--text-secondary);
+      font-size: 18px;
+      margin: 0 16px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    table th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    table tr:nth-child(even) td {
+      background: var(--bg-secondary);
+    }
+
+    .quality-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .quality-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .quality-dots .dot.high {
+      background: var(--accent-green);
+    }
+
+    .quality-dots .dot.med {
+      background: var(--accent-amber);
+    }
+
+    .quality-dots .dot.low {
+      background: var(--accent-red);
+    }
+
+    .traffic-light {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .traffic-light.green {
+      background: var(--accent-green);
+    }
+
+    .traffic-light.amber {
+      background: var(--accent-amber);
+    }
+
+    .traffic-light.red {
+      background: var(--accent-red);
+    }
+
+    .citation-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    .citation-list li {
+      padding: 10px 14px;
+      border-left: 3px solid transparent;
+      margin-bottom: 4px;
+      border-radius: 0 6px 6px 0;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+
+    .citation-list li:hover {
+      border-left-color: var(--accent);
+      background: var(--bg-card);
+    }
+
+    .citation-list .cite-id {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .db-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin: 2px;
+    }
+
+    .db-badge.pubmed {
+      background: rgba(96, 165, 250, 0.15);
+      color: #60a5fa;
+    }
+
+    .db-badge.scopus {
+      background: rgba(52, 211, 153, 0.15);
+      color: #34d399;
+    }
+
+    .db-badge.ieee {
+      background: rgba(167, 139, 250, 0.15);
+      color: #a78bfa;
+    }
+
+    .db-badge.arxiv {
+      background: rgba(248, 113, 113, 0.15);
+      color: #f87171;
+    }
+
+    .synthesis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .theme-card {
+      padding: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-top: 3px solid var(--accent);
+    }
+
+    .theme-card h4 {
+      margin: 0 0 6px;
+      font-size: 15px;
+    }
+
+    .theme-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .theme-card .studies {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        font-size: 12px;
+      }
+
+      .synthesis-grid {
+        break-inside: avoid;
+      }
+
+      table {
+        break-inside: avoid;
+      }
+
+      .quality-dots {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .prisma-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin: 1.5em 0;
+      font-size: 14px;
+    }
+
+    .prisma-step {
+      display: flex;
+      justify-content: center;
+    }
+
+    .prisma-box {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 24px;
+      text-align: center;
+      min-width: 160px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .prisma-box strong {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .prisma-box-removed {
+      border-color: #f87171;
+      background: rgba(248, 113, 113, 0.05);
+    }
+
+    .prisma-box-removed strong {
+      color: #f87171;
+    }
+
+    .prisma-box-included {
+      border-color: #34d399;
+      background: rgba(52, 211, 153, 0.05);
+    }
+
+    .prisma-box-included strong {
+      color: #34d399;
+    }
+
+    .prisma-arrow {
+      text-align: center;
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1;
+      padding: 2px 0;
+    }
+
+    .prisma-arrow-right {
+      display: inline-block;
+      padding: 0 8px;
+    }
+
+    .prisma-split {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .prisma-split-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      max-width: 300px;
+    }
+
+    @media (max-width: 640px) {
+      .prisma-split {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .prisma-split-branch {
+        max-width: 100%;
+      }
+
+      .prisma-box {
+        min-width: 140px;
+        padding: 8px 16px;
+      }
+
+      .prisma-arrow-right {
+        transform: rotate(90deg);
+      }
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    .evidence-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow 0.2s;
+    }
+
+    .evidence-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .evidence-claim {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .evidence-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .evidence-confidence {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .confidence-high {
+      background: rgba(52, 211, 153, 0.12);
+      color: #34d399;
+    }
+
+    .confidence-medium {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
+
+    .confidence-low {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    .evidence-sources {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .citation-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 1em 0;
+    }
+
+    .citation-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      transition: box-shadow 0.2s;
+    }
+
+    .citation-item:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .citation-id {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 13px;
+      min-width: 28px;
+    }
+
+    .citation-text {
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .citation-doi {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .citation-year {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 2px 6px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+    }
+
+    .citation-type {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .type-journal {
+      background: rgba(59, 130, 246, 0.12);
+      color: #60a5fa;
+    }
+
+    .type-conference {
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+    }
+
+    .type-preprint {
+      background: rgba(168, 85, 247, 0.12);
+      color: #c084fc;
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Systematic Review</div>
+    <h1 class="hero-title">Model Context Protocol: A Systematic Literature Review</h1>
+    <p class="hero-subtitle">PRISMA-compliant review of 89 studies on the Model Context Protocol
+      ecosystem</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:prisma-flow -->
+  <div class="prisma-flow">
+    <div class="prisma-step">
+      <div class="prisma-box">Records identified<br><strong>847</strong></div>
+    </div>
+    <div class="prisma-arrow">↑</div>
+    <div class="prisma-step prisma-step-removed">
+      <div class="prisma-box prisma-box-removed">Duplicates removed<br><strong>123</strong></div>
+    </div>
+    <div class="prisma-arrow">↑</div>
+    <div class="prisma-step">
+      <div class="prisma-box">Records screened<br><strong>724</strong></div>
+    </div>
+    <div class="prisma-split">
+      <div class="prisma-split-branch">
+        <div class="prisma-arrow prisma-arrow-right">→</div>
+        <div class="prisma-step prisma-step-removed">
+          <div class="prisma-box prisma-box-removed">Excluded
+            (title/abstract)<br><strong>512</strong></div>
+        </div>
+      </div>
+      <div class="prisma-split-branch">
+        <div class="prisma-step">
+          <div class="prisma-box">Full-text assessed<br><strong>212</strong></div>
+        </div>
+        <div class="prisma-split">
+          <div class="prisma-split-branch">
+            <div class="prisma-arrow prisma-arrow-right">→</div>
+            <div class="prisma-step prisma-step-removed">
+              <div class="prisma-box prisma-box-removed">Excluded (full
+                text)<br><strong>123</strong></div>
+            </div>
+          </div>
+          <div class="prisma-split-branch">
+            <div class="prisma-arrow prisma-arrow-right">→</div>
+            <div class="prisma-step prisma-step-included">
+              <div class="prisma-box prisma-box-included">Studies included<br><strong>89</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /fm:section:1:prisma-flow -->
+  <!-- fm:section:2:evidence-grid -->
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <div class="evidence-claim">MCP reduces integration engineering time by 60% on average</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-high">high</span>
+        <span class="evidence-sources">12 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">Adoption grew 340% YoY among enterprise AI teams</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-high">high</span>
+        <span class="evidence-sources">8 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">Latency overhead of MCP is less than 50ms per hop</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-medium">medium</span>
+        <span class="evidence-sources">5 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">MCP improves security posture vs. custom API integrations</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-medium">medium</span>
+        <span class="evidence-sources">7 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">Small teams benefit more proportionally from MCP adoption</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-low">low</span> <span
+          class="evidence-sources">3 sources</span> </div>
+    </div>
+  </div>
+  <!-- /fm:section:2:evidence-grid -->
+  <!-- fm:section:3:citation-block -->
+  <div class="citation-block">
+    <div class="citation-item"> <span class="citation-id">[1]</span> <span
+        class="citation-text">Anthropic. 'Model Context Protocol Specification v1.1.' 2026.</span>
+      <a class="citation-doi" href="https://doi.org/10.1234/mcp-spec">DOI</a> <span
+        class="citation-year">2026</span> <span class="citation-type type-journal">journal</span>
+    </div>
+    <div class="citation-item"> <span class="citation-id">[2]</span> <span
+        class="citation-text">Chen et al. 'Evaluating MCP Performance in Production Environments.'
+        ICSE 2026.</span> <span class="citation-year">2026</span> <span
+        class="citation-type type-conference">conference</span> </div>
+    <div class="citation-item"> <span class="citation-id">[3]</span> <span
+        class="citation-text">Patel, R. 'Security Analysis of the Model Context Protocol.' arXiv
+        preprint.</span> <span class="citation-year">2026</span> <span
+        class="citation-type type-preprint">preprint</span> </div>
+  </div>
+  <!-- /fm:section:3:citation-block -->
+</body>
+</html>

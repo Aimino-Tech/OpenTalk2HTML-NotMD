@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprint Planning W42</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f9fafb;
+      --bg-card: #ffffff;
+      --border: #e5e7eb;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --accent: #6366f1;
+      --accent-light: #eef2ff;
+      --green: #16a34a;
+      --green-bg: #dcfce7;
+      --amber: #d97706;
+      --amber-bg: #fef3c7;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --radius: 8px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #111827;
+      --bg-secondary: #1f2937;
+      --bg-card: #1f2937;
+      --border: #374151;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --accent: #818cf8;
+      --accent-light: #2e1065;
+      --green: #22c55e;
+      --green-bg: #14532d;
+      --amber: #f59e0b;
+      --amber-bg: #451a03;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      line-height: 1.6;
+    }
+
+    .meeting-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .meeting-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0 0 16px;
+    }
+
+    .meeting-meta {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px 16px;
+      font-size: 14px;
+    }
+
+    .meeting-meta .label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .meeting-meta .value {
+      color: var(--text-primary);
+    }
+
+    .meeting-meta .value a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .agenda-item {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent);
+    }
+
+    .agenda-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+
+    .agenda-item .time {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .agenda-item p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .agenda-item .discussion {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .action-items {
+      margin-top: 32px;
+    }
+
+    .action-items h2 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .action-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      background: var(--bg-card);
+    }
+
+    .action-item .checkbox {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .action-item .checkbox.done {
+      background: var(--accent);
+      position: relative;
+    }
+
+    .action-item .checkbox.done::after {
+      content: '✓';
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .action-item .details {
+      flex: 1;
+    }
+
+    .action-item .details .task {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .action-item .details .assignee {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .action-item .details .due {
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .action-item .priority {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+
+    .action-item .priority.high {
+      background: var(--amber-bg);
+      color: var(--amber);
+    }
+
+    .action-item .priority.medium {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .action-item .priority.low {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 24px 16px;
+      }
+
+      .meeting-meta {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Meeting Notes</div>
+    <h1 class="hero-title">Sprint Planning — Week 42</h1>
+    <p class="hero-subtitle">October 14, 2026 | 10:00 AM — 11:30 AM | Engineering Team</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:4">
+    <div class="stat-card">
+      <div class="stat-value">12</div>
+      <div class="stat-label">Attendees</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">8</div>
+      <div class="stat-label">Story Points</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Sprint Goals</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">90m</div>
+      <div class="stat-label">Duration</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Sprint Backlog</caption>
+      <thead>
+        <tr>
+          <th>Issue</th>
+          <th>Type</th>
+          <th>Points</th>
+          <th>Assignee</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AUTH-247: JWT rotation</td>
+          <td>Feature</td>
+          <td>5</td>
+          <td>@alice</td>
+          <td>High</td>
+        </tr>
+        <tr>
+          <td>API-189: Rate limiting</td>
+          <td>Enhancement</td>
+          <td>3</td>
+          <td>@bob</td>
+          <td>High</td>
+        </tr>
+        <tr>
+          <td>UI-456: Loading states</td>
+          <td>Bug Fix</td>
+          <td>2</td>
+          <td>@charlie</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td>DOCS-78: API reference</td>
+          <td>Docs</td>
+          <td>1</td>
+          <td>@diana</td>
+          <td>Low</td>
+        </tr>
+        <tr>
+          <td>TEST-234: E2E auth flow</td>
+          <td>Testing</td>
+          <td>3</td>
+          <td>@eve</td>
+          <td>Medium</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:2:data-table -->
+  <!-- fm:section:3:callout -->
+  <div class="callout callout-info"> <span class="callout-icon">🎯</span>
+    <div class="callout-body"> <strong class="callout-title">Sprint Goal</strong> <span
+        class="callout-text">Complete JWT authentication refactor and deploy rate limiting
+        middleware to production. Target: 18 story points at 85% confidence.</span> </div>
+  </div>
+  <!-- /fm:section:3:callout -->
+</body>
+</html>

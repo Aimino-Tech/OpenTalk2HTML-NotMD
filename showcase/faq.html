@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast HTML MCP FAQ</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f9fafb;
+      --bg-card: #ffffff;
+      --border: #e5e7eb;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --accent: #7c3aed;
+      --accent-light: #f5f3ff;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --radius: 8px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #111827;
+      --bg-secondary: #1f2937;
+      --bg-card: #1f2937;
+      --border: #374151;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --accent: #a78bfa;
+      --accent-light: #2e1065;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      line-height: 1.6;
+    }
+
+    .faq-header {
+      margin-bottom: 40px;
+    }
+
+    .faq-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .faq-header p {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .faq-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-nav a {
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .faq-nav a:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .faq-category {
+      margin-bottom: 32px;
+    }
+
+    .faq-category h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent-light);
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      font-weight: 600;
+      font-size: 15px;
+      background: var(--bg-secondary);
+      transition: background 0.2s;
+    }
+
+    .faq-q:hover {
+      background: var(--accent-light);
+    }
+
+    .faq-q .arrow {
+      font-size: 12px;
+      color: var(--text-secondary);
+      transition: transform 0.2s;
+    }
+
+    .faq-item.open .faq-q .arrow {
+      transform: rotate(180deg);
+    }
+
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.2s ease;
+      padding: 0 20px;
+      background: var(--bg-primary);
+    }
+
+    .faq-item.open .faq-a {
+      max-height: 1000px;
+      padding: 16px 20px;
+    }
+
+    .faq-a p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .faq-a a {
+      color: var(--accent);
+    }
+
+    .faq-a code {
+      font-size: 13px;
+      background: var(--accent-light);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .faq-item:target {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-light);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .accordion-component {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1em 0;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-item:last-child {
+      border-bottom: none;
+    }
+
+    .accordion-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .accordion-trigger:hover {
+      background: var(--bg-card-hover, var(--bg-secondary));
+    }
+
+    .accordion-arrow {
+      transition: transform 0.3s;
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+
+    .accordion-item.open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 16px;
+      background: var(--bg-secondary);
+    }
+
+    .accordion-item.open .accordion-body {
+      max-height: 2000px;
+      padding: 16px;
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">FAQ</div>
+    <h1 class="hero-title">Fast HTML MCP — Frequently Asked Questions</h1>
+    <p class="hero-subtitle">Everything you need to know about the Fast HTML MCP server and its
+      five-tier architecture</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:accordion -->
+  <div class="accordion-component">
+    <div class="accordion-item open">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>What is Fast HTML MCP?</span>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">Fast HTML MCP is a Model Context Protocol server that provides
+        lightning-fast HTML generation from AI agents. It features a five-tier architecture:
+        Assembly, Patch, Read, Raw, and Consistency tiers, with 15 tools, 22 components, and 25
+        templates.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>How is it different from
+          Playwright or Puppeteer?</span> <span class="accordion-arrow">▼</span> </div>
+      <div class="accordion-body">Fast HTML MCP operates directly on strings and AST with no
+        headless browser overhead. Cold start to first render is ~1.5s compared to 5-15s for
+        Playwright/Puppeteer. It also offers token-efficient compression modes that reduce HTML size
+        by 40-97%.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>What templates are
+          available?</span> <span class="accordion-arrow">▼</span> </div>
+      <div class="accordion-body">25 templates across 6 categories: General Purpose (11), Business
+        (5), Communication (4), Technical (3), Research (8), and Presentation (1). Templates range
+        from reports and dashboards to scientific papers and pitch decks.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>How do I get started?</span>
+        <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body">Install with npx: npx -y @aimino/fast-html-mcp-server. Then add the
+        MCP server to your client config. Use list_templates and list_components to discover
+        available options, then render_page to build your first page.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>Does it support custom
+          templates?</span> <span class="accordion-arrow">▼</span> </div>
+      <div class="accordion-body">Yes! Use the register_template tool to add custom templates at
+        runtime. Templates use doT.js syntax with the {{=it.content}} placeholder for rendered
+        sections. Custom templates are immediately available for use.</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:accordion -->
+  <!-- fm:section:2:callout -->
+  <div class="callout callout-tip"> <span class="callout-icon">🚀</span>
+    <div class="callout-body"> <strong class="callout-title">Quick Start</strong> <span
+        class="callout-text">Run npx -y @aimino/fast-html-mcp-server, then use list_templates to see all
+        25 available templates and start building pages immediately.</span> </div>
+  </div>
+  <!-- /fm:section:2:callout -->
+  <script>
+    (function() {
+      document.querySelectorAll('.faq-q').forEach(function(h) {
+        h.addEventListener('click', function() {
+          h.parentElement.classList.toggle('open')
+        })
+      })
+    })();
+  </script>
+  <script>
+    document.querySelectorAll('.accordion-trigger').forEach(el => {
+      const toggle = () => {
+        const item = el.closest('.accordion-item');
+        item.classList.toggle('open');
+      };
+      el.addEventListener('click', toggle);
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Analytics Dashboard — Q3 2026</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--green:#34d399;--red:#f87171;--amber:#fbbf24;--blue:#60a5fa;--pink:#f472b6;--teal:#2dd4bf;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:960px;margin:0 auto;padding:32px 20px;line-height:1.5}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--accent)}
+.header h1{font-size:22px;margin:0;letter-spacing:-0.5px}
+.header .date{font-size:13px;color:var(--text3)}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
+.kpi{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.kpi .lbl{font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);margin-bottom:4px}
+.kpi .val{font-size:20px;font-weight:700;letter-spacing:-0.5px}
+.kpi .chg{font-size:11px;font-weight:600;margin-top:2px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.card h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);margin:0 0 12px}
+.tblwrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:8px 10px;text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);border-bottom:1px solid var(--border)}
+td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text2)}td:last-child{text-align:right;font-family:var(--mono)}
+tr:last-child td{border-bottom:none}
+.chart-area{height:160px;background:var(--bg3);border-radius:var(--r);display:flex;align-items:flex-end;gap:4px;padding:12px 8px}
+.chart-bar{flex:1;border-radius:4px 4px 0 0;min-height:8px;transition:height 0.3s;position:relative}
+.chart-bar:hover{opacity:0.8}
+.chart-bar .tooltip{display:none;position:absolute;top:-28px;left:50%;transform:translateX(-50%);background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:4px;font-size:10px;white-space:nowrap}
+.chart-bar:hover .tooltip{display:block}
+.legend{display:flex;gap:16px;margin-top:8px;font-size:11px;color:var(--text2);flex-wrap:wrap}
+.legend span{display:flex;align-items:center;gap:4px}.legend .dot{width:8px;height:8px;border-radius:50%}
+.channel-list{display:flex;flex-direction:column;gap:8px}
+.channel{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--bg3);border-radius:var(--r)}
+.channel .name{flex:1;font-size:13px;font-weight:500;color:var(--text)}
+.channel .stat{text-align:right;font-size:12px;color:var(--text2);font-family:var(--mono)}
+.channel .bar-bg{flex:0 0 120px;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.channel .bar-fill{height:100%;border-radius:3px}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:16px;margin-top:24px}
+@media(max-width:768px){.kpi-row{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
+@media(max-width:480px){.kpi-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><h1>📊 Campaign Analytics Dashboard</h1><div class="date">Q3 2026 • July 1 – September 30</div></div>
+<div class="kpi-row">
+<div class="kpi"><div class="lbl">Impressions</div><div class="val" style="color:var(--blue)">12.4M</div><div class="chg" style="color:var(--green)">↑ 18.2%</div></div>
+<div class="kpi"><div class="lbl">Clicks</div><div class="val" style="color:var(--accent)">348K</div><div class="chg" style="color:var(--green)">↑ 12.7%</div></div>
+<div class="kpi"><div class="lbl">CTR</div><div class="val" style="color:var(--teal)">2.81%</div><div class="chg" style="color:var(--green)">↑ 0.3pp</div></div>
+<div class="kpi"><div class="lbl">Conversions</div><div class="val" style="color:var(--green)">8,942</div><div class="chg" style="color:var(--green)">↑ 24.1%</div></div>
+<div class="kpi"><div class="lbl">CPA</div><div class="val" style="color:var(--amber)">$47.20</div><div class="chg" style="color:var(--red)">↑ 5.8%</div></div>
+</div>
+<div class="grid-2">
+<div class="card"><h2>📈 Monthly Performance</h2><div class="chart-area">
+<div class="chart-bar" style="height:60%;background:var(--accent)"><span class="tooltip">Jul: 3.8M</span></div>
+<div class="chart-bar" style="height:80%;background:var(--accent)"><span class="tooltip">Aug: 4.2M</span></div>
+<div class="chart-bar" style="height:100%;background:var(--accent)"><span class="tooltip">Sep: 4.4M</span></div>
+<div class="chart-bar" style="height:45%;background:var(--blue)"><span class="tooltip">Jul: 112K</span></div>
+<div class="chart-bar" style="height:55%;background:var(--blue)"><span class="tooltip">Aug: 118K</span></div>
+<div class="chart-bar" style="height:70%;background:var(--blue)"><span class="tooltip">Sep: 118K</span></div>
+<div class="chart-bar" style="height:20%;background:var(--green)"><span class="tooltip">Jul: 2.4K</span></div>
+<div class="chart-bar" style="height:28%;background:var(--green)"><span class="tooltip">Aug: 3.1K</span></div>
+<div class="chart-bar" style="height:35%;background:var(--green)"><span class="tooltip">Sep: 3.4K</span></div>
+</div><div class="legend"><span><span class="dot" style="background:var(--accent)"></span>Impressions</span><span><span class="dot" style="background:var(--blue)"></span>Clicks</span><span><span class="dot" style="background:var(--green)"></span>Conversions</span></div></div>
+<div class="card"><h2>📊 Channel Performance</h2><div class="channel-list">
+<div class="channel"><span class="name">Google Ads</span><div class="bar-bg"><div class="bar-fill" style="width:85%;background:var(--blue)"></div></div><span class="stat">$42,800</span></div>
+<div class="channel"><span class="name">LinkedIn</span><div class="bar-bg"><div class="bar-fill" style="width:65%;background:var(--accent)"></div></div><span class="stat">$32,100</span></div>
+<div class="channel"><span class="name">Meta Ads</span><div class="bar-bg"><div class="bar-fill" style="width:55%;background:var(--pink)"></div></div><span class="stat">$27,500</span></div>
+<div class="channel"><span class="name">Twitter/X</span><div class="bar-bg"><div class="bar-fill" style="width:30%;background:var(--amber)"></div></div><span class="stat">$14,200</span></div>
+<div class="channel"><span class="name">Email</span><div class="bar-bg"><div class="bar-fill" style="width:45%;background:var(--green)"></div></div><span class="stat">$22,400</span></div>
+</div></div>
+</div>
+<div class="card" style="margin-bottom:24px"><h2>📋 Campaign Details</h2><div class="tblwrap"><table>
+<thead><tr><th>Campaign</th><th>Channel</th><th>Budget</th><th>Spent</th><th>Conv.</th><th>ROAS</th></tr></thead>
+<tbody>
+<tr><td>Q3 Brand Awareness</td><td>Google Ads</td><td>$25,000</td><td>$24,200</td><td>2,847</td><td>3.2x</td></tr>
+<tr><td>Enterprise Lead Gen</td><td>LinkedIn</td><td>$20,000</td><td>$19,800</td><td>1,924</td><td>4.1x</td></tr>
+<tr><td>Product Launch</td><td>Meta + Email</td><td>$30,000</td><td>$28,400</td><td>3,112</td><td>5.8x</td></tr>
+<tr><td>Retargeting</td><td>All Channels</td><td>$15,000</td><td>$14,600</td><td>1,059</td><td>2.9x</td></tr>
+</tbody></table></div></div>
+<div class="footer">Last updated: October 1, 2026 • Data refreshes every 15 minutes • Export available in CSV/PDF</div>
+</body>
+</html>

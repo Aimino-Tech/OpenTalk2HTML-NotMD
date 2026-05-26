@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Journal Club</title>
+  <style>
+    :root {
+      --bg-primary: #1a1a2e;
+      --bg-secondary: #222244;
+      --bg-card: #2a2a4e;
+      --border: #3a3a5e;
+      --text-primary: #e8e8f0;
+      --text-secondary: #a8a8d0;
+      --accent: #a78bfa;
+      --accent-dim: #2e1a5e;
+      --accent-green: #4ade80;
+      --accent-amber: #fbbf24;
+      --accent-red: #f87171;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+      --radius: 10px;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #faf5ff;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --border: #d8d0e8;
+      --text-primary: #1a0a2e;
+      --text-secondary: #5a4a7a;
+      --accent: #7c3aed;
+      --accent-dim: #ede9fe;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      line-height: 1.6;
+    }
+
+    .article-header {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .article-header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .article-header .journal {
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .article-header .meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .study-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .study-badge.rct {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .study-badge.cohort {
+      background: rgba(251, 191, 36, .15);
+      color: var(--accent-amber);
+    }
+
+    .study-badge.review {
+      background: rgba(74, 222, 128, .15);
+      color: var(--accent-green);
+    }
+
+    .study-badge.case-report {
+      background: rgba(248, 113, 113, .15);
+      color: var(--accent-red);
+    }
+
+    .pico-box {
+      background: var(--bg-card);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+
+    .pico-box h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+
+    .pico-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+      font-size: 14px;
+    }
+
+    .pico-grid dt {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .pico-grid dd {
+      margin: 2px 0 8px;
+      color: var(--text-secondary);
+    }
+
+    .appraisal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .appraisal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .appraisal-card h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--text-secondary);
+      margin: 0 0 8px;
+    }
+
+    .appraisal-card .score {
+      font-size: 22px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+    }
+
+    .appraisal-card .score.high {
+      color: var(--accent-green);
+    }
+
+    .appraisal-card .score.moderate {
+      color: var(--accent-amber);
+    }
+
+    .appraisal-card .score.low {
+      color: var(--accent-red);
+    }
+
+    .appraisal-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 4px 0 0;
+    }
+
+    .evidence-meter {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--bg-secondary);
+      margin: 4px 0 12px;
+      overflow: hidden;
+    }
+
+    .evidence-meter .fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width .3s;
+    }
+
+    .evidence-meter .fill.strong {
+      background: var(--accent-green);
+    }
+
+    .evidence-meter .fill.moderate {
+      background: var(--accent-amber);
+    }
+
+    .evidence-meter .fill.weak {
+      background: var(--accent-red);
+    }
+
+    .takeaway-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .takeaway-list li {
+      padding: 10px 14px 10px 32px;
+      border-left: 3px solid var(--accent);
+      margin-bottom: 8px;
+      font-size: 14px;
+      background: var(--bg-card);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      position: relative;
+    }
+
+    .takeaway-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 10px;
+      color: var(--accent);
+    }
+
+    .qa-block {
+      margin-bottom: 20px;
+    }
+
+    .qa-block .q {
+      font-weight: 700;
+      color: var(--accent);
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border-radius: var(--radius) var(--radius) 0 0;
+      border-left: 3px solid var(--accent);
+    }
+
+    .qa-block .a {
+      padding: 10px 14px;
+      border-left: 3px solid var(--border);
+      border-radius: 0 0 var(--radius) var(--radius);
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .discussion-point {
+      padding: 12px 16px;
+      border-left: 3px solid var(--accent);
+      margin-bottom: 8px;
+      background: var(--bg-card);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 14px;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .pico-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .appraisal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    .evidence-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow 0.2s;
+    }
+
+    .evidence-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .evidence-claim {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .evidence-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .evidence-confidence {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .confidence-high {
+      background: rgba(52, 211, 153, 0.12);
+      color: #34d399;
+    }
+
+    .confidence-medium {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
+
+    .confidence-low {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    .evidence-sources {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Journal Club</div>
+    <h1 class="hero-title">Model Context Protocol Specification</h1>
+    <p class="hero-subtitle">Critical appraisal of the MCP specification paper by the AI
+      Infrastructure Working Group</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>PICO Framework Analysis</caption>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Population</td>
+          <td>AI agent developers building multi-tool systems</td>
+        </tr>
+        <tr>
+          <td>Intervention</td>
+          <td>Standardized context protocol (MCP v1.1)</td>
+        </tr>
+        <tr>
+          <td>Comparison</td>
+          <td>Custom API integrations, direct tool calls</td>
+        </tr>
+        <tr>
+          <td>Outcome</td>
+          <td>Integration time, security posture, maintainability</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:1:data-table -->
+  <!-- fm:section:2:evidence-grid -->
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <div class="evidence-claim">Strong evidence that MCP reduces integration complexity</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-high">high</span>
+        <span class="evidence-sources">8 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">Moderate evidence for security improvements over custom APIs</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-medium">medium</span>
+        <span class="evidence-sources">5 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">Limited evidence on performance at scale (&gt;100 tools)</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-low">low</span> <span
+          class="evidence-sources">2 sources</span> </div>
+    </div>
+  </div>
+  <!-- /fm:section:2:evidence-grid -->
+  <!-- fm:section:3:callout -->
+  <div class="callout callout-info"> <span class="callout-icon">💬</span>
+    <div class="callout-body"> <strong class="callout-title">Discussion Question</strong> <span
+        class="callout-text">Does standardizing the context protocol constrain innovation in
+        agent-tool interaction patterns? How might MCP evolve to support emerging patterns like tool
+        composition and multi-step workflows?</span> </div>
+  </div>
+  <!-- /fm:section:3:callout -->
+</body>
+</html>

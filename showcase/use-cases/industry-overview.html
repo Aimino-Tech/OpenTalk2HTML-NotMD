@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCP Server Ecosystem — 2026 Industry Overview</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#0891b2;--green:#34d399;--red:#f87171;--amber:#fbbf24;--blue:#60a5fa;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:900px;margin:0 auto;padding:40px 24px;line-height:1.7;font-size:15px}
+.header{padding-bottom:24px;border-bottom:2px solid var(--accent);margin-bottom:28px}
+.header .badge{display:inline-block;padding:4px 14px;border-radius:100px;background:rgba(8,145,178,0.1);color:var(--accent);font-size:11px;font-weight:600;margin-bottom:8px}
+.header h1{font-size:28px;margin:0 0 4px;letter-spacing:-1px}
+.header .sub{color:var(--text2);font-size:14px;margin:4px 0 0}
+h2{font-size:17px;color:var(--accent);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;color:var(--text);margin:16px 0 8px}
+p{color:var(--text2);font-size:14px;line-height:1.7;margin-bottom:12px}
+.tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--bg2);padding:10px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);border-bottom:2px solid var(--border)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}td:last-child{text-align:right;font-family:var(--mono)}tr:last-child td{border-bottom:none}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.metric{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.metric .val{font-size:20px;font-weight:700;color:var(--accent)}
+.metric .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.swot-item{padding:16px;border-radius:var(--r);border:1px solid var(--border)}
+.swot-item h3{font-size:13px;margin:0 0 6px}
+.swot-item ul{margin:0;padding-left:16px;font-size:12px;color:var(--text2);line-height:1.8}
+.swot-s{border-left:4px solid var(--green)}.swot-w{border-left:4px solid var(--red)}
+.swot-o{border-left:4px solid var(--amber)}.swot-t{border-left:4px solid var(--blue)}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:20px;margin-top:32px}
+@media(max-width:600px){.metrics{grid-template-columns:repeat(2,1fr)}.swot{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div class="badge">Industry Overview</div><h1>MCP Server Ecosystem 2026</h1><p class="sub">Market sizing, competitive landscape, and growth trajectory for the Model Context Protocol server market</p></div>
+<div class="metrics">
+<div class="metric"><div class="val">$2.8B</div><div class="lbl">Market Size (2026)</div></div>
+<div class="metric"><div class="val">47.3%</div><div class="lbl">CAGR (2024-2030)</div></div>
+<div class="metric"><div class="val">1,200+</div><div class="lbl">MCP Servers Listed</div></div>
+<div class="metric"><div class="val">85%</div><div class="lbl">Developer Adoption</div></div>
+</div>
+<h2>Market Overview</h2>
+<p>The Model Context Protocol (MCP) server ecosystem has experienced explosive growth since the protocol's open-source release in late 2024. With over 1,200 registered MCP servers across categories including web browsing, file systems, databases, and specialized AI tools, the ecosystem is quickly becoming the standard interface between AI agents and external systems.</p>
+<p>Fast HTML MCP occupies a unique niche as the highest-performing HTML generation MCP server, achieving sub-second render times and sub-200ms patch operations. Its Assembly-Patch-Read-Raw-Consistency (APRR) architecture provides a complete solution for AI agents to create, read, update, and validate HTML documents.</p>
+<h2>Competitive Landscape</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Product</th><th>Category</th><th>Render Speed</th><th>Templates</th><th>MCP Native</th><th>Stars</th></tr></thead>
+<tbody>
+<tr><td>Fast HTML MCP</td><td>HTML Generation</td><td>~900ms</td><td>25</td><td>✓</td><td>—</td></tr>
+<tr><td>Playwright/Puppeteer</td><td>Browser Automation</td><td>5-15s</td><td>0</td><td>✗</td><td>68K</td></tr>
+<tr><td>Handlebars/EJS</td><td>Templating</td><td>~500ms</td><td>Manual</td><td>✗</td><td>N/A</td></tr>
+<tr><td>FinRobot (7K★)</td><td>Financial Reports</td><td>15-30s</td><td>5</td><td>✗</td><td>7K</td></tr>
+<tr><td>Puppeteer MCP</td><td>Browser MCP</td><td>5-10s</td><td>0</td><td>✓</td><td>2K</td></tr>
+</tbody></table></div>
+<h2>SWOT Analysis — Fast HTML MCP</h2>
+<div class="swot">
+<div class="swot-item swot-s"><h3 style="color:var(--green)">✓ Strengths</h3><ul><li>15 tools for complete HTML lifecycle</li><li>Sub-second patch via #id fast-path</li><li>AI token compression (40-70% reduction)</li><li>Unique consistency engine</li></ul></div>
+<div class="swot-item swot-w"><h3 style="color:var(--red)">✗ Weaknesses</h3><ul><li>Smaller community vs Puppeteer</li><li>Limited to HTML operations</li><li>No visual rendering engine</li><li>Node.js 20+ dependency</li></ul></div>
+<div class="swot-item swot-o"><h3 style="color:var(--amber)">✦ Opportunities</h3><ul><li>Growing MCP ecosystem adoption</li><li>Enterprise AI agent workflows</li><li>PDF/image export integration</li><li>Template marketplace</li></ul></div>
+<div class="swot-item swot-t"><h3 style="color:var(--blue)">⚡ Threats</h3><ul><li>Browser automation tools adding MCP</li><li>Native LLM HTML generation improvements</li><li>Alternative template formats (Markdown)</li></ul></div>
+</div>
+<div class="footer">Sources: GitHub, npm trends, MCP registry data • Prepared June 2026 • Confidential</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast HTML MCP — API Reference v3</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#0891b2;--green:#34d399;--blue:#60a5fa;--amber:#fbbf24;--red:#f87171;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:8px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:900px;margin:0 auto;padding:40px 24px;line-height:1.6}
+.header{margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--accent)}
+.header .badge{display:inline-block;padding:4px 12px;border-radius:100px;background:rgba(8,145,178,0.1);color:var(--accent);font-size:11px;font-weight:600;margin-bottom:8px}
+.header h1{font-size:28px;margin:0 0 4px;letter-spacing:-1px}
+.header p{color:var(--text2);font-size:14px;margin:0}
+.endpoint{padding:20px;background:var(--bg2);border-radius:var(--r);border:1px solid var(--border);margin-bottom:16px}
+.endpoint .ep-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.endpoint .method{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;color:#fff}
+.method-get{background:#22c55e}.method-post{background:#3b82f6}.method-patch{background:#f59e0b}.method-delete{background:#ef4444}
+.endpoint .path{font-family:var(--mono);font-size:14px;font-weight:600;color:var(--accent)}
+.endpoint .desc{font-size:13px;color:var(--text2);margin-bottom:10px}
+.endpoint .ep-meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text3);margin-bottom:10px}
+.code-block{background:#0d0d1a;border:1px solid var(--border);border-radius:var(--r);padding:16px;overflow-x:auto;margin:10px 0}
+.code-block pre{margin:0;font-family:var(--mono);font-size:12px;color:var(--text2);line-height:1.7;tab-size:2;-moz-tab-size:2}
+.code-block .kw{color:#c792ea}.code-block .str{color:#c3e88d}.code-block .cm{color:#546e7a}.code-block .fn{color:#82aaff}.code-block .num{color:#f78c6c}
+.params{margin:12px 0;display:grid;grid-template-columns:auto 1fr auto;gap:8px 16px;font-size:12px;align-items:baseline}
+.params .pname{font-family:var(--mono);color:var(--accent);font-weight:500}
+.params .ptype{color:var(--text3);font-size:11px;font-style:italic}
+.params .pdesc{color:var(--text2)}
+h2{font-size:17px;color:var(--accent);margin:28px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;color:var(--text);margin:20px 0 10px}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:20px;margin-top:32px}
+@media(max-width:600px){.params{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div class="badge">REST API v3</div><h1>Fast HTML MCP API Reference</h1><p>Build, read, and patch HTML documents programmatically</p></div>
+<h2>Core Endpoints</h2>
+<div class="endpoint"><div class="ep-head"><span class="method method-post">POST</span><span class="path">/v1/render</span><span style="font-size:12px;color:var(--text3)">Compose a page from components</span></div><div class="desc">Accepts a template name and an array of section specifications. Returns the fully rendered HTML document.</div>
+<div class="ep-meta"><span>⏱ ~900ms</span><span>📦 Content-Type: application/json</span></div>
+<div class="code-block"><pre>{
+  <span class="kw">"template"</span>: <span class="str">"report"</span>,
+  <span class="kw">"sections"</span>: [
+    { <span class="kw">"component"</span>: <span class="str">"hero"</span>, <span class="kw">"props"</span>: { <span class="kw">"title"</span>: <span class="str">"Q3 Report"</span> } },
+    { <span class="kw">"component"</span>: <span class="str">"data-table"</span>, <span class="kw">"props"</span>: { <span class="kw">"headers"</span>: [<span class="str">"Metric"</span>,<span class="str">"Value"</span>], <span class="kw">"rows"</span>: [[<span class="str">"Revenue"</span>,<span class="str">"$1.2M"</span>]] } }
+  ],
+  <span class="kw">"output_path"</span>: <span class="str">"/tmp/report.html"</span>,
+  <span class="kw">"options"</span>: { <span class="kw">"title"</span>: <span class="str">"Q3 Report"</span> }
+}</pre></div><div class="params"><span class="pname">template</span><span class="ptype">string (required)</span><span class="pdesc">One of 25 available templates</span><span class="pname">sections</span><span class="ptype">array (required)</span><span class="pdesc">Component specs with component name and props</span><span class="pname">output_path</span><span class="ptype">string (optional)</span><span class="pdesc">File path for output HTML. If omitted, returns inline</span></div>
+</div>
+<div class="endpoint"><div class="ep-head"><span class="method method-post">POST</span><span class="path">/v1/render/html</span><span style="font-size:12px;color:var(--text3)">Raw HTML wrapped in a template</span></div><div class="desc">Pass raw HTML content and optionally wrap it in a template shell.</div>
+<div class="code-block"><pre>{
+  <span class="kw">"template"</span>: <span class="str">"minimal"</span>,
+  <span class="kw">"content"</span>: <span class="str">"&lt;h1&gt;Hello World&lt;/h1&gt;"</span>
+}</pre></div></div>
+<div class="endpoint"><div class="ep-head"><span class="method method-patch">PATCH</span><span class="path">/v1/patch</span><span style="font-size:12px;color:var(--text3)">Update existing HTML by CSS selector</span></div><div class="desc">Replace the inner content of elements matched by a CSS selector. Uses parse5 AST for complex selectors and a #id fast-path for simple id lookups.</div>
+<div class="code-block"><pre>{
+  <span class="kw">"file_path"</span>: <span class="str">"/tmp/page.html"</span>,
+  <span class="kw">"selector"</span>: <span class="str">"#title"</span>,
+  <span class="kw">"html"</span>: <span class="str">"&lt;h1&gt;New Title&lt;/h1&gt;"</span>
+}</pre></div></div>
+<h2>Utility Endpoints</h2>
+<div class="endpoint"><div class="ep-head"><span class="method method-get">GET</span><span class="path">/v1/templates</span><span style="font-size:12px;color:var(--text3)">List available templates</span></div><div class="desc">Returns all 25 templates organized by category with metadata.</div></div>
+<div class="endpoint"><div class="ep-head"><span class="method method-get">GET</span><span class="path">/v1/components</span><span style="font-size:12px;color:var(--text3)">List available components</span></div><div class="desc">Returns all 22 components organized by category with prop schemas.</div></div>
+<div class="endpoint"><div class="ep-head"><span class="method method-get">GET</span><span class="path">/v1/openapi.json</span><span style="font-size:12px;color:var(--text3)">OpenAPI specification</span></div><div class="desc">Full OpenAPI 3.0 spec for all endpoints, request/response schemas, and authentication.</div></div>
+<div class="footer">Base URL: <code style="color:var(--accent)">http://localhost:8766</code> • Auth: Bearer token in <code style="color:var(--text2)">Authorization</code> header • <a href="#" style="color:var(--accent);text-decoration:none">View full docs</a></div>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Pulse — May 2026</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f9fafb;
+      --bg-card: #ffffff;
+      --border: #e5e7eb;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --accent: #e11d48;
+      --accent-light: #ffe4e6;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --radius: 8px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #111827;
+      --bg-secondary: #1f2937;
+      --bg-card: #1f2937;
+      --border: #374151;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --accent: #f43f5e;
+      --accent-light: #4c0519;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nl-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--bg-primary);
+    }
+
+    .nl-header {
+      text-align: center;
+      padding: 40px 24px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nl-header .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nl-header .tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .nl-hero {
+      padding: 32px 24px;
+      text-align: center;
+      background: var(--accent-light);
+    }
+
+    .nl-hero h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .nl-hero p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .nl-hero .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .nl-content {
+      padding: 32px 24px;
+    }
+
+    .nl-content h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 28px 0 12px;
+      color: var(--text-primary);
+    }
+
+    .nl-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0 0 16px;
+    }
+
+    .article-card {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-card:last-child {
+      border-bottom: none;
+    }
+
+    .article-card .cat {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .article-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 4px 0 8px;
+    }
+
+    .article-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .article-card .read-more {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nl-footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .nl-footer .social {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .nl-footer .social a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nl-footer .social a:hover {
+      color: var(--accent);
+    }
+
+    .nl-footer .unsub {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    @media (max-width: 600px) {
+      .nl-hero {
+        padding: 24px 16px;
+      }
+
+      .nl-content {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .card-deck {
+      display: grid;
+      grid-template-columns: repeat(var(--deck-cols, 3), 1fr);
+      gap: 16px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .card-deck {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .deck-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .deck-card:hover {
+      border-color: var(--border-active, var(--accent));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .deck-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .deck-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .deck-content {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .deck-footer {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="nl-wrapper"><!-- fm:section:0:hero -->
+    <div class="hero-section">
+      <div class="hero-badge">Monthly Newsletter</div>
+      <h1 class="hero-title">Tech Pulse: May 2026</h1>
+      <p class="hero-subtitle">Curated insights from the world of technology, AI, and software
+        engineering</p>
+    </div>
+    <!-- /fm:section:0:hero -->
+    <!-- fm:section:1:card-deck -->
+    <div class="card-deck" style="--deck-cols:2">
+      <div class="deck-card">
+        <div class="deck-icon">🤖</div>
+        <h3 class="deck-title">Claude 4 Released</h3>
+        <p class="deck-content">Anthropic's latest model features 200K context window and native
+          tool use capabilities, setting new benchmarks in code generation.</p>
+      </div>
+      <div class="deck-card">
+        <div class="deck-icon">⚡</div>
+        <h3 class="deck-title">MCP Protocol v1.1</h3>
+        <p class="deck-content">The Model Context Protocol adds streaming support and improved error
+          handling, enabling real-time AI-server interactions.</p>
+      </div>
+      <div class="deck-card">
+        <div class="deck-icon">🛡️</div>
+        <h3 class="deck-title">Zero-Day Vulnerability</h3>
+        <p class="deck-content">Critical severity vulnerability discovered in widely-used logging
+          library. Patches available for versions 3.x and above.</p>
+      </div>
+      <div class="deck-card">
+        <div class="deck-icon">📊</div>
+        <h3 class="deck-title">TypeScript 6.0 Beta</h3>
+        <p class="deck-content">New 'using' declarations for explicit resource management, improved
+          type inference for discriminated unions.</p>
+      </div>
+    </div>
+    <!-- /fm:section:1:card-deck -->
+    <!-- fm:section:2:callout -->
+    <div class="callout callout-info"> <span class="callout-icon">📬</span>
+      <div class="callout-body"> <strong class="callout-title">From the Editor</strong> <span
+          class="callout-text">This month's theme is 'AI in Production' — we're featuring stories
+          from engineering teams that have deployed AI systems at scale and lessons learned along
+          the way.</span> </div>
+    </div>
+    <!-- /fm:section:2:callout -->
+  </div>
+</body>
+</html>

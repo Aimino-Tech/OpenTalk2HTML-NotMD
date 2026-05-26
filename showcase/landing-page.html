@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova AI — Enterprise Search</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --accent: #2563eb;
+      --accent-bright: #1d4ed8;
+      --accent-light: #eff6ff;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --font-display: system-ui, -apple-system, sans-serif;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #1e293b;
+      --border: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent: #3b82f6;
+      --accent-bright: #60a5fa;
+      --accent-light: #1e3a5f;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin: 0;
+      background: var(--bg-primary);
+    }
+
+    .lp-section {
+      padding: 80px 24px;
+    }
+
+    .lp-section:nth-child(even) {
+      background: var(--bg-secondary);
+    }
+
+    .lp-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .lp-hero {
+      text-align: center;
+      padding: 100px 24px 80px;
+    }
+
+    .lp-hero .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 100px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .lp-hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      margin: 0 0 16px;
+      line-height: 1.1;
+    }
+
+    .lp-hero .subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    .lp-hero .cta {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .lp-hero .cta .btn {
+      padding: 12px 32px;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .lp-hero .cta .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .lp-hero .cta .btn-primary:hover {
+      background: var(--accent-bright);
+      transform: translateY(-2px);
+    }
+
+    .lp-hero .cta .btn-ghost {
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .lp-hero .cta .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card .icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .testimonial .quote {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+
+    .testimonial .author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial .author .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .testimonial .author .name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .testimonial .author .role {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      text-align: center;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-light);
+    }
+
+    .pricing-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .pricing-card .price {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 16px 0;
+    }
+
+    .pricing-card .price .period {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      text-align: left;
+    }
+
+    .pricing-card li {
+      padding: 8px 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pricing-card li:last-child {
+      border-bottom: none;
+    }
+
+    .pricing-card .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: var(--radius);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .pricing-card .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .lp-cta {
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .lp-cta h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 16px;
+    }
+
+    .lp-cta p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin: 0 0 24px;
+    }
+
+    .lp-footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .lp-hero {
+        padding: 60px 24px 40px;
+      }
+
+      .lp-section {
+        padding: 40px 24px;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .card-deck {
+      display: grid;
+      grid-template-columns: repeat(var(--deck-cols, 3), 1fr);
+      gap: 16px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .card-deck {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .deck-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s;
+    }
+
+    .deck-card:hover {
+      border-color: var(--border-active, var(--accent));
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .deck-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .deck-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .deck-content {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .deck-footer {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .callout {
+      display: flex;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 1em 0;
+      border-left: 4px solid;
+    }
+
+    .callout-info {
+      background: rgba(96, 165, 250, 0.1);
+      border-color: #60a5fa;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: #f59e0b;
+    }
+
+    .callout-tip {
+      background: rgba(52, 211, 153, 0.1);
+      border-color: #34d399;
+    }
+
+    .callout-error {
+      background: rgba(248, 113, 113, 0.1);
+      border-color: #f87171;
+    }
+
+    .callout-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .callout-body {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .callout-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Coming Soon</div>
+    <h1 class="hero-title">Nova AI: Search That Understands</h1>
+    <p class="hero-subtitle">Enterprise-grade AI search that connects to your tools and finds
+      answers across your entire knowledge base</p>
+    <div class="hero-cta"><a href="#cta" class="btn-primary">Join the Waitlist</a> <a href="#demo"
+        class="btn-secondary">Book a Demo</a></div>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:3">
+    <div class="stat-card">
+      <div class="stat-value">50K+</div>
+      <div class="stat-label">Waitlist Signups</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">100+</div>
+      <div class="stat-label">Integrations</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">99.9%</div>
+      <div class="stat-label">Uptime</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:card-deck -->
+  <div class="card-deck" style="--deck-cols:3">
+    <div class="deck-card">
+      <div class="deck-icon">🔍</div>
+      <h3 class="deck-title">Semantic Search</h3>
+      <p class="deck-content">Find information by meaning, not just keywords. Our AI understands
+        your queries in context.</p>
+    </div>
+    <div class="deck-card">
+      <div class="deck-icon">🔌</div>
+      <h3 class="deck-title">100+ Integrations</h3>
+      <p class="deck-content">Connect Slack, Notion, Google Drive, GitHub, and more. Search across
+        all your tools.</p>
+    </div>
+    <div class="deck-card">
+      <div class="deck-icon">🔒</div>
+      <h3 class="deck-title">Enterprise Security</h3>
+      <p class="deck-content">SOC 2 Type II compliant with granular access controls, audit logs, and
+        encryption at rest.</p>
+    </div>
+    <div class="deck-card">
+      <div class="deck-icon">🤖</div>
+      <h3 class="deck-title">AI-Powered Answers</h3>
+      <p class="deck-content">Get direct answers with citations from your documents, not just links
+        to results.</p>
+    </div>
+    <div class="deck-card">
+      <div class="deck-icon">📊</div>
+      <h3 class="deck-title">Analytics Dashboard</h3>
+      <p class="deck-content">Understand search patterns, popular queries, and knowledge gaps across
+        your organization.</p>
+    </div>
+    <div class="deck-card">
+      <div class="deck-icon">🌐</div>
+      <h3 class="deck-title">Multi-Language</h3>
+      <p class="deck-content">Search and get answers in 50+ languages with automatic language
+        detection.</p>
+    </div>
+  </div>
+  <!-- /fm:section:2:card-deck -->
+  <!-- fm:section:3:callout -->
+  <div class="callout callout-tip"> <span class="callout-icon">🚀</span>
+    <div class="callout-body"> <strong class="callout-title">Early Access</strong> <span
+        class="callout-text">Join 50,000+ professionals already on the waitlist. Early adopters get
+        6 months free on the Business plan.</span> </div>
+  </div>
+  <!-- /fm:section:3:callout -->
+</body>
+</html>

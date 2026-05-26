@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transformers for Code Generation</title>
+  <style>
+    :root {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #16162a;
+      --bg-card: #1c1c38;
+      --border: #2a2a50;
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898c8;
+      --accent: #38bdf8;
+      --accent-dim: #1e3a5f;
+      --accent-green: #4ade80;
+      --accent-amber: #fbbf24;
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+      --radius: 10px;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f0f4f8;
+      --bg-card: #ffffff;
+      --border: #cbd5e1;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #0284c7;
+      --accent-dim: #e0f2fe;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .paper-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .paper-header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      letter-spacing: -.5px;
+    }
+
+    .paper-header .authors {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .paper-header .authors strong {
+      color: var(--accent);
+    }
+
+    .paper-header .meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .paper-header .doi-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-family: var(--font-mono);
+    }
+
+    .paper-header .keywords {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .paper-header .keywords span {
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--accent);
+    }
+
+    .abstract-box {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+
+    .abstract-box h2 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+
+    .abstract-box p {
+      font-size: 14px;
+      font-style: italic;
+      margin: 0;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 36px 0 16px;
+      color: var(--accent);
+      counter-increment: section;
+    }
+
+    h2::before {
+      content: counter(section) ". ";
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 24px 0 12px;
+      color: var(--text-primary);
+    }
+
+    body {
+      counter-reset: section;
+    }
+
+    .fig-caption,
+    .table-caption {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin: 6px 0 20px;
+      font-style: italic;
+    }
+
+    .fig-caption strong,
+    .table-caption strong {
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .eq-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 16px 0;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      overflow-x: auto;
+    }
+
+    .eq-block .eq-num {
+      float: right;
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      font-size: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 13px;
+    }
+
+    table th {
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      border-bottom: 2px solid var(--accent);
+      background: var(--bg-secondary);
+      color: var(--accent);
+    }
+
+    table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ref-list {
+      list-style: none;
+      padding: 0;
+      font-size: 13px;
+    }
+
+    .ref-list li {
+      padding: 8px 12px;
+      border-left: 2px solid var(--border);
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+
+    .ref-list li .ref-num {
+      color: var(--accent);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      margin-right: 8px;
+    }
+
+    .ref-list li:hover {
+      border-left-color: var(--accent);
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        font-size: 12px;
+      }
+
+      h2 {
+        page-break-before: always;
+      }
+
+      h2:first-of-type {
+        page-break-before: avoid;
+      }
+
+      .paper-header {
+        page-break-after: avoid;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .paper-header h1 {
+        font-size: 22px;
+      }
+
+      body {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    .evidence-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: box-shadow 0.2s;
+    }
+
+    .evidence-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .evidence-claim {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .evidence-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .evidence-confidence {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .confidence-high {
+      background: rgba(52, 211, 153, 0.12);
+      color: #34d399;
+    }
+
+    .confidence-medium {
+      background: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
+
+    .confidence-low {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    .evidence-sources {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    @media (max-width: 640px) {
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .citation-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 1em 0;
+    }
+
+    .citation-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 14px;
+      line-height: 1.6;
+      transition: box-shadow 0.2s;
+    }
+
+    .citation-item:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .citation-id {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 13px;
+      min-width: 28px;
+    }
+
+    .citation-text {
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .citation-doi {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .citation-year {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 2px 6px;
+      background: var(--bg-primary);
+      border-radius: 4px;
+    }
+
+    .citation-type {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .type-journal {
+      background: rgba(59, 130, 246, 0.12);
+      color: #60a5fa;
+    }
+
+    .type-conference {
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+    }
+
+    .type-preprint {
+      background: rgba(168, 85, 247, 0.12);
+      color: #c084fc;
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Preprint</div>
+    <h1 class="hero-title">Transformers for Code Generation: A Comprehensive Analysis</h1>
+    <p class="hero-subtitle">Evaluating large language models on code generation tasks across 12
+      programming languages</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Table 1: Model Performance by Language</caption>
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th>GPT-4</th>
+          <th>Claude 3</th>
+          <th>Llama 3</th>
+          <th>CodeGemma</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Python</td>
+          <td>92.3%</td>
+          <td>91.8%</td>
+          <td>87.2%</td>
+          <td>85.6%</td>
+        </tr>
+        <tr>
+          <td>TypeScript</td>
+          <td>89.7%</td>
+          <td>90.1%</td>
+          <td>84.5%</td>
+          <td>82.3%</td>
+        </tr>
+        <tr>
+          <td>Java</td>
+          <td>87.4%</td>
+          <td>88.2%</td>
+          <td>82.1%</td>
+          <td>80.8%</td>
+        </tr>
+        <tr>
+          <td>Rust</td>
+          <td>81.2%</td>
+          <td>83.5%</td>
+          <td>76.8%</td>
+          <td>74.1%</td>
+        </tr>
+        <tr>
+          <td>Go</td>
+          <td>86.8%</td>
+          <td>87.3%</td>
+          <td>80.4%</td>
+          <td>78.9%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:1:data-table -->
+  <!-- fm:section:2:evidence-grid -->
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <div class="evidence-claim">Larger models consistently outperform on complex reasoning tasks
+      </div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-high">high</span>
+        <span class="evidence-sources">45 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">Performance gap narrows for simple code completion tasks</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-high">high</span>
+        <span class="evidence-sources">38 sources</span>
+      </div>
+    </div>
+    <div class="evidence-card">
+      <div class="evidence-claim">Fine-tuned code models match general models with 3x fewer
+        parameters</div>
+      <div class="evidence-meta"> <span class="evidence-confidence confidence-medium">medium</span>
+        <span class="evidence-sources">12 sources</span>
+      </div>
+    </div>
+  </div>
+  <!-- /fm:section:2:evidence-grid -->
+  <!-- fm:section:3:citation-block -->
+  <div class="citation-block">
+    <div class="citation-item"> <span class="citation-id">[1]</span> <span
+        class="citation-text">Vaswani et al. 'Attention Is All You Need.' NeurIPS 2017.</span> <a
+        class="citation-doi" href="https://doi.org/10.1234/neurips2017">DOI</a> <span
+        class="citation-year">2017</span> <span
+        class="citation-type type-conference">conference</span> </div>
+    <div class="citation-item"> <span class="citation-id">[2]</span> <span
+        class="citation-text">Chen et al. 'Evaluating Large Language Models Trained on Code.'
+        2021.</span> <span class="citation-year">2021</span> <span
+        class="citation-type type-preprint">preprint</span> </div>
+    <div class="citation-item"> <span class="citation-id">[3]</span> <span
+        class="citation-text">Rozière et al. 'Code Llama: Open Foundation Models for Code.'
+        2023.</span> <span class="citation-year">2023</span> <span
+        class="citation-type type-preprint">preprint</span> </div>
+  </div>
+  <!-- /fm:section:3:citation-block -->
+</body>
+</html>

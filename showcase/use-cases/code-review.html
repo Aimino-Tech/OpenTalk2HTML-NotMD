@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PR #347 — Authentication Middleware Refactor</title>
+<style>
+:root{--bg:#0d0d1a;--bg2:#1a1a2e;--bg3:#12121e;--border:#2a2a44;--text:#e8e8f0;--text2:#8888aa;--text3:#686888;--accent:#34d399;--green:#34d399;--red:#f87171;--amber:#fbbf24;--blue:#60a5fa;--font:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;--r:8px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:900px;margin:0 auto;padding:40px 24px;line-height:1.6}
+pre,code{font-family:var(--mono)}
+.header{margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--accent)}
+.header .pr-num{font-size:14px;color:var(--accent);font-weight:700}
+.header h1{font-size:24px;margin:4px 0 6px;letter-spacing:-0.5px}
+.header .meta{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text3)}
+.header .meta span{display:flex;align-items:center;gap:4px}
+.pr-status{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:11px;font-weight:600}
+.pr-open{background:rgba(52,211,153,0.15);color:var(--green);border:1px solid rgba(52,211,153,0.2)}
+.pr-draft{background:rgba(251,191,36,0.1);color:var(--amber);border:1px solid rgba(251,191,36,0.15)}
+h2{font-size:16px;color:var(--accent);margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.code-block{background:#0d0d1a;border:1px solid var(--border);border-radius:var(--r);padding:16px;overflow-x:auto;margin:10px 0}
+.code-block pre{margin:0;font-family:var(--mono);font-size:12px;color:var(--text2);line-height:1.7;tab-size:2;-moz-tab-size:2}
+.code-block .add{color:var(--green)}.code-block .del{color:var(--red)}.code-block .cm{color:#546e7a}.code-block .kw{color:#c792ea}.code-block .fn{color:#82aaff}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.sm{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-align:center}
+.sm .val{font-size:20px;font-weight:700;color:var(--accent)}
+.sm .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+.file-list{list-style:none;padding:0;margin:0}
+.file-list li{padding:8px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:6px;font-family:var(--mono);font-size:12px;display:flex;justify-content:space-between;align-items:center}
+.file-list li .chg{font-size:11px}
+.chg-add{color:var(--green)}.chg-del{color:var(--red)}
+.issues{margin:16px 0}
+.issue{padding:12px 16px;border-left:3px solid;background:var(--bg2);margin-bottom:8px;border-radius:0 var(--r) var(--r) 0}
+.issue-err{border-color:var(--red)}.issue-warn{border-color:var(--amber)}.issue-info{border-color:var(--blue)}
+.issue .ititle{font-size:13px;font-weight:600;margin-bottom:2px}
+.issue .ibody{font-size:12px;color:var(--text2)}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding:20px;margin-top:28px}
+@media(max-width:600px){.summary-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="header"><span class="pr-num">PR #347</span><div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><h1>Authentication Middleware Refactor</h1><span class="pr-status pr-open">● Open</span></div><div class="meta"><span>👤 @jdoe</span><span>📅 Opened Jun 15, 2026</span><span>🎯 base: main ← compare: auth-refactor</span><span>🏷️ enhancement, security</span></div></div>
+<div class="summary-grid">
+<div class="sm"><div class="val">14</div><div class="lbl">Commits</div></div>
+<div class="sm"><div class="val">+847</div><div class="lbl">Additions</div></div>
+<div class="sm"><div class="val">-312</div><div class="lbl">Deletions</div></div>
+<div class="sm"><div class="val">12</div><div class="lbl">Files Changed</div></div>
+</div>
+<h2>Summary</h2>
+<p style="color:var(--text2);font-size:14px;line-height:1.7;margin-bottom:16px">This PR refactors the authentication middleware to use a strategy pattern, replacing the monolithic auth handler with composable authentication strategies (JWT, OAuth2, API Key). The change improves testability, reduces code duplication, and prepares the system for SAML/SSO support.</p>
+<h2>Files Changed</h2>
+<ul class="file-list">
+<li><span>src/middleware/auth/index.ts</span><span class="chg"><span class="chg-add">+124</span> <span class="chg-del">-248</span></span></li>
+<li><span>src/middleware/auth/strategies/jwt.ts</span><span class="chg"><span class="chg-add">+186</span></span></li>
+<li><span>src/middleware/auth/strategies/oauth2.ts</span><span class="chg"><span class="chg-add">+214</span></span></li>
+<li><span>src/middleware/auth/strategies/api-key.ts</span><span class="chg"><span class="chg-add">+98</span></span></li>
+<li><span>src/middleware/auth/types.ts</span><span class="chg"><span class="chg-add">+67</span></span></li>
+<li><span>src/middleware/auth/__tests__/auth.test.ts</span><span class="chg"><span class="chg-add">+158</span> <span class="chg-del">-64</span></span></li>
+</ul>
+<h2>Code Changes</h2>
+<div class="code-block"><pre><span class="cm">// Before: Monolithic switch statement</span>
+<span class="kw">function</span> <span class="fn">authenticate</span>(req: Request): User | <span class="kw">null</span> {
+  <span class="kw">switch</span> (req.authType) {
+    <span class="kw">case</span> <span class="str">'jwt'</span>: <span class="del">...</span> <span class="cm">// 80 lines</span>
+    <span class="kw">case</span> <span class="str">'oauth'</span>: <span class="del">...</span> <span class="cm">// 90 lines</span>
+    <span class="kw">default</span>: <span class="kw">throw</span> <span class="kw">new</span> <span class="fn">Error</span>(<span class="str">'Unknown auth type'</span>);
+  }
+}
+
+<span class="cm">// After: Strategy pattern</span>
+<span class="kw">const</span> strategies = <span class="kw">new</span> <span class="fn">StrategyRegistry</span>();
+strategies.<span class="fn">register</span>(<span class="str">'jwt'</span>, <span class="kw">new</span> <span class="fn">JwtStrategy</span>(config.jwt));
+strategies.<span class="fn">register</span>(<span class="str">'oauth2'</span>, <span class="kw">new</span> <span class="fn">OAuth2Strategy</span>(config.oauth));
+strategies.<span class="fn">register</span>(<span class="str">'api-key'</span>, <span class="kw">new</span> <span class="fn">ApiKeyStrategy</span>(config.keys));
+
+<span class="kw">async</span> <span class="kw">function</span> <span class="fn">authenticate</span>(req: Request): Promise&lt;User&gt; {
+  <span class="kw">const</span> strategy = strategies.<span class="fn">get</span>(req.authType);
+  <span class="kw">return</span> strategy.<span class="fn">validate</span>(req);
+}</pre></div>
+<h2>Review Notes</h2>
+<div class="issues">
+<div class="issue issue-err"><div class="ititle">🚫 Missing rate limiting on OAuth2 callback</div><div class="ibody">The OAuth2 callback handler lacks rate limiting, which could allow token replay attacks. Consider adding a rate limiter middleware.</div></div>
+<div class="issue issue-warn"><div class="ititle">⚠️ JWT secret should be rotated</div><div class="ibody">The JWT signing key appears to be the default development key. Ensure a production key is configured via environment variable.</div></div>
+<div class="issue issue-info"><div class="ititle">ℹ️ Consider adding refresh token support</div><div class="ibody">The current JWT strategy uses short-lived tokens (15 min) but doesn't implement refresh tokens. Consider adding refresh token rotation for better UX.</div></div>
+</div>
+<div class="footer">✅ 3 approvals needed • 1 approval received • All checks passing</div>
+</body>
+</html>

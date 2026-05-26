@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint Planning — Week 44 Meeting Notes</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--green:#34d399;--red:#f87171;--amber:#fbbf24;--blue:#60a5fa;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:800px;margin:0 auto;padding:40px 24px;line-height:1.6}
+.header{margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--accent);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
+.header h1{font-size:22px;margin:0;letter-spacing:-0.5px}
+.header .meta{color:var(--text3);font-size:13px}
+.header .meta span{display:block;margin-top:2px}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600}
+.bdg-meeting{background:rgba(99,102,241,0.1);color:var(--accent)}.bdg-action{background:rgba(52,211,153,0.1);color:var(--green)}.bdg-decision{background:rgba(251,191,36,0.1);color:var(--amber)}.bdg-note{background:rgba(96,165,250,0.1);color:var(--blue)}
+.section{margin-bottom:24px}
+.section h2{font-size:15px;font-weight:700;color:var(--accent);padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.attendance{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.att{display:flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:6px 12px;font-size:12px}
+.att .ava{width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.att .status{font-size:10px;color:var(--green)}
+ul.item-list{list-style:none;padding:0;margin:0}
+ul.item-list li{padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;font-size:13px;color:var(--text2);line-height:1.6}
+ul.item-list li .lb{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;margin-right:8px}
+.action-item{border-left:3px solid var(--green)!important}
+.action-item .assignee{display:inline-block;margin-left:8px;font-size:11px;color:var(--text3)}
+.action-item .due{display:inline-block;margin-left:8px;font-size:11px;color:var(--amber)}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:20px;margin-top:28px}
+@media(max-width:480px){.attendance{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="header"><div><span class="badge bdg-meeting">📋 Sprint Planning — Week 44</span><h1>Meeting Notes</h1><div class="meta"><span>📅 October 28, 2026 • 10:00 AM – 11:30 AM</span><span>📍 Conference Room B / Zoom</span></div></div><span class="badge bdg-meeting" style="font-size:11px">Sprint #12</span></div>
+<div class="section"><h2>👥 Attendees</h2><div class="attendance">
+<div class="att"><span class="ava">AM</span> Alex M. <span class="status">✓</span></div>
+<div class="att"><span class="ava">JR</span> Jamie R. <span class="status">✓</span></div>
+<div class="att"><span class="ava">SK</span> Sarah K. <span class="status">✓</span></div>
+<div class="att"><span class="ava">TL</span> Tom L. <span class="status">✓</span></div>
+<div class="att"><span class="ava">PW</span> Priya W. <span class="status">✓</span></div>
+<div class="att"><span class="ava">CN</span> Chris N. <span class="status">✓</span></div>
+<div class="att"><span class="ava">--</span> Dana P. <span style="color:var(--red)">✗</span></div>
+</div></div>
+<div class="section"><h2>🎯 Sprint Goals</h2><ul class="item-list">
+<li><span class="lb bdg-note">Goal 1</span>Complete OAuth integration for the API gateway (Story #4271)</li>
+<li><span class="lb bdg-note">Goal 2</span>Deliver dashboard v2 UI with real-time data refresh (Story #4298)</li>
+<li><span class="lb bdg-note">Goal 3</span>Reduce p95 API latency to under 200ms (target: 180ms)</li>
+<li><span class="lb bdg-note">Goal 4</span>Address all P0/P1 security vulnerabilities from latest audit</li>
+</ul></div>
+<div class="section"><h2>📝 Discussion Notes</h2><ul class="item-list">
+<li><span class="lb bdg-note">Note</span><strong style="color:var(--text)">API Gateway Migration:</strong> The team agreed to migrate the API gateway from Express to Fastify for better performance. Estimated effort: 3 story points. Blocked on infrastructure team providing the new deployment pipeline.</li>
+<li><span class="lb bdg-note">Note</span><strong style="color:var(--text)">Dashboard Performance:</strong> Real-time data refresh requires WebSocket connection. Existing REST polling will be deprecated. Design doc: DR-0052.</li>
+<li><span class="lb bdg-note">Note</span><strong style="color:var(--text)">Security Audit Results:</strong> 2 P0 and 5 P1 findings. All P0 items must be fixed by end of sprint. Plan: dedicated security fix day on Wednesday.</li>
+</ul></div>
+<div class="section"><h2>✅ Action Items</h2><ul class="item-list">
+<li class="action-item"><span class="lb bdg-action">ACT-1</span>Create Fastify migration plan and share with infra team<span class="assignee">👤 Alex M.</span><span class="due">📅 Nov 1</span></li>
+<li class="action-item"><span class="lb bdg-action">ACT-2</span>Draft WebSocket spec for real-time dashboard<span class="assignee">👤 Jamie R.</span><span class="due">📅 Oct 30</span></li>
+<li class="action-item"><span class="lb bdg-action">ACT-3</span>Fix P0 security issues in authentication module<span class="assignee">👤 Sarah K., Tom L.</span><span class="due">📅 Oct 31</span></li>
+<li class="action-item"><span class="lb bdg-action">ACT-4</span>Update Sprint board with all estimated stories<span class="assignee">👤 Priya W.</span><span class="due">📅 Oct 29</span></li>
+</ul></div>
+<div class="section"><h2>⚡ Decisions Made</h2><ul class="item-list">
+<li><span class="lb bdg-decision">DEC-1</span>Adopt Fastify for all new API services. Express migration planned over next 3 sprints.</li>
+<li><span class="lb bdg-decision">DEC-2</span>Use Server-Sent Events (SSE) instead of WebSocket for dashboard v2 to simplify infrastructure.</li>
+<li><span class="lb bdg-decision">DEC-3</span>Postpone mobile app redesign to Q1 2027 due to capacity constraints.</li>
+</ul></div>
+<div class="footer">📧 Notes distributed by: Priya W. • Next sprint planning: Monday, November 11, 2026</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found · Nova AI</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--font:'Inter',system-ui,sans-serif;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+.error-code{font-size:120px;font-weight:900;letter-spacing:-8px;line-height:1;background:linear-gradient(135deg,#6366f1,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.error-label{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--accent);margin-bottom:16px}
+h1{font-size:28px;margin:0 0 12px;letter-spacing:-0.5px}
+p{color:var(--text2);font-size:16px;max-width:480px;line-height:1.7;margin:0 0 32px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.btn{padding:12px 28px;border-radius:var(--r);font-size:15px;font-weight:600;text-decoration:none;transition:all 0.2s}
+.btn-pry{background:var(--accent);color:#fff}.btn-pry:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+.btn-ghost{border:2px solid var(--border);color:var(--text)}.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.search-box{display:flex;gap:8px;max-width:400px;margin:0 auto 48px}
+.search-box input{flex:1;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-size:14px;font-family:inherit}
+.search-box input:focus{outline:none;border-color:var(--accent)}
+.search-box button{padding:12px 20px;background:var(--accent);color:#fff;border:none;border-radius:var(--r);font-weight:600;cursor:pointer}
+.links{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.links a{color:var(--text3);text-decoration:none;font-size:14px;transition:color 0.2s}
+.links a:hover{color:var(--accent)}
+.illustration{margin-bottom:24px;font-size:80px;opacity:0.6;line-height:1}
+.footer{margin-top:64px;font-size:12px;color:var(--text3)}
+@media(max-width:480px){.error-code{font-size:80px}.illustration{font-size:60px}}
+</style>
+</head>
+<body>
+<div class="illustration">🔭</div>
+<div class="error-code">404</div>
+<div class="error-label">Page Not Found</div>
+<h1>This page has drifted out of orbit</h1>
+<p>The page you're looking for doesn't exist or has been moved. The universe is expanding, and occasionally pages drift beyond our reach.</p>
+<div class="actions"><a href="#" class="btn btn-pry">Return Home</a><a href="#" class="btn btn-ghost">Contact Support</a></div>
+<div class="search-box"><input type="text" placeholder="Search the docs..."><button>Search</button></div>
+<div class="links"><a href="#">Documentation</a><a href="#">API Reference</a><a href="#">Changelog</a><a href="#">GitHub</a><a href="#">Status</a></div>
+<div class="footer">© 2026 Nova AI Technologies Inc. • Error tracking ID: ERR-a7f2c4e9-6b1d</div>
+</body>
+</html>

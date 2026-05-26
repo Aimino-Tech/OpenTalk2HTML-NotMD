@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sparse Multimodal Attention — Efficient Cross-Modal Understanding</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--font:'Inter','Georgia',serif;--mono:'JetBrains Mono',monospace;--r:8px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:800px;margin:0 auto;padding:48px 32px;line-height:1.8;font-size:15px}
+.paper-header{text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:2px solid var(--accent)}
+.paper-header h1{font-size:26px;font-weight:800;letter-spacing:-0.5px;line-height:1.3;margin-bottom:16px}
+.authors{font-size:14px;color:var(--text2);margin-bottom:4px}
+.affiliations{font-size:12px;color:var(--text3);margin-bottom:12px}
+.abstract-box{background:var(--bg2);border-radius:var(--r);padding:20px 24px;margin-bottom:28px;border-left:3px solid var(--accent)}
+.abstract-box h2{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin:0 0 8px}
+.abstract-box p{font-size:13px;color:var(--text2);line-height:1.7;margin:0}
+h2{font-size:18px;color:var(--accent);margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:15px;color:var(--text);margin:24px 0 8px}
+p{color:var(--text2);font-size:14px;line-height:1.8;margin-bottom:12px}
+.eq{font-family:var(--mono);background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;text-align:center;font-size:16px;color:var(--text);margin:16px 0;overflow-x:auto}
+.eq .sym{color:var(--accent)}.eq .var{color:var(--blue);font-style:italic}
+.refs{padding:0;list-style:none}
+.refs li{padding:6px 0;font-size:12px;color:var(--text3);border-bottom:1px solid var(--border);line-height:1.6}
+.refs li:last-child{border-bottom:none}
+.refs li .num{color:var(--accent);font-weight:600;margin-right:6px}
+.figure{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:24px;text-align:center;margin:16px 0}
+.figure .placeholder{width:100%;height:120px;background:var(--bg3);border-radius:var(--r);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:13px;margin-bottom:8px}
+.figure .caption{font-size:12px;color:var(--text3);font-style:italic}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:24px;margin-top:40px}
+@media(max-width:480px){body{padding:32px 16px}}
+</style>
+</head>
+<body>
+<div class="paper-header"><h1>Sparse Multimodal Attention:<br>Efficient Cross-Modal Understanding with Sublinear Complexity</h1><div class="authors">James Park, Sarah Chen, Michael Torres, Dr. Anna Kowalski</div><div class="affiliations">Nova AI Research • Stanford University • MIT CSAIL</div></div>
+<div class="abstract-box"><h2>Abstract</h2><p>We present Sparse Multimodal Attention (SMA), a novel attention mechanism for multimodal transformer models that achieves state-of-the-art results on 12 of 14 benchmarks while reducing computational requirements by 60%. SMA employs a learned sparsity mask to selectively attend to relevant cross-modal interactions, replacing the dense O(n²) attention matrix with a sparse O(n log n) alternative. Our method achieves 4.2% accuracy improvement over previous dense attention mechanisms on video understanding tasks and 3.8% on cross-modal retrieval benchmarks.</p></div>
+<h2>1. Introduction</h2>
+<p>Multimodal understanding — the ability to reason across text, images, video, and audio — represents a critical frontier in artificial intelligence. However, existing multimodal architectures face a fundamental scalability challenge: the quadratic complexity of cross-modal attention mechanisms limits their applicability to large-scale, real-world problems.</p>
+<p>In this paper, we introduce Sparse Multimodal Attention (SMA), which addresses the computational bottleneck of cross-modal attention by replacing the dense attention matrix with a learned sparse structure.</p>
+<h2>2. Method</h2>
+<h3>2.1 Sparse Attention Mask</h3>
+<p>The core innovation of SMA is the learned sparsity mask M ∈ {0,1}^(n×m), where n is the sequence length of the query modality and m is the sequence length of the key modality. Each entry M_ij indicates whether token i in modality A should attend to token j in modality B.</p>
+<div class="eq">Attention(Q, K, V) = softmax(<span class="sym">⊙</span> QKᵀ / √d) V</div>
+<p>where ⊙ denotes element-wise multiplication with the binary mask M. The mask is learned through a Gumbel-Sigmoid relaxation, enabling differentiable training of binary decisions.</p>
+<h3>2.2 Complexity Analysis</h3>
+<p>Standard dense cross-modal attention requires O(n·m) operations. SMA reduces this to O(n·k) where k ≪ m is the average number of attended positions per query. In our experiments, k scales as O(log m), yielding near-linear complexity.</p>
+<div class="figure"><div class="placeholder">[SMA Architecture Diagram — Attention Sparsity Pattern Visualization]</div><div class="caption">Figure 1: Attention sparsity patterns learned by SMA across text→image and video→audio modalities. Dark cells indicate attended positions.</div></div>
+<h2>3. Results</h2>
+<p>We evaluated SMA on 14 standard multimodal benchmarks spanning video understanding, cross-modal retrieval, and visual question answering. SMA achieves state-of-the-art results on 12 benchmarks while reducing FLOPs by an average of 60% compared to dense attention baselines.</p>
+<h2>4. Conclusion</h2>
+<p>We introduced Sparse Multimodal Attention, a novel approach that achieves state-of-the-art multimodal understanding with dramatically reduced computational requirements. Our work opens new possibilities for deploying large multimodal models in resource-constrained environments.</p>
+<h2>References</h2>
+<ol class="refs">
+<li><span class="num">[1]</span>Vaswani et al., "Attention Is All You Need," NeurIPS 2017.</li>
+<li><span class="num">[2]</span>Jaegle et al., "Perceiver: General Perception with Iterative Attention," ICML 2021.</li>
+<li><span class="num">[3]</span>Child et al., "Generating Long Sequences with Sparse Transformers," arXiv 2019.</li>
+<li><span class="num">[4]</span>Radford et al., "Learning Transferable Visual Models From Natural Language Supervision," ICML 2021.</li>
+<li><span class="num">[5]</span>Alayrac et al., "Flamingo: a Visual Language Model for Few-Shot Learning," NeurIPS 2022.</li>
+</ol>
+<div class="footer">Preprint under review • Correspondence to: park@novaresearch.ai • Code: github.com/novaresearch/sma</div>
+</body>
+</html>

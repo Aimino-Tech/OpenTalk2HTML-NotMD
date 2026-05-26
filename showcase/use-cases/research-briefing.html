@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Briefing: AI Agent Security — Research Alert</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#ef4444;--green:#34d399;--amber:#fbbf24;--blue:#60a5fa;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:800px;margin:0 auto;padding:40px 24px;line-height:1.7}
+.header{padding-bottom:24px;border-bottom:3px solid var(--accent);margin-bottom:24px}
+.header .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:100px;background:rgba(239,68,68,0.1);color:var(--accent);font-size:11px;font-weight:600;margin-bottom:8px;border:1px solid rgba(239,68,68,0.15)}
+.header h1{font-size:24px;margin:0 0 6px;letter-spacing:-0.5px}
+.header .meta{color:var(--text3);font-size:13px;display:flex;gap:16px;flex-wrap:wrap}
+.key-findings{background:var(--bg2);border-radius:var(--r);padding:20px;margin-bottom:20px;border:1px solid var(--border)}
+.key-findings h2{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent);margin:0 0 10px}
+.key-findings ul{list-style:none;padding:0;margin:0}
+.key-findings li{padding:6px 0;font-size:13px;color:var(--text2);line-height:1.6}
+.key-findings li::before{content:'▸ ';color:var(--accent);font-weight:700}
+h2{font-size:16px;color:var(--accent);margin:24px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;color:var(--text);margin:16px 0 6px}
+p{color:var(--text2);font-size:14px;line-height:1.8;margin-bottom:12px}
+.method-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;margin:12px 0;font-size:12px;color:var(--text3);line-height:1.7}
+.method-box strong{color:var(--text)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.evidence{border-left:4px solid;padding:12px 16px;margin:8px 0;background:var(--bg2);border-radius:0 var(--r) var(--r) 0;font-size:13px;color:var(--text2)}
+.ev-high{border-color:var(--green)}.ev-mod{border-color:var(--amber)}.ev-low{border-color:var(--red)}
+.evidence .src{font-size:11px;color:var(--text3);margin-top:4px}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:20px;margin-top:28px}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div class="badge">🔴 Research Alert — High Priority</div><h1>AI Agent Security: Prompt Injection & Tool-Use Vulnerabilities</h1><div class="meta"><span>📅 June 15, 2026</span><span>🏢 Research Division</span><span>⏱ 8 min read</span></div></div>
+<div class="key-findings"><h2>▸ Key Findings</h2><ul>
+<li>3 new prompt injection techniques targeting MCP tool-calling agents discovered in Q2 2026</li>
+<li>Indirect injection via tool outputs affects 67% of tested agent architectures</li>
+<li>Context window poisoning enables persistent adversarial control across conversation turns</li>
+<li>Recommended: output sanitization, tool-scoped permissions, and input validation layers</li>
+</ul></div>
+<h2>Executive Summary</h2>
+<p>This briefing summarizes emerging vulnerabilities in AI agent systems that use the Model Context Protocol (MCP) for tool calling. Our research team identified three novel attack vectors that target the tool-use pipeline rather than the underlying language model. These findings have significant implications for enterprise deployments of AI agents.</p>
+<h2>Attack Vectors</h2>
+<div class="grid-2">
+<div class="evidence ev-high"><strong style="color:var(--green)">Vector A: Tool Output Injection</strong><br>Malicious content returned by a tool (e.g., a compromised API response) injects instructions that the agent follows in subsequent steps. Affects 67% of architectures tested.<div class="src">🔬 Source: Internal pentest, May 2026</div></div>
+<div class="evidence ev-high"><strong style="color:var(--green)">Vector B: Context Window Poisoning</strong><br>Adversarial content embedded early in the context window persists across conversation turns, biasing the agent's behavior. Particularly effective in long-running agent sessions.<div class="src">🔬 Source: Academic paper, arXiv:2605.12345</div></div>
+<div class="evidence ev-mod"><strong style="color:var(--amber)">Vector C: Tool-Use Confusion</strong><br>Attackers craft inputs that cause the agent to select the wrong tool or pass malformed parameters, bypassing safety checks. Observed in 34% of evaluated agent configurations.<div class="src">🔬 Source: Responsible disclosure, April 2026</div></div>
+</div>
+<h2>Recommendations</h2>
+<p>Based on our analysis, we recommend the following immediate actions:</p>
+<div class="method-box"><strong>1. Output Sanitization</strong> — Sanitize all tool outputs before they enter the agent's context window. Strip control tokens and validate content against expected schemas.<br><br>
+<strong>2. Tool-Scoped Permissions</strong> — Implement least-privilege tool access. Each tool should have explicit allowlists for parameters and rate limits for invocations.<br><br>
+<strong>3. Input Validation Layer</strong> — Add a dedicated validation step between user input and agent processing that detects and blocks prompt injection attempts.<br><br>
+<strong>4. Continuous Monitoring</strong> — Log all tool invocations and implement anomaly detection for unusual tool selection patterns.</div>
+<div class="footer">Prepared by Security Research Team • Classification: Confidential • For executive distribution only</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast HTML MCP — Frequently Asked Questions</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--font:'Inter',system-ui,sans-serif;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
+.wrap{max-width:800px;margin:0 auto;padding:40px 24px;flex:1}
+.header{text-align:center;margin-bottom:36px}
+.header h1{font-size:32px;margin-bottom:8px;letter-spacing:-1px}
+.header p{color:var(--text2);font-size:15px}
+.search-box{position:relative;margin-bottom:28px}
+.search-box input{width:100%;padding:12px 16px 12px 44px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-size:14px;font-family:inherit;transition:all 0.2s}
+.search-box input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+.search-box input::placeholder{color:var(--text3)}
+.search-box .sicon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:16px}
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.cat{display:inline-block;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;background:var(--bg3);color:var(--text2);border:1px solid var(--border);cursor:pointer;transition:all 0.2s}
+.cat:hover{background:var(--bg2);color:var(--text);border-color:var(--text3)}
+.cat.act{background:var(--accent);color:#fff;border-color:var(--accent)}
+.faq-group{margin-bottom:24px}
+.faq-group h2{font-size:15px;font-weight:700;color:var(--accent);padding-bottom:8px;border-bottom:1px solid var(--border);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.faq-item{padding:14px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;cursor:pointer;transition:all 0.2s}
+.faq-item:hover{border-color:var(--accent)}
+.faq-item .q{font-size:14px;font-weight:600;color:var(--text);display:flex;justify-content:space-between;align-items:center}
+.faq-item .q .arrow{transition:transform 0.2s;font-size:12px;color:var(--text3)}
+.faq-item.open .q .arrow{transform:rotate(180deg)}
+.faq-item .a{max-height:0;overflow:hidden;transition:max-height 0.3s,padding 0.3s;font-size:13px;color:var(--text2);line-height:1.7}
+.faq-item.open .a{max-height:300px;padding-top:10px}
+.footer{text-align:center;padding:24px;font-size:12px;color:var(--text3);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="header"><h1>Frequently Asked Questions</h1><p>Everything you need to know about Fast HTML MCP</p></div>
+<div class="search-box"><span class="sicon">🔍</span><input type="text" placeholder="Search FAQs..." id="faqSearch"></div>
+<div class="cats"><span class="cat act">All</span><span class="cat">Getting Started</span><span class="cat">Templates</span><span class="cat">API & Tools</span><span class="cat">Deployment</span><span class="cat">Pricing</span></div>
+<div class="faq-group"><h2>Getting Started</h2>
+<div class="faq-item"><div class="q">What is Fast HTML MCP?<span class="arrow">▾</span></div><div class="a">Fast HTML MCP is a Model Context Protocol server that generates HTML from AI agents. It provides 15 tools, 22 components, and 25 templates for lightning-fast HTML generation with sub-second patch times.</div></div>
+<div class="faq-item"><div class="q">How do I install Fast HTML MCP?<span class="arrow">▾</span></div><div class="a">Run <code style="color:var(--accent)">npx -y @aimino/fast-html-mcp-server</code> in your terminal. No dependencies or configuration files needed. Works on Node.js 20+.</div></div>
+<div class="faq-item"><div class="q">Which AI platforms are supported?<span class="arrow">▾</span></div><div class="a">Fast HTML MCP works with Cursor, VS Code (via GitHub Copilot MCP), Claude Desktop, Claude Code, and Windsurf. See our integration guides for platform-specific setup.</div></div>
+</div>
+<div class="faq-group"><h2>Templates & Components</h2>
+<div class="faq-item"><div class="q">How many templates are available?<span class="arrow">▾</span></div><div class="a">There are 25 templates across 6 categories: General Purpose (11), Business (5), Communication (5), Technical (3), Research (7), and Presentation (1). Each template has customizable variables and supports embedded components.</div></div>
+<div class="faq-item"><div class="q">Can I create custom templates?<span class="arrow">▾</span></div><div class="a">Yes! Use the <code style="color:var(--accent)">register_template</code> tool to register your own doT.js templates at runtime. You can also add templates to the <code style="color:var(--accent)">community-templates/</code> directory for persistent availability.</div></div>
+</div>
+<div class="faq-group"><h2>API & Tools</h2>
+<div class="faq-item"><div class="q">What's the difference between render_page and write_raw_html?<span class="arrow">▾</span></div><div class="a"><code style="color:var(--accent)">render_page</code> composes pages from structured component specs using doT.js templates, while <code style="color:var(--accent)">write_raw_html</code> writes a raw HTML string (optionally template-wrapped) directly to a file.</div></div>
+<div class="faq-item"><div class="q">How does patch_html work?<span class="arrow">▾</span></div><div class="a">It replaces the inner content of matched elements via CSS selectors using the parse5 AST. For <code style="color:var(--accent)">#id</code> selectors, it uses a direct text substitution fast-path (~10x faster than full AST parsing).</div></div>
+</div>
+<div class="faq-group"><h2>Deployment</h2>
+<div class="faq-item"><div class="q">Can I run Fast HTML MCP as a REST API?<span class="arrow">▾</span></div><div class="a">Yes! Set <code style="color:var(--accent)">TRANSPORT=api</code> or <code style="color:var(--accent)">TRANSPORT=http</code> to start the server in REST API mode. When using http mode, both MCP and REST are available on the same port.</div></div>
+<div class="faq-item"><div class="q">Is there a Docker image available?<span class="arrow">▾</span></div><div class="a">Yes, we publish Docker images. Use the provided <code style="color:var(--accent)">Dockerfile</code> and <code style="color:var(--accent)">docker-compose.yml</code> for containerized deployments.</div></div>
+</div>
+</div>
+<div class="footer">Still have questions? <a href="#" style="color:var(--accent);text-decoration:none">Contact support</a> — We typically respond within 2 hours.</div>
+</body>
+</html>

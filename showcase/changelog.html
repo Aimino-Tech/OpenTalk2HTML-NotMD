@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast HTML MCP v2.5.0 Changelog</title>
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f9fafb;
+      --bg-card: #ffffff;
+      --border: #e5e7eb;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --green: #16a34a;
+      --green-bg: #dcfce7;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --amber: #d97706;
+      --amber-bg: #fef3c7;
+      --font-body: system-ui, -apple-system, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+      --radius: 8px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #111827;
+      --bg-secondary: #1f2937;
+      --bg-card: #1f2937;
+      --border: #374151;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --accent: #3b82f6;
+      --accent-light: #1e3a5f;
+      --green: #22c55e;
+      --green-bg: #14532d;
+      --red: #ef4444;
+      --red-bg: #450a0a;
+      --amber: #f59e0b;
+      --amber-bg: #451a03;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      line-height: 1.6;
+    }
+
+    .cl-header {
+      margin-bottom: 40px;
+    }
+
+    .cl-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .cl-header p {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .version {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .version:last-child {
+      border-bottom: none;
+    }
+
+    .version-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .version-header .tag {
+      font-size: 18px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--accent);
+    }
+
+    .version-header .date {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .version-header .badge {
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .version-header .badge.latest {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .version-header .badge.breaking {
+      background: var(--red-bg);
+      color: var(--red);
+    }
+
+    .change-group {
+      margin-bottom: 16px;
+    }
+
+    .change-group h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .change-group h3.features {
+      color: var(--green);
+    }
+
+    .change-group h3.fixes {
+      color: var(--amber);
+    }
+
+    .change-group h3.breaking {
+      color: var(--red);
+    }
+
+    .change-group ul {
+      margin: 0;
+      padding: 0 0 0 20px;
+    }
+
+    .change-group li {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+      line-height: 1.6;
+    }
+
+    .change-group li strong {
+      color: var(--text-primary);
+    }
+
+    .rss-sub {
+      margin-top: 40px;
+      padding: 16px 20px;
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .rss-sub a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .accordion-component {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1em 0;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-item:last-child {
+      border-bottom: none;
+    }
+
+    .accordion-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .accordion-trigger:hover {
+      background: var(--bg-card-hover, var(--bg-secondary));
+    }
+
+    .accordion-arrow {
+      transition: transform 0.3s;
+      font-size: 10px;
+      color: var(--text-tertiary);
+    }
+
+    .accordion-item.open .accordion-arrow {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      padding: 0 16px;
+      background: var(--bg-secondary);
+    }
+
+    .accordion-item.open .accordion-body {
+      max-height: 2000px;
+      padding: 16px;
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Latest Release</div>
+    <h1 class="hero-title">Fast HTML MCP v2.5.0</h1>
+    <p class="hero-subtitle">Major release with consistency engine, streaming support, and 8 new
+      templates</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:4">
+    <div class="stat-card">
+      <div class="stat-value">15</div>
+      <div class="stat-label">Tools</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">22</div>
+      <div class="stat-label">Components</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">25</div>
+      <div class="stat-label">Templates</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">47</div>
+      <div class="stat-label">Bug Fixes</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:accordion -->
+  <div class="accordion-component">
+    <div class="accordion-item open">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>✨ New Features</span> <span
+          class="accordion-arrow">▼</span> </div>
+      <div class="accordion-body">Consistency engine with propagate_edit and check_consistency tools
+        for cross-section data integrity. Streaming mode for real-time HTML preview. AI compression
+        mode for semantic token reduction. New 8 research templates.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>🔄 Enhancements</span> <span
+          class="accordion-arrow">▼</span> </div>
+      <div class="accordion-body">50% faster cold start via lazy template compilation. Improved #id
+        fast-path with 10x speedup for id-based patches. Better error messages for selector misses.
+        Enhanced DOMPurify integration.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-trigger" role="button" tabindex="0"> <span>🐛 Bug Fixes</span> <span
+          class="accordion-arrow">▼</span> </div>
+      <div class="accordion-body">Fixed race condition in atomic writes. Corrected section marker
+        detection. Fixed dark mode CSS variable defaults. Resolved template caching edge case. Fixed
+        parse5 serialization for nested elements.</div>
+    </div>
+  </div>
+  <!-- /fm:section:2:accordion -->
+  <script>
+    document.querySelectorAll('.accordion-trigger').forEach(el => {
+      const toggle = () => {
+        const item = el.closest('.accordion-item');
+        item.classList.toggle('open');
+      };
+      el.addEventListener('click', toggle);
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

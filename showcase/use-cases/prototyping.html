@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Manager — Interactive Wireframe Prototype</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#6366f1;--green:#34d399;--red:#f87171;--amber:#fbbf24;--blue:#60a5fa;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;display:flex;flex-direction:column;min-height:100vh}
+.wireframe-header{display:flex;align-items:center;padding:12px 20px;background:var(--bg2);border-bottom:1px solid var(--border);flex-shrink:0}
+.wf-logo{width:28px;height:28px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;margin-right:12px}
+.wf-nav{display:flex;gap:4px;margin-left:24px;flex:1}
+.wf-nav a{padding:6px 14px;border-radius:6px;font-size:12px;color:var(--text3);text-decoration:none;transition:all 0.2s}
+.wf-nav a:hover{color:var(--text);background:var(--bg3)}.wf-nav a.active{color:var(--accent);background:rgba(99,102,241,0.1)}
+.wf-user{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.wf-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700}
+.wireframe-body{display:flex;flex:1}
+.wf-sidebar{width:200px;background:var(--bg2);border-right:1px solid var(--border);padding:12px 0;flex-shrink:0}
+.wf-sidebar a{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;color:var(--text3);text-decoration:none;transition:all 0.2s}
+.wf-sidebar a:hover{color:var(--text);background:var(--bg3)}.wf-sidebar a.active{color:var(--accent);background:rgba(99,102,241,0.1);border-right:2px solid var(--accent)}
+.wf-content{flex:1;padding:24px;overflow-y:auto}
+.wf-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.wf-topbar h1{font-size:20px;letter-spacing:-0.5px;margin:0}
+.wf-topbar .actions{display:flex;gap:8px}
+.mock-btn{padding:8px 18px;border-radius:var(--r);font-size:12px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all 0.2s}
+.mock-btn-primary{background:var(--accent);color:#fff}.mock-btn-secondary{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.mock-btn-primary:hover{transform:translateY(-1px)}
+.mock-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:20px;margin-bottom:16px}
+.mock-card .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.mock-card .card-header h3{font-size:14px;font-weight:600;margin:0}
+.mock-card .card-body{font-size:12px;color:var(--text2);line-height:1.6}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.stat-card .val{font-size:22px;font-weight:700;color:var(--accent)}
+.stat-card .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+.wireframe-footer{padding:12px 20px;background:var(--bg2);border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--text3);flex-shrink:0}
+.prototype-badge{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;padding:8px 16px;border-radius:100px;font-size:11px;font-weight:600;z-index:100}
+@media(max-width:768px){.wf-sidebar{display:none}.grid-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wireframe-header"><div class="wf-logo">CM</div><div class="wf-nav"><a href="#" class="active">Dashboard</a><a href="#">Campaigns</a><a href="#">Analytics</a><a href="#">Audiences</a><a href="#">Settings</a></div><div class="wf-user"><span>alex@company.com</span><div class="wf-avatar">AM</div></div></div>
+<div class="wireframe-body">
+<div class="wf-sidebar"><a href="#" class="active">📊 Overview</a><a href="#">📢 Campaigns</a><a href="#">👥 Audiences</a><a href="#">📈 Reports</a><a href="#">⚙️ Settings</a><a href="#">💳 Billing</a></div>
+<div class="wf-content">
+<div class="wf-topbar"><h1>Campaign Dashboard</h1><div class="actions"><button class="mock-btn mock-btn-secondary">📥 Export</button><button class="mock-btn mock-btn-primary">+ New Campaign</button></div></div>
+<div class="grid-3">
+<div class="stat-card"><div class="val">$128.4K</div><div class="lbl">Total Spend</div></div>
+<div class="stat-card"><div class="val" style="color:var(--green)">8,942</div><div class="lbl">Conversions</div></div>
+<div class="stat-card"><div class="val" style="color:var(--amber)">3.2x</div><div class="lbl">ROAS</div></div>
+</div>
+<div class="mock-card"><div class="card-header"><h3>📢 Active Campaigns</h3><span style="font-size:12px;color:var(--text3)">4 campaigns running</span></div><div class="card-body"><div style="display:grid;gap:8px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px">
+<span><strong style="color:var(--text)">Q3 Brand Awareness</strong> — Google Ads</span><span style="color:var(--green)">$24.2K spent • 2,847 conv.</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px">
+<span><strong style="color:var(--text)">Enterprise Lead Gen</strong> — LinkedIn</span><span style="color:var(--green)">$19.8K spent • 1,924 conv.</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:13px">
+<span><strong style="color:var(--text)">Product Launch</strong> — Meta + Email</span><span style="color:var(--green)">$28.4K spent • 3,112 conv.</span></div>
+</div></div></div>
+<div class="mock-card"><div class="card-header"><h3>📊 Performance Trend</h3><span style="font-size:12px;color:var(--text3)">Last 30 days</span></div><div class="card-body"><div style="display:flex;gap:4px;height:100px;align-items:flex-end;margin-bottom:8px">
+<div style="flex:1;height:55%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:70%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:60%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:85%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:75%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:90%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:80%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:65%;background:var(--accent);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:95%;background:var(--green);border-radius:4px 4px 0 0;min-height:12px"></div>
+<div style="flex:1;height:100%;background:var(--green);border-radius:4px 4px 0 0;min-height:12px"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3)"><span>Jun 5</span><span>Jun 10</span><span>Jun 15</span><span>Jun 20</span><span>Jun 25</span><span>Jun 30</span></div></div></div>
+</div>
+</div>
+<div class="wireframe-footer">Campaign Manager v2.0 • Interactive Wireframe Prototype • Not production data</div>
+<div class="prototype-badge">📱 Interactive Prototype</div>
+</body>
+</html>

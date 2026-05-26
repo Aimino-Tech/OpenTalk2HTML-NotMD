@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Manager Prototype</title>
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-card: #1a1a2e;
+      --bg-elevated: #222240;
+      --border: #2a2a4a;
+      --text-primary: #e8e8f0;
+      --text-secondary: #9898b8;
+      --accent: #f59e0b;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #fffbeb;
+      --bg-card: #ffffff;
+      --bg-elevated: #fef3c7;
+      --border: #f0e0a0;
+      --text-primary: #1a1a2e;
+      --text-secondary: #8a7a4a;
+      --accent: #d97706;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <style>
+    .hero-section {
+      padding: 60px 0 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(var(--accent-rgb, 245, 158, 11), 0.1);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(var(--accent-rgb, 245, 158, 11), 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .hero-cta {
+      margin-top: 16px;
+    }
+
+    .hero-children {
+      margin-top: 24px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(var(--stat-cols, 4), 1fr);
+      gap: 12px;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .stat-trend {
+      font-size: 12px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .trend-up {
+      color: #34d399;
+    }
+
+    .trend-down {
+      color: #f87171;
+    }
+
+    .tabs-component {
+      margin: 1em 0;
+    }
+
+    .tabs-header {
+      display: flex;
+      gap: 2px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      background: var(--bg-elevated, var(--bg-card));
+      color: var(--accent);
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 16px 0;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin: 1em 0;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .data-table th {
+      background: var(--bg-elevated, var(--bg-card));
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .data-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .data-table tr:hover td {
+      background: var(--bg-card-hover, rgba(255, 255, 255, 0.02));
+    }
+
+    .data-table caption {
+      padding: 8px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-primary);
+      caption-side: top;
+    }
+  </style>
+</head>
+<body><!-- fm:section:0:hero -->
+  <div class="hero-section">
+    <div class="hero-badge">Interactive Prototype</div>
+    <h1 class="hero-title">Campaign Manager Dashboard</h1>
+    <p class="hero-subtitle">High-fidelity prototype for the new marketing campaign management
+      interface</p>
+  </div>
+  <!-- /fm:section:0:hero -->
+  <!-- fm:section:1:stats-grid -->
+  <div class="stats-grid" style="--stat-cols:3">
+    <div class="stat-card">
+      <div class="stat-value">12</div>
+      <div class="stat-label">Active Campaigns</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$847K</div>
+      <div class="stat-label">Total Spend</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3.4×</div>
+      <div class="stat-label">ROAS</div>
+    </div>
+  </div>
+  <!-- /fm:section:1:stats-grid -->
+  <!-- fm:section:2:tabs -->
+  <div class="tabs-component">
+    <div class="tabs-header" role="tablist"> <button class="tab-btn active" data-tab="0"
+        role="tab">Overview</button> <button class="tab-btn" data-tab="1"
+        role="tab">Performance</button> <button class="tab-btn" data-tab="2"
+        role="tab">Budget</button> </div>
+    <div class="tab-panel active" data-panel="0" role="tabpanel">Campaign Manager provides real-time
+      analytics, budget tracking, and creative performance metrics across all active campaigns. The
+      dashboard consolidates data from Google Ads, Meta, LinkedIn, and TikTok into a single unified
+      view.</div>
+    <div class="tab-panel" data-panel="1" role="tabpanel">Campaign performance metrics show a 3.4x
+      ROAS across all channels, with LinkedIn outperforming at 5.2x and TikTok showing the fastest
+      growth at 12% week-over-week.</div>
+    <div class="tab-panel" data-panel="2" role="tabpanel">Budget distribution across channels:
+      Google Ads ($320K), Meta ($280K), LinkedIn ($147K), TikTok ($100K). Total monthly spend is
+      tracking 8% under the $920K budget.</div>
+  </div>
+  <!-- /fm:section:2:tabs -->
+  <!-- fm:section:3:data-table -->
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>Campaign Performance</caption>
+      <thead>
+        <tr>
+          <th>Campaign</th>
+          <th>Channel</th>
+          <th>Spend</th>
+          <th>Revenue</th>
+          <th>ROAS</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Brand Awareness Q3</td>
+          <td>Google Ads</td>
+          <td>$120K</td>
+          <td>$480K</td>
+          <td>4.0×</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>Product Launch</td>
+          <td>Meta</td>
+          <td>$95K</td>
+          <td>$285K</td>
+          <td>3.0×</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>Enterprise Outreach</td>
+          <td>LinkedIn</td>
+          <td>$72K</td>
+          <td>$374K</td>
+          <td>5.2×</td>
+          <td>Active</td>
+        </tr>
+        <tr>
+          <td>TikTok Viral</td>
+          <td>TikTok</td>
+          <td>$55K</td>
+          <td>$143K</td>
+          <td>2.6×</td>
+          <td>Paused</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- /fm:section:3:data-table -->
+  <script>
+    document.querySelectorAll('.tabs-component').forEach(tabs => {
+      tabs.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = btn.dataset.tab;
+          tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          tabs.querySelectorAll('.tab-panel').forEach(p => p.classList.remove(
+            'active'));
+          btn.classList.add('active');
+          tabs.querySelector('.tab-panel[data-panel="' + idx + '"]')?.classList.add(
+            'active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

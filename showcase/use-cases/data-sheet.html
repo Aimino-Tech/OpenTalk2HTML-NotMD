@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nebula DB Enterprise — Product Data Sheet</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#0891b2;--green:#34d399;--blue:#60a5fa;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:8px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:900px;margin:0 auto;padding:40px 24px;line-height:1.5}
+.header{margin-bottom:28px;padding-bottom:20px;border-bottom:2px solid var(--accent);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px}
+.header h1{font-size:26px;margin:0;color:var(--accent);letter-spacing:-1px}
+.header .version{padding:4px 12px;border-radius:100px;background:rgba(8,145,178,0.1);color:var(--accent);font-size:11px;font-weight:600;border:1px solid rgba(8,145,178,0.2)}
+.header p{color:var(--text2);font-size:13px;margin:4px 0 0}
+h2{font-size:16px;color:var(--accent);margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.spec-item{background:var(--bg2);border-radius:var(--r);padding:16px}
+.spec-item .label{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);margin-bottom:4px}
+.spec-item .value{font-size:14px;color:var(--text);font-weight:600}
+.tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:20px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--bg2);padding:10px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);border-bottom:2px solid var(--border)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.feat{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.feat .icon{font-size:24px;margin-bottom:8px}
+.feat h3{font-size:13px;margin:0 0 4px;color:var(--text)}
+.feat p{font-size:11px;color:var(--text3);margin:0;line-height:1.5}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:20px;margin-top:32px}
+@media(max-width:600px){.specs{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="header"><div><h1>Nebula DB Enterprise</h1><p>Distributed SQL Database for Mission-Critical Workloads</p></div><div class="version">v4.2 — June 2026</div></div>
+<h2>Product Overview</h2>
+<p style="color:var(--text2);font-size:14px;line-height:1.7;margin-bottom:20px">Nebula DB Enterprise is a distributed SQL database engineered for high-throughput transactional and analytical workloads. It offers horizontal scalability, strong consistency, and multi-cloud deployment with sub-5ms p99 latency at 1M+ QPS.</p>
+<h2>Key Specifications</h2>
+<div class="specs">
+<div class="spec-item"><div class="label">Engine</div><div class="value">NebulaDB v4.2 (Distributed SQL)</div></div>
+<div class="spec-item"><div class="label">Max Storage</div><div class="value">512 TB per cluster (unlimited with sharding)</div></div>
+<div class="spec-item"><div class="label">Max Throughput</div><div class="value">1,200,000 QPS (read), 400,000 QPS (write)</div></div>
+<div class="spec-item"><div class="label">Latency (p99)</div><div class="value">&lt;5ms local, &lt;15ms global (multi-region)</div></div>
+<div class="spec-item"><div class="label">Consistency Model</div><div class="value">Strong (Linearizable) / Tunable (Eventual)</div></div>
+<div class="spec-item"><div class="label">Replication</div><div class="value">Synchronous (Raft consensus), 3–7 nodes</div></div>
+<div class="spec-item"><div class="label">Compliance</div><div class="value">SOC 2 Type II, HIPAA, GDPR, FedRAMP</div></div>
+<div class="spec-item"><div class="label">Deployment</div><div class="value">AWS, GCP, Azure, On-Prem, Hybrid</div></div>
+</div>
+<h2>Edition Comparison</h2>
+<div class="tblwrap">
+<table>
+<thead><tr><th>Feature</th><th>Community</th><th>Enterprise</th><th>Enterprise Plus</th></tr></thead>
+<tbody>
+<tr><td>Nodes per Cluster</td><td>Up to 5</td><td>Up to 32</td><td>Unlimited</td></tr>
+<tr><td>Multi-Region</td><td>—</td><td>Up to 3 regions</td><td>Unlimited</td></tr>
+<tr><td>Audit Logging</td><td>Basic</td><td>Advanced</td><td>Real-time + SIEM</td></tr>
+<tr><td>Encryption</td><td>At Rest (AES-256)</td><td>At Rest + In Transit</td><td>Field-Level + HSM</td></tr>
+<tr><td>Support</td><td>Community</td><td>24/7 (4h SLA)</td><td>24/7 (30m SLA)</td></tr>
+<tr><td>Price</td><td>Free</td><td>$12,000/node/yr</td><td>$24,000/node/yr</td></tr>
+</tbody>
+</table>
+</div>
+<h2>Key Features</h2>
+<div class="features">
+<div class="feat"><div class="icon">⚡</div><h3>HTAP Workloads</h3><p>Simultaneous OLTP and OLAP with columnar storage engine for real-time analytics</p></div>
+<div class="feat"><div class="icon">🔄</div><h3>Multi-Cloud Mesh</h3><p>Active-active across AWS, GCP, and Azure with automated failover</p></div>
+<div class="feat"><div class="icon">🔒</div><h3>Zero-Trust Security</h3><p>RBAC, row-level security, dynamic data masking, and field-level encryption</p></div>
+</div>
+<div class="footer">Nebula Data Systems Inc. • 350 Bryant Street, San Francisco, CA 94107 • www.nebuladb.io</div>
+</body>
+</html>

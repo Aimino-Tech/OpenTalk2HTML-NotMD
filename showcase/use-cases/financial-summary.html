@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Corp — FY2026 Financial Summary</title>
+<style>
+:root{--bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a28;--border:#2a2a44;--text:#e8e8f0;--text2:#9898b8;--text3:#686888;--accent:#2563eb;--green:#34d399;--red:#f87171;--amber:#fbbf24;--font:'Inter',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;--r:10px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);max-width:900px;margin:0 auto;padding:40px 24px;line-height:1.6}
+.header{text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:2px solid var(--accent)}
+.header .badge{display:inline-block;padding:4px 14px;border-radius:100px;background:rgba(37,99,235,0.1);color:var(--accent);font-size:11px;font-weight:600;margin-bottom:8px}
+.header h1{font-size:30px;margin:0 0 4px;letter-spacing:-1px}
+.header p{color:var(--text2);font-size:14px;margin:0}
+h2{font-size:17px;color:var(--accent);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;color:var(--text);margin:16px 0 8px}
+.tblwrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);margin-bottom:20px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:var(--bg2);padding:10px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text3);border-bottom:2px solid var(--border)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}td:last-child{text-align:right;font-family:var(--mono);font-weight:600}
+tr:last-child td{border-bottom:none}
+tr.total td{font-weight:700;color:var(--text);background:var(--bg2);border-top:2px solid var(--accent)}
+.pos{color:var(--green)}.neg{color:var(--red)}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.kpi .val{font-size:22px;font-weight:700;letter-spacing:-0.5px}
+.kpi .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+.kpi .chg{font-size:11px;margin-top:4px;font-weight:600}
+.footer{text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border);padding-top:20px;margin-top:32px}
+@media(max-width:600px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="header"><div class="badge">Annual Financial Summary</div><h1>Meridian Corporation</h1><p>Fiscal Year 2026 (Jan 1 – Dec 31, 2026) • All figures in USD</p></div>
+<div class="kpi-grid">
+<div class="kpi"><div class="val" style="color:var(--accent)">$48.2B</div><div class="lbl">Total Revenue</div><div class="chg pos">↑ 14.3%</div></div>
+<div class="kpi"><div class="val" style="color:var(--green)">$9.6B</div><div class="lbl">Net Income</div><div class="chg pos">↑ 22.1%</div></div>
+<div class="kpi"><div class="val" style="color:var(--amber)">19.9%</div><div class="lbl">Operating Margin</div><div class="chg pos">↑ 1.8pp</div></div>
+<div class="kpi"><div class="val" style="color:var(--blue)">$7.42</div><div class="lbl">EPS (Diluted)</div><div class="chg pos">↑ 24.5%</div></div>
+</div>
+<h2>Profit & Loss Statement</h2>
+<div class="tblwrap">
+<table>
+<thead><tr><th>Line Item</th><th>FY2026</th><th>FY2025</th><th>Change</th></tr></thead>
+<tbody>
+<tr><td>Total Revenue</td><td>$48,200M</td><td>$42,150M</td><td class="pos">+14.3%</td></tr>
+<tr><td>Cost of Revenue</td><td>$18,200M</td><td>$16,400M</td><td class="neg">+11.0%</td></tr>
+<tr><td>Gross Profit</td><td>$30,000M</td><td>$25,750M</td><td class="pos">+16.5%</td></tr>
+<tr><td>R&D Expense</td><td>$6,800M</td><td>$5,900M</td><td class="neg">+15.3%</td></tr>
+<tr><td>SG&A</td><td>$7,200M</td><td>$6,600M</td><td class="neg">+9.1%</td></tr>
+<tr><td>Operating Income</td><td>$16,000M</td><td>$13,250M</td><td class="pos">+20.8%</td></tr>
+<tr><td>Interest & Other</td><td>$(400)M</td><td>$(350)M</td><td class="neg">+14.3%</td></tr>
+<tr><td>Pre-Tax Income</td><td>$15,600M</td><td>$12,900M</td><td class="pos">+20.9%</td></tr>
+<tr><td>Income Tax (38.5%)</td><td>$6,006M</td><td>$4,967M</td><td class="neg">+20.9%</td></tr>
+<tr class="total"><td>Net Income</td><td>$9,594M</td><td>$7,933M</td><td class="pos">+20.9%</td></tr>
+</tbody>
+</table>
+</div>
+<h2>Balance Sheet Highlights</h2>
+<div class="tblwrap">
+<table>
+<thead><tr><th>Line Item</th><th>FY2026</th><th>FY2025</th><th>Change</th></tr></thead>
+<tbody>
+<tr><td>Cash & Equivalents</td><td>$14,200M</td><td>$11,800M</td><td class="pos">+20.3%</td></tr>
+<tr><td>Total Assets</td><td>$68,400M</td><td>$61,200M</td><td class="pos">+11.8%</td></tr>
+<tr><td>Total Debt</td><td>$22,100M</td><td>$20,600M</td><td class="neg">+7.3%</td></tr>
+<tr><td>Shareholders' Equity</td><td>$32,400M</td><td>$28,700M</td><td class="pos">+12.9%</td></tr>
+<tr class="total"><td>Debt-to-Equity</td><td>0.68x</td><td>0.72x</td><td class="pos">-5.6%</td></tr>
+</tbody>
+</table>
+</div>
+<div class="footer">Meridian Corporation • 1 Financial Plaza, New York, NY 10005 • IR Contact: ir@meridiancorp.com</div>
+</body>
+</html>
