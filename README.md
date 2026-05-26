@@ -14,9 +14,9 @@ Assembly-Patch-Read-Raw-Consistency architecture. **15 tools, 22 components, 25 
 MCP name: `io.github.aimino-tech/fast-html-mcp`
 
 <p align="center">
-  <img src="docs/demo.gif" alt="MCP-HTML Demo" width="720">
+  <img src="showcase/fast-html-mcp-showcase.gif" alt="Fast HTML MCP — 22 Use Cases Showcase" width="720">
   <br>
-  <em>Generate 300+ page HTML reports in seconds — no browser, no Docker, just `npx`</em>
+  <em>22 real-world pages generated in seconds — invoices, reports, dashboards, pitch decks, and more. No browser, no Docker, just <code>npx</code>.</em>
 </p>
 
 
