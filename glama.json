@@ -17,5 +17,6 @@
     "markdown-alternative"
   ],
   "repository": "https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD",
-  "npm": "@aimino/opentalk2html-notmd"
+  "npm": "@aimino/opentalk2html-notmd",
+  "license": "MIT"
 }
