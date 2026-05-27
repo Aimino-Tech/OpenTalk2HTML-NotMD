@@ -1,52 +1,46 @@
-# Fast HTML MCP
+# 🔥 OpenTalk2HTML-NotMD
 
 [![npm version](https://img.shields.io/npm/v/@aimino/fast-html-mcp-server)](https://www.npmjs.com/package/@aimino/fast-html-mcp-server)
 [![License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](package.json)
-[![MCP](https://badge.mcpx.dev?type=server 'MCP Server')](https://github.com/modelcontextprotocol/specification)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen?logo=github)](CONTRIBUTING.md)
+[![MCP](https://badge.mcpx.dev?type=server 'MCP Server')](https://github.com/modelcontext-protocol/specification)
 [![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?logo=github)](https://github.com/Aimino-Tech/fast-html-mcp/discussions)
-[![Last Commit](https://img.shields.io/github/last-commit/Aimino-Tech/fast-html-mcp)](https://github.com/Aimino-Tech/fast-html-mcp/commits)
 
-**Five-tier MCP server for lightning-fast HTML generation from AI agents.**  
-Assembly-Patch-Read-Raw-Consistency architecture. **15 tools, 22 components, 25 templates** — purpose-built for AI-driven page creation with sub-second patch times and AI-grade token compression.
+**AI talks to you in proper HTML pages — not overwhelming markdown dumps.**
 
-MCP name: `io.github.aimino-tech/fast-html-mcp`
+Five-tier MCP server for AI-to-user communication via clean, organized HTML. 15 tools, 22 components, 25 templates. Sub-second, no browser needed.
 
-<p align="center">
-  <img src="showcase/fast-html-mcp-showcase.gif" alt="Fast HTML MCP — 22 Use Cases Showcase" width="720">
-  <br>
-  <em>22 real-world pages generated in seconds — invoices, reports, dashboards, pitch decks, and more. No browser, no Docker, just <code>npx</code>.</em>
-</p>
+---
 
+## The Problem
 
-## Supported Platforms
+**AI agents dump raw markdown on you.** Walls of text. No structure. Impossible to scan.
 
-Fast HTML MCP is available on all major AI coding platforms:
+You're drowning in files you can't read — while the AI just keeps generating more.
 
-| Platform | Config File | Setup |
-|----------|-------------|-------|
-| [Cursor](docs/cursor-integration.md) | `.cursor/mcp.json` | npx / Docker |
-| [VS Code](docs/vscode-integration.md) | `.vscode/mcp.json` | GitHub Copilot MCP extension |
-| [Claude Desktop](docs/claude-desktop-guide.md) | `claude_desktop_config.json` | npx / Docker / SSE |
-| [Claude Code](docs/cursor-integration.md) | `claude mcp add` CLI | CLI command |
-| [Windsurf](docs/windsurf-integration.md) | `.windsurf/mcp_config.json` | npx / Docker / SSE |
+## The Solution
 
-See the individual integration guides for detailed setup instructions.
+**OpenTalk2HTML-NotMD** lets AI agents communicate with you through **proper HTML pages**:
 
-### OpenCode Plugin
+- **Reports** you can actually scan
+- **Dashboards** with real structure
+- **Landing pages** that communicate results
+- **Invoices, pitch decks, newsletters** — all as HTML
+- **Any AI output** — delivered as a clean page, not a raw dump
 
-Fast HTML MCP also ships as an [OpenCode plugin](plugin/) that adds intent routing, context compression, quality gates, and document state management on top of the base server.
+No browser runtime. No headless Playwright. No Docker required. Just `npx` and you're done.
 
-## Roadmap
+> **"Instead of markdown dumps I can't read, AI opens HTML pages I actually can."**
 
-See [ROADMAP.md](ROADMAP.md) for our full public roadmap covering v0.2 (Monetization), v0.3 (Virality & Sharing), v0.4 (Enterprise & AGI), and v0.5 (Ecosystem). Each feature includes a spec with motivation, success criteria, and RICE priority scoring.
+---
 
-## Showcase Gallery
+## What You Get
 
-See what fast-html-mcp can build → [**Showcase Gallery**](showcase/index.html)
-
-40+ rendered pages demonstrating all 25 templates and 22 components.
+| Instead of this (markdown) | You get this (HTML page) |
+|---------------------------|------------------------|
+| `## Q3 Report\n\nRevenue: $1.2M\nUsers: 45K\n\n### Details...` | A styled report with tables, charts, badges |
+| Raw text wall with `**bold**` and `- bullets` | Professional dashboard with data tables |
+| Scroll-endless markdown file | Structured page with navigation, sections, visuals |
 
 ---
 
@@ -63,7 +57,7 @@ Or add to your MCP client config:
 ```json
 {
   "mcpServers": {
-    "fast-html-mcp": {
+    "open-talk-2-html-not-md": {
       "command": "npx",
       "args": ["-y", "@aimino/fast-html-mcp-server"]
     }
@@ -76,7 +70,7 @@ Or add to your MCP client config:
 ```json
 {
   "mcpServers": {
-    "fast-html-mcp": {
+    "open-talk-2-html-not-md": {
       "command": "npx",
       "args": ["-y", "@aimino/fast-html-mcp-server"]
     }
@@ -90,7 +84,7 @@ Or add to your MCP client config:
 {
   "inputs": [],
   "servers": {
-    "fast-html-mcp": {
+    "open-talk-2-html-not-md": {
       "command": "npx",
       "args": ["-y", "@aimino/fast-html-mcp-server"]
     }
@@ -101,14 +95,14 @@ Or add to your MCP client config:
 ### Claude Code
 
 ```bash
-claude mcp add fast-html-mcp -e npx -a "-y" -a "@aimino/fast-html-mcp-server"
+claude mcp add open-talk-2-html-not-md -e npx -a "-y" -a "@aimino/fast-html-mcp-server"
 ```
 
 ---
 
-## Use Cases
+## What Can AI Build for You?
 
-Every page below was generated by fast-html-mcp — click the title to see the live rendered preview.
+Every page below was generated by OpenTalk2HTML-NotMD — click the title to see the live rendered preview.
 
 | # | Template | Use Case | Preview |
 |---|----------|----------|---------|
@@ -116,7 +110,7 @@ Every page below was generated by fast-html-mcp — click the title to see the l
 | 2 | `report` | [SaaS Quarterly Report](showcase/use-cases/saas-report.html) | <img src="showcase/previews/saas-report.png" width="180" alt="SaaS Report"> |
 | 3 | `budget` | [Department Budget Proposal](showcase/use-cases/budget-proposal.html) | <img src="showcase/previews/budget-proposal.png" width="180" alt="Budget"> |
 | 4 | `data-sheet` | [Enterprise Product Data Sheet](showcase/use-cases/data-sheet.html) | <img src="showcase/previews/data-sheet.png" width="180" alt="Data Sheet"> |
-| 5 | `financial-summary` | [P&amp;L and Balance Sheet Summary](showcase/use-cases/financial-summary.html) | <img src="showcase/previews/financial-summary.png" width="180" alt="Financial Summary"> |
+| 5 | `financial-summary` | [P&L and Balance Sheet Summary](showcase/use-cases/financial-summary.html) | <img src="showcase/previews/financial-summary.png" width="180" alt="Financial Summary"> |
 | 6 | `landing-page` | [SaaS Landing Page](showcase/use-cases/landing-page.html) | <img src="showcase/previews/landing-page.png" width="180" alt="Landing Page"> |
 | 7 | `newsletter` | [Tech Newsletter](showcase/use-cases/newsletter.html) | <img src="showcase/previews/newsletter.png" width="180" alt="Newsletter"> |
 | 8 | `changelog` | [Product Changelog](showcase/use-cases/changelog.html) | <img src="showcase/previews/changelog.png" width="180" alt="Changelog"> |
@@ -139,16 +133,63 @@ Every page below was generated by fast-html-mcp — click the title to see the l
 
 ---
 
-## REST API Mode
+## Supported Platforms
 
-Fast HTML MCP also runs as a standalone **REST API** — no MCP client required. Call it with `curl`, `fetch`, or any HTTP client.
+OpenTalk2HTML-NotMD works on all major AI coding platforms:
+
+| Platform | Config File | Setup |
+|----------|-------------|-------|
+| [Cursor](docs/cursor-integration.md) | `.cursor/mcp.json` | npx / Docker |
+| [VS Code](docs/vscode-integration.md) | `.vscode/mcp.json` | GitHub Copilot MCP extension |
+| [Claude Desktop](docs/claude-desktop-guide.md) | `claude_desktop_config.json` | npx / Docker / SSE |
+| [Claude Code](docs/cursor-integration.md) | `claude mcp add` CLI | CLI command |
+| [Windsurf](docs/windsurf-integration.md) | `.windsurf/mcp_config.json` | npx / Docker / SSE |
+
+See the individual integration guides for detailed setup instructions.
+
+---
+
+## Working Example
+
+Here's a complete workflow that builds a report page — the AI talks to you through HTML, not markdown:
 
 ```bash
-# Start the API server (standalone mode)
-TRANSPORT=api npx -y @aimino/fast-html-mcp-server
+# 1. List available templates and components
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_templates","arguments":{}}}' | npx -y @aimino/fast-html-mcp-server
 
-# Or use the dedicated binary
-npx -y @aimino/fast-html-mcp-server api
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_components","arguments":{}}}' | npx -y @aimino/fast-html-mcp-server
+
+# 2. Render a page — AI creates a styled report instead of raw markdown
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"render_page","arguments":{"template":"report","sections":[{"component":"hero","props":{"title":"Q3 Report","badge":"Draft"}},{"component":"data-table","props":{"headers":["Metric","Value"],"rows":[["Revenue","$1.2M"],["Users","45K"]]}}],"output_path":"/tmp/report.html","options":{"title":"Q3 Report"}}}}}' | npx -y @aimino/fast-html-mcp-server
+
+# 3. Inspect the output (compressed = token-efficient, 87% smaller than raw HTML)
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_html","arguments":{"path":"/tmp/report.html","mode":"compressed"}}}' | npx -y @aimino/fast-html-mcp-server
+```
+
+---
+
+## Why Not Markdown?
+
+**Markdown was never designed for AI output at scale.** It's a flat text format that becomes unreadable past a few screens. Here's what makes HTML pages better:
+
+| | Markdown Dumps | HTML Pages (OpenTalk2HTML) |
+|---|---|---|
+| **Structure** | Flat text, manual headings | Nested layout with nav, sections, sidebar |
+| **Scannability** | Scroll endlessly | Jump between sections, table of contents |
+| **Visuals** | Raw `[alt](img.png)` text | Embedded images, charts, styled tables |
+| **Organization** | One long file | Multi-section with proper hierarchy |
+| **Token efficiency** | AI reads everything | 97% compression with `read_html` text mode |
+| **Agent workflow** | Replace entire file | Patch specific sections via CSS selectors |
+
+---
+
+## REST API Mode
+
+OpenTalk2HTML-NotMD also runs as a standalone **REST API** — no MCP client required.
+
+```bash
+# Start the API server
+TRANSPORT=api npx -y @aimino/fast-html-mcp-server
 ```
 
 ### Build HTML with curl
@@ -167,80 +208,39 @@ curl -X POST http://localhost:8766/v1/render \
       }}
     ]
   }'
-
-# Get raw HTML wrapped in a template
-curl -X POST http://localhost:8766/v1/render/html \
-  -H "Content-Type: application/json" \
-  -d '{"template": "minimal", "content": "<h1>Hello World</h1>"}'
-
-# Patch existing HTML by CSS selector
-curl -X POST http://localhost:8766/v1/patch \
-  -H "Content-Type: application/json" \
-  -d '{"file_path": "/tmp/page.html", "selector": "#title", "html": "<h1>New Title</h1>"}'
-
-# List templates and components
-curl http://localhost:8766/v1/templates
-curl http://localhost:8766/v1/components
 ```
 
 ### Unified mode (MCP + REST on one port)
 
 ```bash
 TRANSPORT=http npx -y @aimino/fast-html-mcp-server
-# → http://localhost:3000/mcp       — MCP protocol for AI agents
-# → http://localhost:3000/v1/render — REST API for curl/HTTP clients
-# → http://localhost:3000/          — Landing page
 ```
 
-### OpenAPI Spec
-
-```bash
-curl http://localhost:8766/v1/openapi.json
-```
-
-See the [full API reference](docs/book/src/api.md) for all 15+ endpoints, authentication, and pricing.
-
-## Working Example
-
-Here's a complete copy-paste workflow that builds a report page:
-
-```bash
-# 1. List available templates and components
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_templates","arguments":{}}}' | npx -y @aimino/fast-html-mcp-server
-
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"list_components","arguments":{}}}' | npx -y @aimino/fast-html-mcp-server
-
-# 2. Render a page
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"render_page","arguments":{"template":"report","sections":[{"component":"hero","props":{"title":"Q3 Report","badge":"Draft"}},{"component":"data-table","props":{"headers":["Metric","Value"],"rows":[["Revenue","$1.2M"],["Users","45K"]]}}],"output_path":"/tmp/report.html","options":{"title":"Q3 Report"}}}}}' | npx -y @aimino/fast-html-mcp-server
-
-# 3. Inspect the output
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"read_html","arguments":{"path":"/tmp/report.html","mode":"compressed"}}}' | npx -y @aimino/fast-html-mcp-server
-```
+---
 
 ## Performance Benchmarks
 
-All benchmarks measured from cold start (first tool call after server launch). No warmup or pre-initialization.
+All benchmarks measured from cold start. No warmup or pre-initialization.
 
 | Operation | Target | Actual | vs Alternatives |
 |-----------|--------|--------|-----------------|
 | **Cold start → first render** | <3s | **~1.5s** | Playwright/Puppeteer: 5-15s |
 | **Subsequent render_page** (25 templates) | <1s | **~900ms** | Handlebars/EJS render: similar |
 | **patch_html** (typo fix on landing page) | <2s | **~800ms** | Regex replace: 1-3s |
-| **patch_html** (500KB table, 10 rows) | <5s | **~3s** | parse5 full parse: 8-15s |
 | **patch_html** (#id fast-path) | <500ms | **~200ms** | JSoup/Cheerio: 2-5s |
 | **5 sequential patches** (same file) | <4s total | **~2s total** | Re-parsing each time: 10s+ |
-| **set_attribute** on 500KB file | <2s | **~1s** | DOM parser: 3-8s |
 | **Compression:high** (bloated HTML) | >40% reduction | **40-70%** | html-minifier: 10-30% |
 | **Compression:ai** (full report→500 tokens) | <1750 chars | **~1600 chars** | Manual minification: unreliable |
-| **Streaming** (real-time preview) | Valid HTML chunks | **all chunks valid** | No streaming alternative exists |
 | **Equity research report** (10 sections) | <5s | **~3s** | FinRobot (7K★): 15-30s |
 
 **Why is it faster?**
 
-1. **#id fast-path** — `patch_html` and `set_attribute` detect `#id` selectors and use direct text substitution instead of full parse5 AST parsing, achieving **~10x speedup** for the most common editing pattern
+1. **#id fast-path** — Direct text substitution for `#id` selectors instead of full AST parsing (~10x speedup)
 2. **Pre-compiled doT.js templates** — All 25 templates are compiled at startup, not at render time
-3. **No browser runtime** — Unlike Playwright/Puppeteer-based solutions, Fast HTML MCP operates directly on strings and AST with no headless browser overhead
+3. **No browser runtime** — Operates directly on strings and AST with no headless browser overhead
 4. **Atomic in-place edits** — Read the structure once, edit specific sections, no full DOM re-serialization
+
+---
 
 ## Tools
 
@@ -251,7 +251,6 @@ All benchmarks measured from cold start (first tool call after server launch). N
 | **Patch** | `set_attribute` | Set an attribute on elements matched by CSS selector |
 | **Read** | `read_html` | Analyze existing HTML in three modes: structure, content, compressed |
 | **Raw** | `write_raw_html` | Write raw HTML string (optionally template-wrapped) to file |
-| **Raw** | `write_html_file` | Alias for `write_raw_html` |
 | **Raw** | `format_html` | Beautify an existing HTML file in-place with js-beautify |
 | **Raw** | `preview_html` | Render HTML string to a preview file without writing to disk |
 | **Consistency** | `propagate_edit` | Propagate entity edit through dependency graph, auto-updating affected sections |
@@ -261,6 +260,8 @@ All benchmarks measured from cold start (first tool call after server launch). N
 | **Utility** | `get_template_schema` | Get template metadata with available variables and defaults |
 | **Utility** | `get_component_schema` | Get component schema with available props |
 | **Utility** | `register_template` | Register a custom template at runtime for immediate use |
+
+---
 
 ## Components (22)
 
@@ -275,62 +276,23 @@ All benchmarks measured from cold start (first tool call after server launch). N
 
 ## Templates (25)
 
-### General Purpose
-`report`, `exploration`, `deck`, `code-review`, `design`, `prototyping`, `illustrations`, `research`, `custom-editor`, `minimal`, `documentation`
+**General Purpose**: `report`, `exploration`, `deck`, `code-review`, `design`, `prototyping`, `illustrations`, `research`, `custom-editor`, `minimal`, `documentation`
 
-### Business
-`invoice`, `budget`, `financial-summary`, `data-sheet`, `dashboard`, `financial-dashboard`
+**Business**: `invoice`, `budget`, `financial-summary`, `data-sheet`, `dashboard`, `financial-dashboard`
 
-### Communication
-`newsletter`, `changelog`, `faq`, `meeting-notes`, `comparison`
+**Communication**: `newsletter`, `changelog`, `faq`, `meeting-notes`, `comparison`
 
-### Technical
-`api-doc`, `landing-page`, `error-page`
+**Technical**: `api-doc`, `landing-page`, `error-page`
 
-### Research
-`equity-research`, `lit-review`, `research-briefing`, `scientific-paper`, `journal-club`, `earnings-summary`, `industry-overview`
+**Research**: `equity-research`, `lit-review`, `research-briefing`, `scientific-paper`, `journal-club`, `earnings-summary`, `industry-overview`
 
-### Presentation
-`pitch-deck`
+**Presentation**: `pitch-deck`
 
-## Architecture
-
-Assembly-Patch-Read-Raw (APRR) — four tiers that work together in a feedback loop:
-
-```
-Fast HTML MCP
-├── Assembly Tier    — render_page
-├── Patch Tier       — patch_html, set_attribute
-├── Read Tier        — read_html
-├── Raw Tier         — write_raw_html, write_html_file, format_html, preview_html
-├── Consistency Tier — propagate_edit, check_consistency
-└── Utilities        — list_components, list_templates
-```
-
-### Ping-Pong Loop
-
-1. **Discover** → `list_templates` + `list_components` + schema tools
-2. **Build** → `render_page` with template + sections
-3. **Inspect** → `read_html` to verify output
-4. **Refine** → `patch_html` / `set_attribute` → read again
-5. **Consistency** → `check_consistency` / `propagate_edit` to maintain data integrity across interdependent sections
-
-### Key Design Decisions
-
-- **doT.js** for templates (not Handlebars/EJS — 10x faster compile time, critical for AI agent latency)
-- **#id fast-path** — `patch_html`/`set_attribute` detects `#id` selectors for direct string substitution instead of full AST parse (~10x faster for most edits)
-- **parse5** for full HTML patching (AST manipulation, not regex — safe and correct for complex selectors)
-- **js-beautify** for HTML formatting
-- **DOMPurify** for XSS prevention on all output
-- **AI compression** — Token-aware minification that preserves semantic content while fitting agent token budgets
-- **Streaming** — Real-time HTML streaming for preview use cases, each chunk parseable as valid HTML
-- **Consistency Engine** — Dependency-graph-based cross-section propagation for maintaining data integrity across edits
-- **Atomic writes**: tmp file + rename to prevent partial writes
-- **ESM**: TypeScript compiled to ES modules for Node.js 20+
+---
 
 ## Token Efficiency
 
-Fast HTML MCP is designed from the ground up for AI agent token budgets. All read and edit modes prioritize token efficiency through progressive disclosure.
+Designed from the ground up for AI agent token budgets. All read and edit modes prioritize token efficiency through progressive disclosure.
 
 ### Read Modes Comparison (106KB HTML page)
 
@@ -342,19 +304,7 @@ Fast HTML MCP is designed from the ground up for AI agent token budgets. All rea
 | Compressed | 3,909 | 87% saved | Summary + stats |
 | **Text** | **1,000** | **97% saved** | **Token-minimal reading** |
 
-The `text` mode strips all HTML tags and returns only plain text — the most token-efficient way to consume HTML content. Combined with `offset`/`limit` progressive reading, agents read only what they need:
-
-```
-# Read just the first 1K chars (~250 tokens)
-read_html(path, mode: "text", offset: 0, limit: 1000)
-
-# Read more if needed
-read_html(path, mode: "text", offset: 1000, limit: 1000)
-```
-
-For editing, the `edit_html_range` tool lets agents replace specific line ranges instead of re-sending entire element content — following the same progressive pattern as Cursor and OpenCode.
-
-### Edit Modes Comparison
+### Edit Efficiency
 
 When an AI agent changes one value in a 500-line HTML file:
 
@@ -363,46 +313,62 @@ When an AI agent changes one value in a 500-line HTML file:
 | `patch_html` with CSS selector | ~2,396 tokens | Small, single-line targets (by id) |
 | **`edit_html_range` with line range** | **~48 tokens** | **Large containers, surgical changes** |
 
-For small edits inside large elements (e.g., fixing a value in a table cell deep in a 500-line page), `edit_html_range` saves **85–99%** of the tool call tokens. The agent only sends the changed lines, not the complete element content.
+For small edits inside large elements, `edit_html_range` saves **85–99%** of the tool call tokens.
+
+---
+
+## Architecture — The Ping-Pong Loop
 
 ```
-# Fix a typo — send just the one changed line
-edit_html_range(file_path: "report.html", start_line: 42, end_line: 42, 
-  new_content: "  <p>The quick brown fox jumps over the lazy dog.</p>")
-
-# vs. patch_html which requires the entire element content
-patch_html(file_path: "report.html", selector: "#content",
-  html: "<p>The quick brown fox jumps over the lazy dog.</p><p>Another paragraph...</p>...")
+┌───────────────────────────────────────────────────────┐
+│                  OpenTalk2HTML-NotMD                    │
+├───────────┬────────┬───────┬────────┬─────────────────┤
+│ Assembly  │ Patch  │ Read  │ Raw    │ Consistency     │
+├───────────┼────────┼───────┼────────┼─────────────────┤
+│ render_   │ patch_ │ read_ │ write_ │ propagate_      │
+│ page      │ html   │ html  │ raw_   │ edit            │
+│           │ set_   │       │ html   │ check_          │
+│           │ attr   │       │ format │ consistency     │
+│           │        │       │ _html  │                 │
+│           │        │       │ pre-   │                 │
+│           │        │       │ view_  │                 │
+│           │        │       │ html   │                 │
+├───────────┴────────┴───────┴────────┴─────────────────┤
+│  Utilities: list_components, list_templates, schema    │
+└───────────────────────────────────────────────────────┘
 ```
 
-**When to use which tool:**
-- `patch_html` — edit a small element you can target by CSS id (selector token cost < content token cost)
-- `edit_html_range` — edit inside a large element where the changed lines are small vs. the element size
-- `set_attribute` — change a single attribute (attribute+value, fast regex path)
+1. **Discover** → `list_templates` + `list_components` + schema tools
+2. **Build** → `render_page` with template + sections (AI creates the page)
+3. **Inspect** → `read_html` to verify output (AI reads it in token-efficient mode)
+4. **Refine** → `patch_html` / `set_attribute` → read again (AI makes surgical edits)
+5. **Consistency** → `check_consistency` / `propagate_edit` to maintain data integrity
+
+---
 
 ## Security
 
-Fast HTML MCP takes security seriously:
+- **XSS Prevention**: Every output passes through DOMPurify
+- **Atomic Writes**: Files written to temp files first, then renamed atomically
+- **No Arbitrary Execution**: Only HTML operations — no shell execution, no unauthorized file reads
+- **Strict Input Validation**: All tool inputs validated with Zod schemas
 
-- **XSS Prevention**: Every output passes through DOMPurify, preventing cross-site scripting attacks
-- **Atomic Writes**: Files are written to temporary files first, then renamed atomically — preventing partial/corrupt writes
-- **No Arbitrary Execution**: The server only performs HTML operations — no shell execution, no file reads outside workspace boundaries
-- **Strict Input Validation**: All tool inputs are validated with Zod schemas before processing
+---
 
 ## Development
 
 ```bash
-git clone https://github.com/Aimino-Tech/fast-html-mcp.git
-cd fast-html-mcp
+git clone https://github.com/Aimino-Tech/fast-html-mcp-server.git
+cd fast-html-mcp-server
 npm install
 npm run build
 npm run dev              # hot reload via tsx
-npm test                 # vitest (108 tests)
+npm test                 # vitest
 bash demo.sh             # run the REST API demo
-cp .env.example .env     # configure for production
 npm run api              # start REST API server
-TRANSPORT=http npm start # unified MCP + REST server
 ```
+
+---
 
 ## License
 
