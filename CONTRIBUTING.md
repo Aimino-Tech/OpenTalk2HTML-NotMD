@@ -1,12 +1,12 @@
 # Contributing
 
-Thank you for considering contributing to Fast HTML MCP!
+Thank you for considering contributing to OpenTalk2HTML-NotMD!
 
 ## Development Setup
 
 ```bash
-git clone https://github.com/Aimino-Tech/fast-html-mcp.git
-cd fast-html-mcp
+git clone https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD.git
+cd OpenTalk2HTML-NotMD
 npm install
 npm run build
 ```
@@ -35,7 +35,7 @@ npm run build
 
 ## Reporting Issues
 
-Report bugs and suggest features at https://github.com/Aimino-Tech/fast-html-mcp/issues
+Report bugs and suggest features at https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD/issues
 
 Include:
 - Node.js version

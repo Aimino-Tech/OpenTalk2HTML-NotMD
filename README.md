@@ -1,10 +1,10 @@
 # OpenTalk2HTML-NotMD MCP Server
 
-[![npm version](https://img.shields.io/npm/v/@aimino/fast-html-mcp-server)](https://www.npmjs.com/package/@aimino/fast-html-mcp-server)
+[![npm version](https://img.shields.io/npm/v/@aimino/opentalk2html-notmd)](https://www.npmjs.com/package/@aimino/opentalk2html-notmd)
 [![License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](package.json)
 [![MCP](https://badge.mcpx.dev?type=server 'MCP Server')](https://github.com/modelcontextprotocol/specification)
-[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?logo=github)](https://github.com/Aimino-Tech/fast-html-mcp/discussions)
+[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?logo=github)](https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD/discussions)
 
 > **AI talks to you through beautiful pages — not overwhelming markdown dumps.**
 
@@ -21,7 +21,7 @@ Every time an AI agent dumps markdown on you, it's choosing the easiest path for
 **One command. Any AI platform. Real pages.**
 
 ```
-npx -y @aimino/fast-html-mcp-server
+npx -y @aimino/opentalk2html-notmd
 ```
 
 ---
@@ -41,7 +41,7 @@ npx -y @aimino/fast-html-mcp-server
 ## Quick Start
 
 ```bash
-npx -y @aimino/fast-html-mcp-server
+npx -y @aimino/opentalk2html-notmd
 ```
 
 Add to Claude Desktop, Cursor, VS Code, or any MCP client:
@@ -51,7 +51,7 @@ Add to Claude Desktop, Cursor, VS Code, or any MCP client:
   "mcpServers": {
     "open-talk-2-html-not-md": {
       "command": "npx",
-      "args": ["-y", "@aimino/fast-html-mcp-server"]
+      "args": ["-y", "@aimino/opentalk2html-notmd"]
     }
   }
 }

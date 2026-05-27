@@ -7,5 +7,5 @@ startCommand:
     |-
       (config) => ({
         command: 'npx',
-        args: ['-y', '@aimino/fast-html-mcp-server']
+        args: ['-y', '@aimino/opentalk2html-notmd']
       })

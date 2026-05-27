@@ -1,0 +1,3 @@
+[console_scripts]
+opentalk2html-notmd = opentalk2html_notmd.cli:main
+opentalk2html-notmd = opentalk2html_notmd.cli:main

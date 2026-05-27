@@ -1,14 +1,14 @@
 Metadata-Version: 2.4
-Name: fast-html-mcp-server
+Name: opentalk2html-notmd
 Version: 0.1.2
 Summary: Five-tier MCP server for lightning-fast HTML generation from AI agents
 Author-email: Aimino Tech <hello@syntaro.io>
 Maintainer-email: Aimino Tech <hello@syntaro.io>
 License-Expression: GPL-3.0-only
-Project-URL: Homepage, https://github.com/Aimino-Tech/fast-html-mcp-server
-Project-URL: Repository, https://github.com/Aimino-Tech/fast-html-mcp-server
-Project-URL: Documentation, https://github.com/Aimino-Tech/fast-html-mcp-server#readme
-Project-URL: Bug Tracker, https://github.com/Aimino-Tech/fast-html-mcp-server/issues
+Project-URL: Homepage, https://github.com/Aimino-Tech/opentalk2html-notmd
+Project-URL: Repository, https://github.com/Aimino-Tech/opentalk2html-notmd
+Project-URL: Documentation, https://github.com/Aimino-Tech/opentalk2html-notmd#readme
+Project-URL: Bug Tracker, https://github.com/Aimino-Tech/opentalk2html-notmd/issues
 Keywords: mcp,mcp-server,model-context-protocol,html,html-generation,ai
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
@@ -24,15 +24,15 @@ Classifier: Topic :: Internet :: WWW/HTTP
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 
-# fast-html-mcp-server
+# opentalk2html-notmd
 
 Five-tier MCP server for lightning-fast HTML generation from AI agents.
 
-**Install:** `pip install fast-html-mcp-server` or `uvx fast-html-mcp-server`
+**Install:** `pip install opentalk2html-notmd` or `uvx opentalk2html-notmd`
 
 **Usage:** This is a wrapper around the Node.js MCP server. Requires Node.js >= 20.
 
-- `fast-html-mcp-server` — run the MCP server
-- `npx -y @aimino/fast-html-mcp-server` — run directly via npm
+- `opentalk2html-notmd` — run the MCP server
+- `npx -y @aimino/opentalk2html-notmd` — run directly via npm
 
-For full documentation see: https://github.com/Aimino-Tech/fast-html-mcp-server
+For full documentation see: https://github.com/Aimino-Tech/opentalk2html-notmd

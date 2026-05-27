@@ -39,7 +39,7 @@ import {
 import { handlePropagateEdit, handleCheckConsistency } from "./consistency/index.js";
 
 const server = new McpServer({
-    name: "@aimino/fast-html-mcp-server",
+    name: "@aimino/opentalk2html-notmd",
   version: "0.1.0",
 });
 

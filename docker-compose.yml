@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  fast-html-mcp:
+  opentalk2html-notmd:
     build:
       context: .
       dockerfile: Dockerfile

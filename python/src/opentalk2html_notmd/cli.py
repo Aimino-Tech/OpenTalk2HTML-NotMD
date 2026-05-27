@@ -1,7 +1,7 @@
 """
-CLI entry point for fast-html-mcp-server.
+CLI entry point for opentalk2html-notmd.
 
-Delegates to the Node.js server via ``npx @aimino/fast-html-mcp-server``.
+Delegates to the Node.js server via ``npx @aimino/opentalk2html-notmd``.
 """
 
 import subprocess
@@ -19,7 +19,7 @@ def main() -> None:
         )
         sys.exit(1)
 
-    cmd = [npx, "-y", "@aimino/fast-html-mcp-server"]
+    cmd = [npx, "-y", "@aimino/opentalk2html-notmd"]
     try:
         proc = subprocess.run(cmd)
         sys.exit(proc.returncode)

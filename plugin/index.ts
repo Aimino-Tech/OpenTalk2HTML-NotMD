@@ -179,5 +179,5 @@ function extractHtmlPath(input: { tool: string; args?: Record<string, unknown> }
 
 function isHtmlPermission(permission: string): boolean {
   const lower = permission.toLowerCase()
-  return lower.includes("html") || lower.includes("fast-html-mcp")
+  return lower.includes("html") || lower.includes("opentalk2html-notmd")
 }

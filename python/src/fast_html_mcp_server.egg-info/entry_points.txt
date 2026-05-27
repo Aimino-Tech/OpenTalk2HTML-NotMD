@@ -1,3 +1,0 @@
-[console_scripts]
-fast-html-mcp = fast_html_mcp_server.cli:main
-fast-html-mcp-server = fast_html_mcp_server.cli:main

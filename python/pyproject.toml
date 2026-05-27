@@ -1,5 +1,5 @@
 [project]
-name = "fast-html-mcp-server"
+name = "opentalk2html-notmd"
 version = "0.1.2"
 description = "Five-tier MCP server for lightning-fast HTML generation from AI agents"
 readme = "README.md"
@@ -31,14 +31,14 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/Aimino-Tech/fast-html-mcp-server"
-Repository = "https://github.com/Aimino-Tech/fast-html-mcp-server"
-Documentation = "https://github.com/Aimino-Tech/fast-html-mcp-server#readme"
-"Bug Tracker" = "https://github.com/Aimino-Tech/fast-html-mcp-server/issues"
+Homepage = "https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD"
+Repository = "https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD"
+Documentation = "https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD#readme"
+"Bug Tracker" = "https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD/issues"
 
 [project.scripts]
-fast-html-mcp-server = "fast_html_mcp_server.cli:main"
-fast-html-mcp = "fast_html_mcp_server.cli:main"
+opentalk2html-notmd = "opentalk2html_notmd.cli:main"
+opentalk2html-notmd = "opentalk2html_notmd.cli:main"
 
 [build-system]
 requires = ["setuptools>=75.0"]

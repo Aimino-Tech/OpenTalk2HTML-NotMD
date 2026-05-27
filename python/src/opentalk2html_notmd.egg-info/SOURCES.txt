@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/opentalk2html_notmd/__init__.py
+src/opentalk2html_notmd/__main__.py
+src/opentalk2html_notmd/cli.py
+src/opentalk2html_notmd.egg-info/PKG-INFO
+src/opentalk2html_notmd.egg-info/SOURCES.txt
+src/opentalk2html_notmd.egg-info/dependency_links.txt
+src/opentalk2html_notmd.egg-info/entry_points.txt
+src/opentalk2html_notmd.egg-info/top_level.txt
