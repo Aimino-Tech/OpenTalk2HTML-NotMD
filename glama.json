@@ -1,8 +1,21 @@
 {
-  "name": "Fast HTML MCP",
-  "description": "Five-tier MCP server for lightning-fast HTML generation from AI agents — assembly, patch, read, raw, and consistency tiers with 15 tools, 22 components, 25 templates.",
-  "categories": ["developer-tools", "web-development", "content-generation"],
-  "tags": ["html", "html-generation", "dom-manipulation", "templates", "components"],
+  "name": "OpenTalk2HTML-NotMD MCP Server",
+  "description": "OpenTalk2HTML-NotMD MCP Server \u2014 AI talks to you through beautiful HTML pages instead of overwhelming markdown dumps. Five-tier architecture with 18 tools, 22 components, 25+ templates.",
+  "categories": [
+    "developer-tools",
+    "web-development",
+    "ai",
+    "content-generation"
+  ],
+  "tags": [
+    "open-talk-2-html-not-md",
+    "mcp-server",
+    "html-pages",
+    "ai-communication",
+    "html-generation",
+    "ai-agent",
+    "markdown-alternative"
+  ],
   "repository": "https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD",
   "npm": "@aimino/opentalk2html-notmd"
 }
