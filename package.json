@@ -1,7 +1,7 @@
 {
   "name": "@aimino/opentalk2html-notmd",
   "version": "0.1.2",
-  "description": "Five-tier MCP server for lightning-fast HTML generation from AI agents \u2014 assembly, patch, read, raw, and consistency tiers with tools, components, and templates",
+  "description": "OpenTalk2HTML-NotMD MCP Server — AI talks to you through beautiful HTML pages instead of overwhelming markdown dumps. Five-tier architecture with 18 tools, 22 components, 25+ templates.",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,16 +20,20 @@
     "node": ">=20.0.0"
   },
   "keywords": [
-    "mcp",
-    "mcp-server",
-    "model-context-protocol",
-    "html",
-    "html-generation",
-    "dom-manipulation",
-    "templates",
     "components",
+    "open-talk-2-html-not-md",
+    "model-context-protocol",
+    "dom-manipulation",
+    "html",
+    "mcp",
+    "html-pages",
+    "typescript",
+    "templates",
+    "html-generation",
     "ai",
-    "typescript"
+    "ai-communication",
+    "mcp-server",
+    "markdown-alternative"
   ],
   "license": "GPL-3.0-only",
   "repository": {
