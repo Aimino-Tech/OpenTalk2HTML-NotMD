@@ -1,6 +1,6 @@
 # OpenTalk2HTML-NotMD MCP Server
 
-[![npm version](https://img.shields.io/npm/v/@aimino/opentalk2html-notmd)](https://www.npmjs.com/package/@aimino/opentalk2html-notmd)
+[![npm version](https://img.shields.io/npm/v/@aimino/fast-html-mcp-server)](https://www.npmjs.com/package/@aimino/fast-html-mcp-server)
 [![License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](package.json)
 [![MCP](https://badge.mcpx.dev?type=server 'MCP Server')](https://github.com/modelcontextprotocol/specification)
@@ -21,7 +21,7 @@ Every time an AI agent dumps markdown on you, it's choosing the easiest path for
 **One command. Any AI platform. Real pages.**
 
 ```
-npx -y @aimino/opentalk2html-notmd
+npx -y @aimino/fast-html-mcp-server
 ```
 
 ---
@@ -38,10 +38,18 @@ npx -y @aimino/opentalk2html-notmd
 
 ---
 
+## See It In Action
+
+![OpenTalk2HTML-NotMD Demo](showcase/opentalk2html-notmd-showcase.gif)
+
+*AI builds a real dashboard page in seconds — no browser, no Playwright, no Docker.*
+
+---
+
 ## Quick Start
 
 ```bash
-npx -y @aimino/opentalk2html-notmd
+npx -y @aimino/fast-html-mcp-server
 ```
 
 Add to Claude Desktop, Cursor, VS Code, or any MCP client:
@@ -51,7 +59,7 @@ Add to Claude Desktop, Cursor, VS Code, or any MCP client:
   "mcpServers": {
     "open-talk-2-html-not-md": {
       "command": "npx",
-      "args": ["-y", "@aimino/opentalk2html-notmd"]
+      "args": ["-y", "@aimino/fast-html-mcp-server"]
     }
   }
 }
@@ -67,13 +75,13 @@ An AI agent using OpenTalk2HTML-NotMD can build you:
 
 | You ask for... | Instead of markdown | AI creates |
 |---|---|---|
-| "Show me Q3 numbers" | `## Q3\n- Revenue: $1.2M\n- Users: 45K` | [A styled report with tables & badges](showcase/use-cases/saas-report.html) |
-| "Make an invoice" | `# Invoice\n**Client:** Acme Corp` | [A proper invoice page](showcase/use-cases/pharma-invoice.html) |
-| "Dashboard please" | `## Metrics\n**ARR:** $10M` | [Analytics dashboard with visuals](showcase/use-cases/analytics-dashboard.html) |
-| "Pitch deck for investors" | Raw text with `---` slides | [Slide deck with real design](showcase/use-cases/pitch-deck.html) |
-| "API documentation" | Markdown with ` ``` ` blocks | [Proper API docs page](showcase/use-cases/api-docs.html) |
+| "Show me Q3 numbers" | `## Q3\n- Revenue: $1.2M\n- Users: 45K` | [A styled report with tables & badges](showcase/report.html) |
+| "Make an invoice" | `# Invoice\n**Client:** Acme Corp` | [A proper invoice page](showcase/invoice.html) |
+| "Dashboard please" | `## Metrics\n**ARR:** $10M` | [Analytics dashboard with visuals](showcase/dashboard.html) |
+| "Pitch deck for investors" | Raw text with `---` slides | [Slide deck with real design](showcase/deck.html) |
+| "API documentation" | Markdown with ` ``` ` blocks | [Proper API docs page](showcase/api-doc.html) |
 
-See all 22+ use cases in the [interactive showcase](showcase/use-cases.html).
+See all 22+ use cases in the [interactive showcase](showcase/index.html).
 
 ---
 
@@ -230,8 +238,8 @@ Designed from the ground up for AI token budgets:
 ## Development
 
 ```bash
-git clone https://github.com/Aimino-Tech/open-talk-2-html-not-md-mcp-server.git
-cd open-talk-2-html-not-md-mcp-server
+git clone https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD.git
+cd OpenTalk2HTML-NotMD
 npm install
 npm run build
 npm run dev              # hot reload
