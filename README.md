@@ -1,5 +1,9 @@
 # OpenTalk2HTML-NotMD MCP Server
 
+[![GitHub stars](https://img.shields.io/github/stars/Aimino-Tech/OpenTalk2HTML-NotMD?style=social)](https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Aimino-Tech/OpenTalk2HTML-NotMD?style=social)](https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/Aimino-Tech/OpenTalk2HTML-NotMD)](https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/Aimino-Tech/OpenTalk2HTML-NotMD)](https://github.com/Aimino-Tech/OpenTalk2HTML-NotMD/pulls)
 [![npm version](https://img.shields.io/npm/v/@aimino/fast-html-mcp-server)](https://www.npmjs.com/package/@aimino/fast-html-mcp-server)
 [![License](https://img.shields.io/badge/license-GPL%203.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](package.json)
